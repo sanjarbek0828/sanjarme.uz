@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Send, Mail, ArrowUp, Shield } from 'lucide-react';
+import { Send, Mail, ArrowUp, Shield, Star, GitFork } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex items-center gap-2 pt-2">
               <a
-                href="https://github.com/sanjarbek404"
+                href="https://github.com/sanjarbek0828"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors shadow-xs"
@@ -88,12 +88,24 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 3: Portal & Controls */}
+          {/* Col 3: Portal & GitHub Activity */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Tizim & Status
+              Tizim & Repozitoriya
             </h4>
             <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
+              <li>
+                <a
+                  href="https://github.com/sanjarbek0828/sanjarme.uz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-neutral-800 dark:text-neutral-200 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors"
+                >
+                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                  <span>GitHub: sanjarme.uz</span>
+                  <GitFork className="w-3 h-3 text-neutral-400" />
+                </a>
+              </li>
               <li>
                 <Link
                   href="/admin"

@@ -15,7 +15,8 @@ import {
   FolderGit2,
   Award,
   Mail,
-  Send
+  Send,
+  Star
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CommandPalette } from './ui/CommandPalette';
@@ -130,6 +131,17 @@ export const Navbar: React.FC = () => {
               </Link>
 
               <a
+                href="https://github.com/sanjarbek0828/sanjarme.uz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] hover:scale-105 transition-all shadow-2xs"
+                title="Star on GitHub"
+              >
+                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span>Star</span>
+              </a>
+
+              <a
                 href="#contact"
                 className="px-4 py-1.5 rounded-full text-xs font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 active:scale-[0.98] transition-all inline-flex items-center gap-1.5 shadow-xs"
               >
@@ -194,6 +206,22 @@ export const Navbar: React.FC = () => {
                       </a>
                     );
                   })}
+                </div>
+
+                {/* GitHub Star & Repo Link on Mobile */}
+                <div className="pt-1 pb-1">
+                  <a
+                    href="https://github.com/sanjarbek0828/sanjarme.uz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] text-xs font-semibold text-neutral-800 dark:text-neutral-200 active:scale-95 transition-all"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                      <span>GitHub: sanjarme.uz (Star berish)</span>
+                    </span>
+                    <span className="text-neutral-400 font-mono text-[10px]">⭐️ repo →</span>
+                  </a>
                 </div>
 
                 {/* Mobile Direct Action Buttons */}
