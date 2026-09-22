@@ -204,9 +204,9 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               {/* Radial backlight aura for depth & crisp silhouette separation */}
               <div className="absolute inset-0 -m-8 rounded-full bg-gradient-to-tr from-sky-400/15 via-indigo-500/10 to-transparent dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-transparent blur-3xl pointer-events-none -z-10" />
 
-              {/* Character Cutout - Razor-Sharp Studio Portrait */}
+              {/* Character Cutout - Razor-Sharp Studio Portrait (Optimized WebP) */}
               <Image
-                src="/images/personaj-sanjarbek.png"
+                src="/images/personaj-sanjarbek.webp"
                 alt="Sanjarbek Otabekov — Full Stack Dasturchi (sanjarme.uz)"
                 width={1561}
                 height={1774}
