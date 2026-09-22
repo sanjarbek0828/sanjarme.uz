@@ -65,26 +65,33 @@ export default function Home() {
       {/* Sticky Top Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero Section (Critical above-the-fold) */}
       <Hero content={siteContent.hero} />
 
-      {/* About Section */}
-      <About content={siteContent.about} />
+      {/* Off-screen Sections optimized with content-visibility for silky 60fps scrolling */}
+      <div className="section-deferred">
+        <About content={siteContent.about} />
+      </div>
 
-      {/* Skills / Tech Stack Section */}
-      <Skills skills={siteContent.skills} />
+      <div className="section-deferred">
+        <Skills skills={siteContent.skills} />
+      </div>
 
-      {/* Services & Pricing Section */}
-      <Services services={siteContent.services} />
+      <div className="section-deferred">
+        <Services services={siteContent.services} />
+      </div>
 
-      {/* Projects Section */}
-      <Projects projects={projects} />
+      <div className="section-deferred">
+        <Projects projects={projects} />
+      </div>
 
-      {/* Certificates Section */}
-      <Certificates certificates={certificates} />
+      <div className="section-deferred">
+        <Certificates certificates={certificates} />
+      </div>
 
-      {/* Contact Section */}
-      <Contact />
+      <div className="section-deferred">
+        <Contact />
+      </div>
 
       {/* Footer */}
       <Footer />
