@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
                 <LinkedinIcon className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://t.me/sanjarbek_404"
+                href="https://t.me/sanjarbekdev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-sky-500 hover:text-sky-600 dark:hover:text-white transition-colors shadow-xs"

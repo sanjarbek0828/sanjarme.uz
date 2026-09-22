@@ -135,7 +135,7 @@ export const Services: React.FC<ServicesProps> = ({ services = [] }) => {
                   </div>
 
                   <a
-                    href={`https://t.me/sanjarbek_404?text=${encodeURIComponent(`Assalomu alaykum Sanjarbek! ${service.title} xizmati bo'yicha ma'lumot olmoqchi edim.`)}`}
+                    href={`https://t.me/sanjarbekdev?text=${encodeURIComponent(`Assalomu alaykum Sanjarbek! ${service.title} xizmati bo'yicha ma'lumot olmoqchi edim.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto text-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 inline-flex items-center gap-2 shadow-xs group/btn cursor-pointer transition-all active:scale-95"

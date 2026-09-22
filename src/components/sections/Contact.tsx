@@ -144,7 +144,7 @@ export const Contact: React.FC = () => {
                 </span>
                 <div className="grid grid-cols-3 gap-2.5">
                   <a
-                    href="https://github.com/sanjarbek404"
+                    href="https://github.com/sanjarbek0828"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-xl bg-neutral-100/80 dark:bg-neutral-900/80 border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 transition-all flex flex-col items-center justify-center gap-1 group"
@@ -154,7 +154,7 @@ export const Contact: React.FC = () => {
                   </a>
 
                   <a
-                    href="https://t.me/sanjarbek_404"
+                    href="https://t.me/sanjarbekdev"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-xl bg-sky-500/10 dark:bg-sky-500/10 border border-sky-500/20 hover:border-sky-500/40 transition-all flex flex-col items-center justify-center gap-1 group"

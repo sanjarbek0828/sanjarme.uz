@@ -235,7 +235,7 @@ export const Navbar: React.FC = () => {
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                   <a
-                    href="https://t.me/sanjarbek_404"
+                    href="https://t.me/sanjarbekdev"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 active:scale-95 transition-all"

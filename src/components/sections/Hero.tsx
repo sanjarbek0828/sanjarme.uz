@@ -139,7 +139,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             >
               <div className="flex items-center gap-3">
                 <a
-                  href="https://github.com/sanjarbek404"
+                  href="https://github.com/sanjarbek0828"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors p-1"
@@ -157,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://t.me/sanjarbek_404"
+                  href="https://t.me/sanjarbekdev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-500 dark:text-neutral-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors p-1"

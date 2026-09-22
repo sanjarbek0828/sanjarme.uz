@@ -157,11 +157,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         category: 'Actions',
         icon: <FileText className="w-4 h-4 text-blue-500" />,
         perform: () => {
-          window.open('https://github.com/sanjarbek404', '_blank');
+          window.open('https://github.com/sanjarbek0828', '_blank');
           onClose();
         },
         shortcut: 'R',
-        subtext: 'github.com/sanjarbek404',
+        subtext: 'github.com/sanjarbek0828',
       },
 
       // Social
@@ -171,10 +171,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         category: 'Social',
         icon: <Sparkles className="w-4 h-4 text-sky-500" />,
         perform: () => {
-          window.open('https://t.me/sanjarbek_404', '_blank');
+          window.open('https://t.me/sanjarbekdev', '_blank');
           onClose();
         },
-        subtext: '@sanjarbek_404',
+        subtext: '@sanjarbekdev',
       },
       {
         id: 'soc-github',
@@ -182,10 +182,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         category: 'Social',
         icon: <GithubIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-300" />,
         perform: () => {
-          window.open('https://github.com/sanjarbek404', '_blank');
+          window.open('https://github.com/sanjarbek0828', '_blank');
           onClose();
         },
-        subtext: 'github.com/sanjarbek404',
+        subtext: 'github.com/sanjarbek0828',
       },
       {
         id: 'soc-linkedin',

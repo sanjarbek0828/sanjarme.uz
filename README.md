@@ -80,5 +80,5 @@ Brauzerda oching: [http://localhost:3000](http://localhost:3000)
 - **Sanjarbek Otabekov**
 - Veb-sayt: [sanjarme.uz](https://sanjarme.uz)
 - GitHub: [@sanjarbek0828](https://github.com/sanjarbek0828)
-- Telegram: [@sanjarbek_404](https://t.me/sanjarbekdev)
+- Telegram: [@sanjarbekdev](https://t.me/sanjarbekdev)
 - LinkedIn: [Sanjarbek Otabekov](https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/)

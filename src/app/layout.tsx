@@ -81,8 +81,8 @@ export const metadata: Metadata = {
     title: "Sanjarbek Otabekov — Full Stack Dasturchi | sanjarme.uz",
     description:
       "Zamonaviy veb-saytlar, Next.js ilovalar va professional Telegram botlar yaratuvchi Full Stack dasturchi portfoliosi.",
-    images: ["/images/personaj-sanjarbek.png"],
-    creator: "@sanjarbek_404",
+    images: ["/images/personaj-sanjarbek.webp"],
+    creator: "@sanjarbekdev",
   },
   robots: {
     index: true,
@@ -121,7 +121,7 @@ const jsonLd = {
       "jobTitle": "Full Stack Dasturchi & Dasturiy Ta'minot Muhandisi",
       "description": "Next.js, React, TypeScript, Node.js, Telegram botlar va bulutli tizimlar bo'yicha ixtisoslashgan Full Stack muhandis.",
       "url": "https://sanjarme.uz",
-      "image": "https://sanjarme.uz/images/personaj-sanjarbek.png",
+      "image": "https://sanjarme.uz/images/personaj-sanjarbek.webp",
       "email": "sanjarbekotabekov010@gmail.com",
       "nationality": {
         "@type": "Country",
@@ -132,9 +132,9 @@ const jsonLd = {
         "name": "Tashkent, Uzbekistan"
       },
       "sameAs": [
-        "https://github.com/sanjarbek404",
+        "https://github.com/sanjarbek0828",
         "https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/",
-        "https://t.me/sanjarbek_404"
+        "https://t.me/sanjarbekdev"
       ],
       "knowsAbout": [
         "Web Development",

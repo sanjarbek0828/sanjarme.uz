@@ -345,8 +345,8 @@ export const initialServices: ServiceItem[] = [
 ];
 
 export const initialSettings: UserSettings = {
-  github: 'https://github.com/sanjarbek404',
-  telegram: 'https://t.me/sanjarbek_404',
+  github: 'https://github.com/sanjarbek0828',
+  telegram: 'https://t.me/sanjarbekdev',
   linkedin: 'https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/',
   email: 'sanjarbekotabekov010@gmail.com',
   resume: '/resume.pdf',
