@@ -184,7 +184,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Free-Standing Character Cutout (Silky Breathing Floating Motion & Ultra-Crisp) */}
+          {/* Right Column: Free-Standing Character Cutout (Pure, Crisp, No Extra Frames) */}
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ 
@@ -195,37 +195,26 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 relative flex items-center justify-center select-none gpu-layer"
           >
-            {/* Subtle floating wrapper with atmospheric back-glow */}
+            {/* Subtle floating breathing motion */}
             <motion.div 
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative flex items-center justify-center gpu-layer"
+              className="relative flex items-center justify-center w-full gpu-layer"
             >
               {/* Radial backlight aura for depth & crisp silhouette separation */}
               <div className="absolute inset-0 -m-8 rounded-full bg-gradient-to-tr from-sky-400/15 via-indigo-500/10 to-transparent dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-transparent blur-3xl pointer-events-none -z-10" />
 
-              {/* Character Cutout - Razor-Sharp Studio Portrait (Optimized WebP) */}
+              {/* Character Cutout - Razor-Sharp Studio Portrait */}
               <Image
-                src="/images/personaj-sanjarbek.webp"
+                src="/personaj.png"
                 alt="Sanjarbek Otabekov — Full Stack Dasturchi (sanjarme.uz)"
                 width={1561}
                 height={1774}
                 priority
-                quality={95}
-                className="object-contain max-h-[360px] sm:max-h-[500px] lg:max-h-[620px] w-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_30px_60px_rgba(0,0,0,0.9)] filter contrast-[1.04] brightness-[1.01] pointer-events-none crisp-render"
-                sizes="(max-width: 768px) 320px, (max-width: 1200px) 480px, 560px"
+                quality={100}
+                className="object-contain max-h-[380px] sm:max-h-[520px] lg:max-h-[640px] w-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_30px_60px_rgba(0,0,0,0.9)] pointer-events-none crisp-render"
+                sizes="(max-width: 768px) 340px, (max-width: 1200px) 500px, 600px"
               />
-
-              {/* Apple Floating Identity Pill */}
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="absolute -bottom-3 sm:-bottom-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full apple-glass-pill text-[10px] sm:text-xs font-mono text-neutral-800 dark:text-neutral-200 border border-black/10 dark:border-white/15 shadow-xl flex items-center gap-2 backdrop-blur-2xl max-w-[95%]"
-              >
-                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
-                <span className="font-medium truncate">Full Stack Dasturchi • Web Arxitektura</span>
-              </motion.div>
             </motion.div>
           </motion.div>
 

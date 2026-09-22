@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Send, Mail, ArrowUp, Shield, Star, GitFork } from 'lucide-react';
+import { Send, Mail, ArrowUp, Shield } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
@@ -88,24 +88,12 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 3: Portal & GitHub Activity */}
+          {/* Col 3: Portal & Controls */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Tizim & Repozitoriya
+              Tizim & Status
             </h4>
             <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
-              <li>
-                <a
-                  href="https://github.com/sanjarbek0828/sanjarme.uz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-neutral-800 dark:text-neutral-200 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors"
-                >
-                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                  <span>GitHub: sanjarme.uz</span>
-                  <GitFork className="w-3 h-3 text-neutral-400" />
-                </a>
-              </li>
               <li>
                 <Link
                   href="/admin"

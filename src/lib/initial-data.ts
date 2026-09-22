@@ -370,7 +370,7 @@ export const initialSiteContent: SiteContent = {
     availabilityStatus: 'Loyihalar va frilans uchun ochiq',
     primaryCtaText: 'Loyihalarni ko‘rish',
     secondaryCtaText: 'Bog‘lanish',
-    avatarUrl: '/images/personaj-sanjarbek.webp',
+    avatarUrl: '/personaj.png',
   },
   about: {
     heading: initialSettings.aboutTitle,

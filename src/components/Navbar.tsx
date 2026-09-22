@@ -15,8 +15,7 @@ import {
   FolderGit2,
   Award,
   Mail,
-  Send,
-  Star
+  Send
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CommandPalette } from './ui/CommandPalette';
@@ -91,7 +90,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation - Apple Segmented Clean Links */}
-            <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-neutral-100/80 dark:bg-neutral-900/60 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl">
+            <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full apple-glass-pill shadow-2xs">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.name}
@@ -108,7 +107,7 @@ export const Navbar: React.FC = () => {
               {/* Cmd+K Quick Search Pill */}
               <button
                 onClick={() => setCmdPaletteOpen(true)}
-                className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                 title="Tezkor Qidiruv (⌘K)"
                 aria-label="Quick Search"
               >
@@ -130,16 +129,6 @@ export const Navbar: React.FC = () => {
                 <ShieldCheck className="w-4 h-4" />
               </Link>
 
-              <a
-                href="https://github.com/sanjarbek0828/sanjarme.uz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] hover:scale-105 transition-all shadow-2xs"
-                title="Star on GitHub"
-              >
-                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>Star</span>
-              </a>
 
               <a
                 href="#contact"
@@ -208,21 +197,7 @@ export const Navbar: React.FC = () => {
                   })}
                 </div>
 
-                {/* GitHub Star & Repo Link on Mobile */}
-                <div className="pt-1 pb-1">
-                  <a
-                    href="https://github.com/sanjarbek0828/sanjarme.uz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] text-xs font-semibold text-neutral-800 dark:text-neutral-200 active:scale-95 transition-all"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                      <span>GitHub: sanjarme.uz (Star berish)</span>
-                    </span>
-                    <span className="text-neutral-400 font-mono text-[10px]">⭐️ repo →</span>
-                  </a>
-                </div>
+
 
                 {/* Mobile Direct Action Buttons */}
                 <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2">
