@@ -1,0 +1,25 @@
+name: 🐛 Xatolik / Bug Report
+description: Portfolioda topilgan vizual yoki texnik kamchilik haqida xabar berish
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Topilgan xatolik haqida xabar berganingiz uchun rahmat.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Xatolik tavsifi
+      description: Qanday xatolik yuz berdi?
+      placeholder: Sahifada xatolik qanday namoyon bo'ldi...
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Qurilma va Brauzer
+      description: Qaysi qurilma (iPhone, Android, Mac, Windows) va brauzer (Safari, Chrome, Firefox)?
+      placeholder: Masalan: iPhone 14 Pro, Safari 17.4
+    validations:
+      required: true

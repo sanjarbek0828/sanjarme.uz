@@ -1,0 +1,24 @@
+name: 🚀 Yangi Imkoniyat / Feature Request
+description: Portfolio uchun yangi funksiya yoki optimizatsiya taklif qilish
+title: "[Feature]: "
+labels: ["enhancement", "feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Sanjarbek Otabekovning rasmiy portfoliosi (sanjarme.uz) uchun taklif kiritganingiz uchun tashakkur!
+  - type: textarea
+    id: description
+    attributes:
+      label: Taklif qilinayotgan funksiya tavsifi
+      description: Loyihaga qanday yangi imkoniyat yoki dizayn yechimi qo'shish kerak?
+      placeholder: Masalan: Yangi loyihalar uchun 3D interaktiv preview qo'shish...
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Sababi va Foydasi
+      description: Bu funksiya foydalanuvchilar yoki loyihaga qanday qiymat keltiradi?
+    validations:
+      required: false
