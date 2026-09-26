@@ -56,12 +56,15 @@ const getLocalData = <T>(key: string, fallback: T): T => {
   try {
     const item = localStorage.getItem(key);
     if (!item) {
-      localStorage.setItem(key, JSON.stringify(fallback));
+      try {
+        localStorage.setItem(key, JSON.stringify(fallback));
+      } catch {
+        // Safe storage write fallback
+      }
       return fallback;
     }
     return JSON.parse(item) as T;
-  } catch (e) {
-    console.error('Error reading localStorage:', e);
+  } catch {
     return fallback;
   }
 };
@@ -70,8 +73,8 @@ const setLocalData = <T>(key: string, value: T): void => {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error('Error writing to localStorage:', e);
+  } catch {
+    // Graceful fallback if storage is disabled or quota exceeded
   }
 };
 
@@ -248,13 +251,13 @@ export const subscribeProjects = (
           }
         },
         (error) => {
-          console.warn('subscribeProjects error, maintaining local state:', error);
+          // Gracefully maintain local cache when offline
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeProjects setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -288,13 +291,12 @@ export const subscribeCertificates = (
           }
         },
         (error) => {
-          console.warn('subscribeCertificates error:', error);
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeCertificates setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -332,13 +334,12 @@ export const subscribeSkills = (
           }
         },
         (error) => {
-          console.warn('subscribeSkills error:', error);
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeSkills setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -370,13 +371,12 @@ export const subscribeServices = (
           }
         },
         (error) => {
-          console.warn('subscribeServices error:', error);
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeServices setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -405,13 +405,12 @@ export const subscribeSettings = (
           }
         },
         (error) => {
-          console.warn('subscribeSettings error:', error);
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeSettings setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -472,8 +471,8 @@ export const subscribeSiteContent = (
         unsubSkills();
         unsubServices();
       };
-    } catch (err) {
-      console.warn('subscribeSiteContent setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -510,13 +509,12 @@ export const subscribeContactMessages = (
           }
         },
         (error) => {
-          console.warn('subscribeContactMessages error:', error);
           if (onError) onError(error);
         }
       );
       return unsubscribe;
-    } catch (err) {
-      console.warn('subscribeContactMessages setup error:', err);
+    } catch {
+      // Setup error fallback
     }
   }
 
@@ -574,30 +572,38 @@ export const getFirestoreConnectionStatus = async (): Promise<{
   const configured = isFirebaseConfigured();
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'portfolio-9d780';
 
+  const localCounts = {
+    projects: getLocalData<Project[]>(STORAGE_KEYS.PROJECTS, initialProjects).length,
+    certificates: getLocalData<Certificate[]>(STORAGE_KEYS.CERTIFICATES, initialCertificates).length,
+    messages: getLocalData<ContactMessage[]>(STORAGE_KEYS.MESSAGES, initialMessages).length,
+    skills: getLocalData<SkillItem[]>(STORAGE_KEYS.SKILLS, initialSkills).length,
+    services: getLocalData<ServiceItem[]>(STORAGE_KEYS.SERVICES, initialServices).length,
+  };
+
   if (!configured || !db) {
     return {
       connected: false,
       projectId,
       isConfigured: false,
-      counts: {
-        projects: getLocalData<Project[]>(STORAGE_KEYS.PROJECTS, initialProjects).length,
-        certificates: getLocalData<Certificate[]>(STORAGE_KEYS.CERTIFICATES, initialCertificates).length,
-        messages: getLocalData<ContactMessage[]>(STORAGE_KEYS.MESSAGES, initialMessages).length,
-        skills: getLocalData<SkillItem[]>(STORAGE_KEYS.SKILLS, initialSkills).length,
-        services: getLocalData<ServiceItem[]>(STORAGE_KEYS.SERVICES, initialServices).length,
-      },
+      counts: localCounts,
       error: 'Firebase not configured in environment',
     };
   }
 
   try {
-    const [pSnap, cSnap, mSnap, sSnap, srvSnap] = await Promise.all([
+    const fetchPromise = Promise.all([
       getDocs(collection(db, 'projects')),
       getDocs(collection(db, 'certificates')),
       getDocs(collection(db, 'messages')),
       getDocs(collection(db, 'skills')),
       getDocs(collection(db, 'services')),
     ]);
+
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('Connection check timeout')), 2500)
+    );
+
+    const [pSnap, cSnap, mSnap, sSnap, srvSnap] = await Promise.race([fetchPromise, timeoutPromise]);
 
     return {
       connected: true,
@@ -617,13 +623,7 @@ export const getFirestoreConnectionStatus = async (): Promise<{
       connected: false,
       projectId,
       isConfigured: true,
-      counts: {
-        projects: getLocalData<Project[]>(STORAGE_KEYS.PROJECTS, initialProjects).length,
-        certificates: getLocalData<Certificate[]>(STORAGE_KEYS.CERTIFICATES, initialCertificates).length,
-        messages: getLocalData<ContactMessage[]>(STORAGE_KEYS.MESSAGES, initialMessages).length,
-        skills: getLocalData<SkillItem[]>(STORAGE_KEYS.SKILLS, initialSkills).length,
-        services: getLocalData<ServiceItem[]>(STORAGE_KEYS.SERVICES, initialServices).length,
-      },
+      counts: localCounts,
       error: msg,
     };
   }
@@ -692,15 +692,19 @@ export const seedFirestoreIfEmpty = async (): Promise<boolean> => {
 export const getProjects = async (): Promise<Project[]> => {
   if (isFirebaseConfigured() && db) {
     try {
-      const snapshot = await getDocs(collection(db, 'projects'));
+      const fetchPromise = getDocs(collection(db, 'projects'));
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('fetch timeout')), 2500)
+      );
+      const snapshot = await Promise.race([fetchPromise, timeoutPromise]);
       if (!snapshot.empty) {
         const projects = snapshot.docs.map(d => normalizeProject(d.id, d.data()));
         projects.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
         setLocalData(STORAGE_KEYS.PROJECTS, projects);
         return projects;
       }
-    } catch (err) {
-      console.warn('Firestore projects fetch failed:', err);
+    } catch {
+      // Graceful fallback to local cache
     }
   }
   return getLocalData<Project[]>(STORAGE_KEYS.PROJECTS, initialProjects);
@@ -772,15 +776,19 @@ export const deleteProject = async (id: string): Promise<boolean> => {
 export const getCertificates = async (): Promise<Certificate[]> => {
   if (isFirebaseConfigured() && db) {
     try {
-      const snapshot = await getDocs(collection(db, 'certificates'));
+      const fetchPromise = getDocs(collection(db, 'certificates'));
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('fetch timeout')), 2500)
+      );
+      const snapshot = await Promise.race([fetchPromise, timeoutPromise]);
       if (!snapshot.empty) {
         const certs = snapshot.docs.map(d => normalizeCertificate(d.id, d.data()));
         certs.sort((a, b) => (b.dateIssued || '0').localeCompare(a.dateIssued || '0'));
         setLocalData(STORAGE_KEYS.CERTIFICATES, certs);
         return certs;
       }
-    } catch (err) {
-      console.warn('Firestore certs fetch failed:', err);
+    } catch {
+      // Graceful fallback to local cache
     }
   }
   return getLocalData<Certificate[]>(STORAGE_KEYS.CERTIFICATES, initialCertificates);

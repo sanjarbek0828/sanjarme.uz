@@ -2,8 +2,9 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { MapPin, Globe2, Clock, Zap, Layers, Music, Award, GitBranch } from 'lucide-react';
+import { MapPin, Globe2, Clock, Zap, Layers, Music, Award, GitBranch, Terminal } from 'lucide-react';
 import { SiteContent } from '@/lib/types';
+import { DevTerminal } from '@/components/ui/DevTerminal';
 
 interface AboutProps {
   content: SiteContent['about'];
@@ -293,6 +294,22 @@ export const About: React.FC<AboutProps> = ({ content }) => {
           </motion.div>
 
         </div>
+
+        {/* Interactive Developer Terminal Playground */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-12 sm:mt-16 max-w-4xl mx-auto"
+        >
+          <div className="flex items-center gap-2 mb-3 px-1 text-xs font-mono text-neutral-500 dark:text-neutral-400">
+            <Terminal className="w-4 h-4 text-emerald-500" />
+            <span className="uppercase tracking-wider font-semibold">Interaktiv Dasturchi Terminali (CLI)</span>
+            <span className="text-neutral-400 dark:text-neutral-600 hidden sm:inline">• buyruq yozib tekshirib ko&apos;ring</span>
+          </div>
+          <DevTerminal />
+        </motion.div>
 
       </div>
     </section>

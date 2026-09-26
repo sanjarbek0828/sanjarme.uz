@@ -74,6 +74,9 @@ export const Footer: React.FC = () => {
                 <a href="#skills" className="hover:text-black dark:hover:text-white transition-colors">Ko&apos;nikmalar</a>
               </li>
               <li>
+                <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors">Tajriba</a>
+              </li>
+              <li>
                 <a href="#services" className="hover:text-black dark:hover:text-white transition-colors">Xizmatlar</a>
               </li>
               <li>
@@ -81,6 +84,9 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#certificates" className="hover:text-black dark:hover:text-white transition-colors">Sertifikatlar</a>
+              </li>
+              <li>
+                <a href="#testimonials" className="hover:text-black dark:hover:text-white transition-colors">Fikrlar</a>
               </li>
               <li>
                 <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">Aloqa</a>

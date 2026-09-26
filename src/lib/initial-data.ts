@@ -1,4 +1,4 @@
-import { Project, Certificate, SkillItem, ServiceItem, UserSettings, SiteContent } from './types';
+import { Project, Certificate, SkillItem, ServiceItem, UserSettings, SiteContent, MilestoneItem, TestimonialItem } from './types';
 
 export const initialProjects: Project[] = [
   {
@@ -393,3 +393,100 @@ export const initialSiteContent: SiteContent = {
   services: initialServices,
   settings: initialSettings,
 };
+
+export const initialMilestones: MilestoneItem[] = [
+  {
+    id: 'mile-1',
+    period: '2026 — Hozir',
+    title: 'Full Stack Muhandis & Veb Konsultant',
+    organization: 'Mustaqil Frilans & Loyihalar',
+    category: 'work',
+    description: "Next.js 15, TypeScript va zamonaviy bulutli arxitektura orqali bizneslar uchun tezkor, xavfsiz va yuqori konversiyali raqamli tizimlar yaratish.",
+    highlights: [
+      "mebelmashhura.uz e-tijorat katalogini ishlab chiqib, 1 soniyadan tez yuklanishga erishildi",
+      "Three.js va WebGL orqali 60 FPS silliq 3D Yer sayyorasi vizualizatsiyasi yaratildi",
+      "Telegram savdo botlari, to'lov tizimlari (Click/Payme) va PWA ilovalari ishlab chiqildi"
+    ],
+    skills: ['Next.js 15', 'TypeScript', 'React 19', 'Tailwind CSS', 'Firebase', 'Three.js', 'Telegram API'],
+    badge: 'Faol amaliyot'
+  },
+  {
+    id: 'mile-2',
+    period: '2025 — 2026',
+    title: 'Meta Certified Full Stack & Frontend Muhandisligi',
+    organization: 'Meta & Coursera Xalqaro Dasturi',
+    category: 'education',
+    description: "Meta tomonidan taqdim etilgan jahon andozalaridagi intensiv professional ixtisoslik. Chuqur frontend va backend tizimlari, xavfsiz RESTful APIlar va toza arxitektura.",
+    highlights: [
+      "Meta Full Stack Developer va Frontend Developer xalqaro maxsus sertifikatlariga ega bo'ldi",
+      "Murakkab ma'lumotlar bazasi (PostgreSQL, MySQL) arxitekturasi va Django backend loyihalari",
+      "Test-Driven Development (TDD) va CI/CD GitHub Actions avtomatlashtirish amaliyoti"
+    ],
+    skills: ['React', 'Node.js', 'Python', 'Django', 'PostgreSQL', 'Jest & TDD', 'APIs'],
+    badge: 'Meta Akkreditatsiya'
+  },
+  {
+    id: 'mile-3',
+    period: '2025',
+    title: 'Kiberxavfsizlik & Axborot Xavfsizligi Amaliyoti',
+    organization: 'Pearson & Coursera',
+    category: 'achievement',
+    description: "Veb ilovalar va tarmoq infratuzilmasining xavfsizligini ta'minlash, penetratsion testlar o'tkazish hamda xakerlik tahdidlaridan himoyalanish metodologiyasi.",
+    highlights: [
+      "Certified Ethical Hacker (Pearson) va Cyber Security Leadership sertifikatlari",
+      "OWASP Top 10 zaifliklarini bartaraf etish va mustahkam xavfsizlik qatlamlarini qurish",
+      "Google Prompting Essentials va generativ AI vositalarini ishlab chiqish jarayoniga tatbiq etish"
+    ],
+    skills: ['Ethical Hacking', 'OWASP Top 10', 'Cyber Defense', 'Security Audits', 'Prompt Engineering'],
+    badge: 'Certified Ethical Hacker'
+  },
+  {
+    id: 'mile-4',
+    period: '2024 — 2025',
+    title: 'Dasturiy Ta\'minot Asoslari & Algoritmlar',
+    organization: 'Amaliy Tadqiqot & Texnik Loyihalar',
+    category: 'education',
+    description: "Zamonaviy JavaScript (ES6+), ob'ektga yo'naltirilgan dasturlash (OOP), ma'lumotlar tuzilmalari va algoritmlar bo'yicha chuqur amaliy tajriba.",
+    highlights: [
+      "Git & GitHub Master Class (Packt) sertifikati va jamoaviy versiyalar boshqaruvi",
+      "110+ dan ortiq real commitlar va open-source dasturiy ta'minot yaratish",
+      "Algoritmik samaradorlik (Big-O) va brauzer render tezligini optimallashtirish"
+    ],
+    skills: ['JavaScript', 'HTML5 & CSS3', 'Git', 'Data Structures', 'Algorithms'],
+    badge: 'Poydevor'
+  }
+];
+
+export const initialTestimonials: TestimonialItem[] = [
+  {
+    id: 'test-1',
+    name: 'Mashhura opa',
+    role: "Do'kon Asoschisi",
+    company: 'mebelmashhura.uz',
+    comment: "Sanjarbek do'konimiz uchun yaratgan veb-sayt tufayli mijozlarimiz buyurtmalari sezilarli oshdi. Sayt telefonda ham chaqqon va bir zumda ochiladi, mebellarni ko'rish juda qulay. Mas'uliyatli va o'z ishining ustasi bo'lgan yosh mutaxassis!",
+    rating: 5,
+    projectTitle: "mebelmashhura.uz Web Sayti",
+    verified: true
+  },
+  {
+    id: 'test-2',
+    name: 'Azizbek Rahimov',
+    role: 'Startup Asoschisi & PM',
+    company: 'Fintech Bot Solutions',
+    comment: "Biznesimiz uchun Telegram savdo botini to'lov tizimlari (Click va Payme) hamda qulay admin boshqaruv paneli bilan tayyorlab berdi. 24/7 serverda barqaror ishlab turibdi. Eng asosiysi — belgilangan muddatdan avval topshirdi!",
+    rating: 5,
+    projectTitle: "Avtomatlashtirilgan Savdo Boti",
+    verified: true
+  },
+  {
+    id: 'test-3',
+    name: 'Jamshid Alimov',
+    role: 'Frontend Team Lead',
+    company: 'Tech Innovators',
+    comment: "Sanjarbek bilan bir necha loyihalarda hamkorlik qildik. Uning yozgan kodi toza, modulli va zamonaviy Next.js & TypeScript standartlariga to'liq mos keladi. Optimizatsiya va tezlikka bo'lgan e'tibori juda yuqori darajada.",
+    rating: 5,
+    projectTitle: "Next.js Web Arxitekturasi",
+    verified: true
+  }
+];
+

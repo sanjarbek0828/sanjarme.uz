@@ -1,6 +1,13 @@
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
 import { getAuth, type Auth } from 'firebase/auth';
-import { getFirestore, type Firestore } from 'firebase/firestore';
+import { 
+  getFirestore, 
+  initializeFirestore, 
+  persistentLocalCache, 
+  persistentMultipleTabManager,
+  setLogLevel, 
+  type Firestore 
+} from 'firebase/firestore';
 import { getStorage, type FirebaseStorage } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -31,7 +38,29 @@ if (typeof window !== 'undefined' || isFirebaseConfigured()) {
     if (isFirebaseConfigured()) {
       app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
       auth = getAuth(app);
-      db = getFirestore(app);
+
+      // Silence internal network retry logging to avoid console error spam when offline
+      // This eliminates: "@firebase/firestore: Could not reach Cloud Firestore backend [code=unavailable]"
+      try {
+        setLogLevel('silent');
+      } catch {
+        // Fallback gracefully
+      }
+
+      if (typeof window !== 'undefined') {
+        try {
+          db = initializeFirestore(app, {
+            localCache: persistentLocalCache({
+              tabManager: persistentMultipleTabManager(),
+            }),
+          });
+        } catch {
+          db = getFirestore(app);
+        }
+      } else {
+        db = getFirestore(app);
+      }
+
       storage = getStorage(app);
     }
   } catch (error) {

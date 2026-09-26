@@ -5,7 +5,9 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ExternalLink, 
-  ArrowUpRight 
+  ArrowUpRight,
+  Search,
+  FolderGit2
 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/Icons';
 import { Project } from '@/lib/types';
@@ -161,6 +163,7 @@ const ProjectCard: React.FC<{
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   const [activeCategory, setActiveCategory] = useState<string>('Barchasi');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const categories = useMemo(() => {
@@ -172,24 +175,36 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
     return ['Barchasi', ...Array.from(set)];
   }, [projects]);
 
-  // Filter and sort: featured first, then by order
-  const filteredProjects = projects
-    .filter(p => activeCategory === 'Barchasi' || p.category === activeCategory || p.tag === activeCategory)
-    .sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      return (a.order || 0) - (b.order || 0);
-    });
+  // Filter by category, search query, and sort: featured first, then by order
+  const filteredProjects = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return projects
+      .filter(p => {
+        const matchesCat = activeCategory === 'Barchasi' || p.category === activeCategory || p.tag === activeCategory;
+        const matchesQuery = !q || 
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.techStack.some(t => t.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
+      })
+      .sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return (a.order || 0) - (b.order || 0);
+      });
+  }, [projects, activeCategory, searchQuery]);
 
   return (
     <section id="projects" className="relative py-24 sm:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-center text-center mb-16 sm:mb-20">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3 block">
-            Mening Loyihalarim
-          </span>
+        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 shadow-2xs">
+            <FolderGit2 className="w-3.5 h-3.5 text-indigo-500" />
+            <span className="uppercase tracking-widest font-semibold">Mening Loyihalarim</span>
+          </div>
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Saralangan <span className="text-apple-headline">Loyiha & Ishlanmalar</span>
           </h2>
@@ -197,29 +212,52 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
             Haqiqiy mijozlar uchun ishlab chiqilgan veb-platformalar, 3D interaktiv grafikalar va PWA ilovalari.
           </p>
 
-          {/* Apple Segmented Filter Pill */}
-          <div className="mt-6 sm:mt-8 inline-flex p-1 rounded-full bg-neutral-100/80 dark:bg-neutral-900/70 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto no-scrollbar">
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat;
-              return (
+          {/* Filter Bar: Segmented Categories + Search Input */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
+            {/* Apple Segmented Filter Pill */}
+            <div className="inline-flex p-1 rounded-full bg-neutral-100/80 dark:bg-neutral-900/70 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto no-scrollbar shadow-xs">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className="relative px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white whitespace-nowrap"
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeFilterTabApple"
+                        className="absolute inset-0 rounded-full bg-white dark:bg-white/10 border border-black/10 dark:border-white/15 shadow-xs"
+                        transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                      />
+                    )}
+                    <span className={`relative z-10 ${isActive ? 'text-black dark:text-white font-semibold' : ''}`}>
+                      {cat}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Quick Live Search Bar */}
+            <div className="relative w-full sm:w-52">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Loyihalarni qidirish..."
+                className="w-full pl-8 pr-4 py-1.5 rounded-full apple-glass-pill text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-xs"
+              />
+              {searchQuery && (
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className="relative px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white whitespace-nowrap"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-neutral-400 hover:text-black dark:hover:text-white font-mono px-1"
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeFilterTabApple"
-                      className="absolute inset-0 rounded-full bg-white dark:bg-white/10 border border-black/10 dark:border-white/15 shadow-xs"
-                      transition={{ type: 'spring', stiffness: 450, damping: 35 }}
-                    />
-                  )}
-                  <span className={`relative z-10 ${isActive ? 'text-black dark:text-white font-semibold' : ''}`}>
-                    {cat}
-                  </span>
+                  ✕
                 </button>
-              );
-            })}
+              )}
+            </div>
           </div>
         </div>
 
@@ -239,6 +277,21 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Empty state when search yields no projects */}
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-16 apple-glass-card rounded-3xl max-w-md mx-auto p-8 border border-black/[0.08] dark:border-white/[0.08]">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              &quot;{searchQuery}&quot; bo&apos;yicha hech qanday loyiha topilmadi.
+            </p>
+            <button
+              onClick={() => { setSearchQuery(''); setActiveCategory('Barchasi'); }}
+              className="mt-3 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+            >
+              Qidiruvni tozalash
+            </button>
+          </div>
+        )}
 
         {/* Project Detail Modal */}
         <ProjectModal

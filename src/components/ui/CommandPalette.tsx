@@ -16,7 +16,9 @@ import {
   Award, 
   User, 
   ShieldCheck, 
-  X 
+  X,
+  Briefcase,
+  HeartHandshake 
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
 import { useTheme } from '@/lib/theme-context';
@@ -93,13 +95,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         subtext: '12+ dasturlash texnologiyalari va tajriba foizlari',
       },
       {
+        id: 'nav-experience',
+        title: 'Tajriba & Rivojlanish (Experience)',
+        category: 'Navigation',
+        icon: <Briefcase className="w-4 h-4 text-sky-500" />,
+        perform: () => navigateTo('#experience'),
+        shortcut: 'G E',
+        subtext: 'Amaliy loyihalar, Meta akkreditatsiyasi va kiberxavfsizlik',
+      },
+      {
         id: 'nav-services',
         title: 'Xizmatlar & Narxlar (Services)',
         category: 'Navigation',
         icon: <Sparkles className="w-4 h-4 text-violet-500" />,
         perform: () => navigateTo('#services'),
         shortcut: 'G X',
-        subtext: 'Telegram botlar, Landing sahifalar va narxlar',
+        subtext: 'Telegram botlar, Landing sahifalar va narx kalkulyatori',
       },
       {
         id: 'nav-projects',
@@ -118,6 +129,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         perform: () => navigateTo('#certificates'),
         shortcut: 'G C',
         subtext: 'Coursera, Meta, Google, Packt va Pearson sertifikatlari',
+      },
+      {
+        id: 'nav-testimonials',
+        title: 'Mijozlar & Hamkorlar Fikrlari (Testimonials)',
+        category: 'Navigation',
+        icon: <HeartHandshake className="w-4 h-4 text-rose-500" />,
+        perform: () => navigateTo('#testimonials'),
+        shortcut: 'G T',
+        subtext: '5.0 reyting va haqiqiy mijozlar xulosalari',
       },
       {
         id: 'nav-contact',

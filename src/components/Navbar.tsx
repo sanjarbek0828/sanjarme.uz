@@ -15,7 +15,9 @@ import {
   FolderGit2,
   Award,
   Mail,
-  Send
+  Send,
+  Briefcase,
+  HeartHandshake
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CommandPalette } from './ui/CommandPalette';
@@ -23,9 +25,11 @@ import { CommandPalette } from './ui/CommandPalette';
 const NAV_LINKS = [
   { name: 'Haqimda', href: '#about', icon: User },
   { name: 'Ko\'nikmalar', href: '#skills', icon: Wrench },
+  { name: 'Tajriba', href: '#experience', icon: Briefcase },
   { name: 'Xizmatlar', href: '#services', icon: Layers },
   { name: 'Loyihalar', href: '#projects', icon: FolderGit2 },
   { name: 'Sertifikatlar', href: '#certificates', icon: Award },
+  { name: 'Fikrlar', href: '#testimonials', icon: HeartHandshake },
   { name: 'Aloqa', href: '#contact', icon: Mail },
 ];
 

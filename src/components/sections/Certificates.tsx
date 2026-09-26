@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ExternalLink, 
   Maximize2, 
   X, 
-  Calendar 
+  Calendar,
+  Search,
+  Award 
 } from 'lucide-react';
 import { Certificate } from '@/lib/types';
 
@@ -17,6 +19,28 @@ interface CertificatesProps {
 
 export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
   const [activeLightboxCert, setActiveLightboxCert] = useState<Certificate | null>(null);
+  const [activeIssuer, setActiveIssuer] = useState<string>('Barchasi');
+  const [certSearch, setCertSearch] = useState<string>('');
+
+  const issuers = useMemo(() => {
+    const set = new Set<string>();
+    certificates.forEach(c => {
+      if (c.issuer) set.add(c.issuer);
+    });
+    return ['Barchasi', ...Array.from(set)];
+  }, [certificates]);
+
+  const filteredCerts = useMemo(() => {
+    const q = certSearch.trim().toLowerCase();
+    return certificates.filter(c => {
+      const matchesIssuer = activeIssuer === 'Barchasi' || c.issuer.toLowerCase() === activeIssuer.toLowerCase();
+      const matchesQuery = !q ||
+        c.title.toLowerCase().includes(q) ||
+        (c.issuer && c.issuer.toLowerCase().includes(q)) ||
+        (c.skills && c.skills.some(s => s.toLowerCase().includes(q)));
+      return matchesIssuer && matchesQuery;
+    });
+  }, [certificates, activeIssuer, certSearch]);
 
   // Close lightbox on Escape key
   useEffect(() => {
@@ -38,21 +62,71 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3 block">
-            Akkreditatsiyalar & Malaka
-          </span>
+        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 shadow-2xs">
+            <Award className="w-3.5 h-3.5 text-emerald-500" />
+            <span className="uppercase tracking-widest font-semibold">Akkreditatsiyalar & Malaka</span>
+          </div>
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Xalqaro <span className="text-apple-headline">Sertifikatlar</span>
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mt-3 max-w-xl text-base font-normal leading-relaxed">
-            Coursera, Meta, Google, Packt va Pearson tomonidan berilgan professional dasturiy ta&apos;minot muhandisligi sertifikatlari.
+            Coursera, Meta, Google, Packt va Pearson tomonidan berilgan professional dasturiy ta&apos;minot muhandisligi sertifikatlari ({certificates.length} ta).
           </p>
+
+          {/* Filter Bar: Issuers + Search Input */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
+            {/* Issuer Filter Pills */}
+            <div className="inline-flex p-1 rounded-full bg-neutral-100/80 dark:bg-neutral-900/70 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto no-scrollbar shadow-xs">
+              {issuers.map((issuer) => {
+                const isActive = activeIssuer === issuer;
+                return (
+                  <button
+                    key={issuer}
+                    onClick={() => setActiveIssuer(issuer)}
+                    className="relative px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white whitespace-nowrap"
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeCertIssuerTab"
+                        className="absolute inset-0 rounded-full bg-white dark:bg-white/10 border border-black/10 dark:border-white/15 shadow-xs"
+                        transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                      />
+                    )}
+                    <span className={`relative z-10 ${isActive ? 'text-black dark:text-white font-semibold' : ''}`}>
+                      {issuer}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Quick Search */}
+            <div className="relative w-full sm:w-48">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              <input
+                type="text"
+                value={certSearch}
+                onChange={(e) => setCertSearch(e.target.value)}
+                placeholder="Sertifikatlardan qidirish..."
+                className="w-full pl-8 pr-4 py-1.5 rounded-full apple-glass-pill text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all shadow-xs"
+              />
+              {certSearch && (
+                <button
+                  onClick={() => setCertSearch('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-neutral-400 hover:text-black dark:hover:text-white font-mono px-1"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {certificates.map((cert, index) => {
+          {filteredCerts.map((cert, index) => {
             const certImg = cert.imageUrl || cert.image || '/placeholder-cert.jpg';
             const certLink = cert.credentialUrl || cert.link;
             const certDate = cert.dateIssued || cert.year;
@@ -140,6 +214,21 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
             );
           })}
         </div>
+
+        {/* Empty state when search yields no certificates */}
+        {filteredCerts.length === 0 && (
+          <div className="text-center py-16 apple-glass-card rounded-3xl max-w-md mx-auto p-8 border border-black/[0.08] dark:border-white/[0.08]">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              &quot;{certSearch}&quot; bo&apos;yicha hech qanday sertifikat topilmadi.
+            </p>
+            <button
+              onClick={() => { setCertSearch(''); setActiveIssuer('Barchasi'); }}
+              className="mt-3 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+            >
+              Filtrlarni tozalash
+            </button>
+          </div>
+        )}
 
         {/* Lightbox Modal */}
         <AnimatePresence>

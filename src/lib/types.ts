@@ -114,3 +114,29 @@ export interface SiteContent {
   services?: ServiceItem[];
   settings?: UserSettings;
 }
+
+export interface MilestoneItem {
+  id: string;
+  period: string;
+  title: string;
+  organization: string;
+  category: 'work' | 'education' | 'achievement';
+  description: string;
+  highlights: string[];
+  skills: string[];
+  badge?: string;
+  link?: string;
+}
+
+export interface TestimonialItem {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  comment: string;
+  rating: number;
+  projectTitle?: string;
+  avatarUrl?: string;
+  verified?: boolean;
+}
+

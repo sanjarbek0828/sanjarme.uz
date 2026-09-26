@@ -28,10 +28,18 @@ export const Contact: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
+
+  const TEMPLATES = [
+    { label: 'Telegram Bot', subject: 'Telegram Bot yaratish', placeholder: "Biznesimiz uchun Telegram bot yaratmoqchiman. Talablar: " },
+    { label: 'Veb-sayt / Landing', subject: 'Veb-sayt buyurtma qilish', placeholder: "Kompaniyamiz uchun zamonaviy veb-sayt kerak. Asosiy maqsad: " },
+    { label: 'Full Stack Ilova', subject: 'Full Stack Web Ilova ishlab chiqish', placeholder: "Next.js va ma'lumotlar bazasi asosida yangi tizim yaratish bo'yicha: " },
+    { label: 'Maslahat / Konsultatsiya', subject: "Dasturlash bo'yicha maslahat", placeholder: "Loyihamiz arxitekturasi va texnologiyalari bo'yicha maslahat olmoqchi edim: " },
+  ];
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -131,6 +139,27 @@ export const Contact: React.FC = () => {
                 </button>
               </div>
 
+              {/* Direct Telegram Card with 1-Click Action */}
+              <div className="p-4 rounded-2xl bg-sky-500/10 dark:bg-sky-500/10 border border-sky-500/20 flex items-center justify-between gap-3">
+                <div className="overflow-hidden">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-semibold block">
+                    Tezkor Muloqot
+                  </span>
+                  <span className="text-xs text-neutral-800 dark:text-neutral-200 font-medium block truncate">
+                    Telegramda 5 daqiqada javob oling
+                  </span>
+                </div>
+                <a
+                  href="https://t.me/sanjarbekdev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-1.5 rounded-full bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-xs shrink-0 transition-transform active:scale-95"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Yozish</span>
+                </a>
+              </div>
+
               {/* Response Time Badge */}
               <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-600 dark:text-neutral-400 p-3 rounded-xl bg-neutral-100/60 dark:bg-neutral-900/50 border border-black/[0.04] dark:border-white/[0.06]">
                 <Clock className="w-4 h-4 text-emerald-500 flex-shrink-0" />
@@ -202,6 +231,28 @@ export const Contact: React.FC = () => {
                   <p className="text-xs sm:text-sm">{errorMessage}</p>
                 </div>
               )}
+
+              {/* Quick Topic Presets */}
+              <div className="mb-6 space-y-2">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block font-semibold">
+                  Tezkor mavzuni tanlang:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {TEMPLATES.map((tmpl) => (
+                    <button
+                      key={tmpl.label}
+                      type="button"
+                      onClick={() => {
+                        setValue('subject', tmpl.subject);
+                        setValue('message', tmpl.placeholder);
+                      }}
+                      className="px-3 py-1.5 rounded-full text-xs font-medium bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.1] text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
+                    >
+                      {tmpl.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 
