@@ -18,33 +18,23 @@ export default function AdminLayout({
   const isLoginPage = pathname === '/admin/login';
 
   useEffect(() => {
-    if (!loading && !user && !isLoginPage) {
-      router.push('/admin/login');
+    if (isLoginPage) {
+      router.replace('/admin');
     }
-  }, [user, loading, isLoginPage, router]);
+  }, [isLoginPage, router]);
 
-  // If on login page, render full screen without sidebar
+  // If on /admin/login, show brief redirect loader
   if (isLoginPage) {
-    return <>{children}</>;
-  }
-
-  // Apple-style Loading state
-  if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-black flex flex-col items-center justify-center space-y-4">
         <div className="w-12 h-12 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] flex items-center justify-center">
           <Loader2 className="w-6 h-6 text-neutral-800 dark:text-neutral-200 animate-spin" />
         </div>
         <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">
-          Authenticating Studio...
+          Admin panelga o'tilmoqda...
         </p>
       </div>
     );
-  }
-
-  // If not authenticated and not on login page, prevent flicker while redirecting
-  if (!user) {
-    return null;
   }
 
   return (

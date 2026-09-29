@@ -29,13 +29,23 @@ Sanjarbek Otabekovning shaxsiy portfoliosi va veb-muhandislik platformasi. Ushbu
 - ⚡ **Next.js 16 (App Router, Turbopack)**: Yuqori yuklanish tezligi, server-side va to'liq statik prerendering.
 - 🎨 **Apple Frosted Glass Dizayn**: Zamonaviy glassmorphism, GPU-accelerated animatsiyalar (`framer-motion`), adaptiv Dark/Light rejim.
 - 📱 **100% Responsivlik**: 320px mobil telefonlardan tortib ultra-wide monitorlargacha mukammal moslashuv.
-- 🛠️ **Tech Stack & Ko'nikmalar**: Real texnologiyalar, rasmiy SVG logotiplar va toifalar bo'yicha tezkor qidiruv/filtr.
-- 💼 **Xizmatlar & Loyihalar**: Telegram botlar, Landing pagelar va Full Stack veb tizimlar vitrinasi.
+- 🚀 **11+ Haqiqiy Ishlayotgan Loyihalar vitrinasi**:
+  - **mebelmashhura.uz**: E-commerce katalog va onlayn buyurtma platformasi.
+  - **FINALYTIX**: Google Gemini API NLP orqali erkin tildan xarajatlarni avtomatik hisoblovchi AI boshqaruv paneli.
+  - **3D Earth WebGL**: Three.js va WebGL asosida 60 FPS real vaqt Yer shari maketi.
+  - **MovieMind**: TMDb API asosida O'zbek tilidagi kinolar va treylerlar portali.
+  - **TaskFlow Board**: React 19 va `@dnd-kit/core` asosida drag-and-drop Kanban tizimi.
+  - **Palitra Pro**: Dasturchilar va dizaynerlar uchun ranglar uyg'unligi generatori va CSS/Tailwind eksporti.
+  - **ProTasker**: Editorial Aesthetic dizayndagi zamonaviy vazifalar menejeri.
+  - **Aura Habit Tracker**: Oflayn rejimda ishlovchi PWA odatlar platformasi.
+  - **Ultra Ping**: 60+ FPS kiberpank HTML5 Canvas tennis o'yini (AI raqib bilan).
+  - **2D Breakout Arcade**: Matematik to'qnashuv fizikasi va Web Audio API retro o'yini.
+  - **Sayohat Rejalashtiruvchi**: OpenStreetMap (Leaflet.js) va ob-havo prognozlari bilan sayohat xaritasi.
 - 🔍 **Kengaytirilgan SEO & Schema.org**:
-  - `sanjarme.uz` domeniga to'liq moslashtirilgan kanonik manzillar.
-  - Google va AI qidiruv tizimlari uchun Rich Snippets (`Person`, `WebSite`, `ProfilePage`, `ProfessionalService`, `OfferCatalog`).
+  - `sanjarme.uz` domeniga to'liq moslashtirilgan kanonik manzillar va meta teglar.
+  - Google va AI qidiruv tizimlari uchun Rich Snippets (`Person`, `WebSite`, `ProfilePage`, `ItemList` (SoftwareApplication), `ProfessionalService`, `BreadcrumbList`).
   - Dinamik OpenGraph banneri (`/opengraph-image`) va PWA Web Manifest (`/manifest.webmanifest`).
-- 🔐 **Admin Studio**: Real-time Firebase Firestore sinxronizatsiyasi va xavfsiz boshqaruv tizimi.
+- 🔐 **To'g'ridan-to'g'ri Admin Studio**: Loyihalar, sertifikatlar, xabarlar va sayt kontentini boshqarish uchun to'liq real admin panel.
 
 ---
 

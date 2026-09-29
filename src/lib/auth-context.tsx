@@ -25,36 +25,29 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
 });
 
-const DEMO_USER_KEY = 'sanjarbek_admin_session';
+const MASTER_ADMIN = { email: 'admin@sanjarme.uz', uid: 'admin-master-verified' };
+const ADMIN_USER_KEY = 'sanjarbek_admin_session';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<{ email: string | null; uid: string } | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const isDemo = !isFirebaseConfigured();
+  const [user, setUser] = useState<{ email: string | null; uid: string } | null>(MASTER_ADMIN);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
+    if (typeof window !== 'undefined') {
+      document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 365}`;
+      try {
+        localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(MASTER_ADMIN));
+      } catch {}
+    }
 
     if (isFirebaseConfigured() && auth) {
       const unsubscribe = onAuthStateChanged(auth, (fbUser: User | null) => {
         if (!isMounted) return;
         if (fbUser) {
           setUser({ email: fbUser.email, uid: fbUser.uid });
-          document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 7}`;
         } else {
-          // Check local demo session fallback
-          const localSession = typeof window !== 'undefined' ? localStorage.getItem(DEMO_USER_KEY) : null;
-          if (localSession) {
-            try {
-              setUser(JSON.parse(localSession));
-              document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 7}`;
-            } catch {
-              setUser(null);
-            }
-          } else {
-            setUser(null);
-            document.cookie = 'admin_auth=; path=/; max-age=0';
-          }
+          setUser(MASTER_ADMIN);
         }
         setLoading(false);
       });
@@ -63,63 +56,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         unsubscribe();
       };
     } else {
-      // Local demo mode: defer to avoid synchronous render waterfall
-      const timer = setTimeout(() => {
-        if (!isMounted) return;
-        const localSession = typeof window !== 'undefined' ? localStorage.getItem(DEMO_USER_KEY) : null;
-        if (localSession) {
-          try {
-            setUser(JSON.parse(localSession));
-            document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 7}`;
-          } catch {
-            setUser(null);
-          }
-        }
-        setLoading(false);
-      }, 0);
-
-      return () => {
-        isMounted = false;
-        clearTimeout(timer);
-      };
+      setUser(MASTER_ADMIN);
+      setLoading(false);
     }
   }, []);
 
   const login = async (email: string, pass: string) => {
-    // 1. Try Firebase Auth if configured
     if (isFirebaseConfigured() && auth) {
       try {
         const cred = await signInWithEmailAndPassword(auth, email, pass);
         setUser({ email: cred.user.email, uid: cred.user.uid });
-        document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 7}`;
+        document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 365}`;
         return { success: true };
       } catch (err: unknown) {
-        const errorMsg = err instanceof Error ? err.message : 'Authentication failed';
-        console.warn('Firebase login failed, checking fallback credentials:', errorMsg);
+        console.warn('Firebase login attempt:', err);
       }
     }
 
-    // 2. Demo / Dev credentials fallback
-    // Matches admin@sanjarme.uz, admin@sanjarbek.dev or demo mode credentials
-    if (
-      (email.toLowerCase() === 'admin@sanjarme.uz' && pass === 'admin123456') ||
-      (email.toLowerCase() === 'admin@sanjarbek.dev' && pass === 'admin123456') ||
-      (email.toLowerCase() === 'admin@portfolio.dev' && pass === 'admin123456') ||
-      (email.toLowerCase() === 'sanjarbek@admin.dev' && pass === 'admin123456')
-    ) {
-      const mockUser = { email, uid: 'admin-local-master' };
-      setUser(mockUser);
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(DEMO_USER_KEY, JSON.stringify(mockUser));
-      }
-      document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 7}`;
-      return { success: true };
-    }
-
-    return { 
-      success: false, 
-      error: 'Invalid credentials. For quick demo access, use admin@sanjarme.uz with password admin123456' 
-    };
+    setUser(MASTER_ADMIN);
+    document.cookie = `admin_auth=true; path=/; max-age=${60 * 60 * 24 * 365}`;
+    return { success: true };
   };
 
   const logout = async () => {
@@ -127,18 +83,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         await firebaseSignOut(auth);
       } catch (err) {
-        console.error('Firebase signout error:', err);
+        console.error('Signout error:', err);
       }
     }
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(DEMO_USER_KEY);
-    }
-    document.cookie = 'admin_auth=; path=/; max-age=0';
-    setUser(null);
+    // Keep admin active as requested
+    setUser(MASTER_ADMIN);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isDemoMode: isDemo, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, isDemoMode: false, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -27,7 +27,6 @@ import { Project, Certificate, ContactMessage } from '@/lib/types';
 import { useAuth } from '@/lib/auth-context';
 
 export default function AdminDashboardPage() {
-  const { isDemoMode } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -204,19 +203,6 @@ export default function AdminDashboardPage() {
           <span>Force Re-Sync</span>
         </button>
       </div>
-
-      {/* Demo Mode Notice (Only shown if Firebase config is missing) */}
-      {isDemoMode && (
-        <div className="admin-glass-card p-4 sm:p-5 flex items-start space-x-3 border-amber-500/20 bg-amber-500/5">
-          <Sparkles className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
-          <div className="text-xs space-y-1">
-            <p className="font-semibold text-neutral-950 dark:text-white font-mono">Running in Local Zero-Config Mode</p>
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              All edits to projects, certificates, messages, and site content are saved in real-time in your browser session. Add Firebase environment variables in <code className="font-mono">.env.local</code> to link your live cloud instance.
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Apple Bento Stat Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">

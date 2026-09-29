@@ -63,7 +63,24 @@ const getLocalData = <T>(key: string, fallback: T): T => {
       }
       return fallback;
     }
-    return JSON.parse(item) as T;
+    const parsed = JSON.parse(item) as T;
+    // Smart sync for projects: ensure all verified deployed projects are present
+    if (key === STORAGE_KEYS.PROJECTS && Array.isArray(parsed) && Array.isArray(fallback)) {
+      if (parsed.length < fallback.length) {
+        const storedIds = new Set(parsed.map((p: any) => p.id || p.slug));
+        const merged = [...parsed];
+        for (const item of (fallback as any[])) {
+          if (!storedIds.has(item.id) && !storedIds.has(item.slug)) {
+            merged.push(item);
+          }
+        }
+        try {
+          localStorage.setItem(key, JSON.stringify(merged));
+        } catch {}
+        return merged as T;
+      }
+    }
+    return parsed;
   } catch {
     return fallback;
   }

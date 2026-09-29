@@ -36,6 +36,16 @@ export const metadata: Metadata = {
     "Firebase Dasturchi",
     "PostgreSQL",
     "Python Developer",
+    "Sanjarbek Otabekov portfolio",
+    "sanjarbek0828",
+    "FINALYTIX AI",
+    "MovieMind",
+    "TaskFlow Board",
+    "3D Earth Three.js",
+    "Palitra Pro",
+    "ProTasker",
+    "Uzbekistan developer portfolio",
+    "Next.js 16 React 19 portfolio",
   ],
   authors: [{ name: "Sanjarbek Otabekov", url: "https://sanjarme.uz" }],
   creator: "Sanjarbek Otabekov",
@@ -52,11 +62,11 @@ export const metadata: Metadata = {
     url: "https://sanjarme.uz",
     title: "Sanjarbek Otabekov — Full Stack Dasturchi & Web Muhandis | sanjarme.uz",
     description:
-      "Zamonaviy veb-saytlar, Next.js ilovalar va professional Telegram botlar yaratuvchi tajribali Full Stack muhandis portfoliosi.",
+      "Zamonaviy veb-saytlar, Next.js ilovalar, Three.js 3D maketlar va sun'iy intellekt (Gemini API) tizimlari yaratuvchi Full Stack muhandis portfoliosi.",
     siteName: "Sanjarbek Otabekov — sanjarme.uz",
     images: [
       {
-        url: "/images/personaj-sanjarbek.png",
+        url: "/images/personaj-sanjarbek.webp",
         width: 1200,
         height: 630,
         alt: "Sanjarbek Otabekov — Full Stack Dasturchi (sanjarme.uz)",
@@ -67,8 +77,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sanjarbek Otabekov — Full Stack Dasturchi | sanjarme.uz",
     description:
-      "Zamonaviy veb-saytlar, Next.js ilovalar va professional Telegram botlar yaratuvchi Full Stack dasturchi portfoliosi.",
-    images: ["/personaj.png"],
+      "Zamonaviy veb-saytlar, Next.js ilovalar, Three.js 3D maketlar va sun'iy intellekt tizimlari portfoliosi.",
+    images: ["/images/personaj-sanjarbek.webp"],
     creator: "@sanjarbekdev",
   },
   robots: {
@@ -106,9 +116,9 @@ const jsonLd = {
       "name": "Sanjarbek Otabekov",
       "alternateName": ["Sanjarbek", "sanjarme", "sanjarme.uz", "Sanjarbek Developer"],
       "jobTitle": "Full Stack Dasturchi & Dasturiy Ta'minot Muhandisi",
-      "description": "Next.js, React, TypeScript, Node.js, Telegram botlar va bulutli tizimlar bo'yicha ixtisoslashgan Full Stack muhandis.",
+      "description": "Next.js, React, TypeScript, Node.js, Telegram botlar va sun'iy intellekt (Gemini API) bo'yicha ixtisoslashgan Full Stack muhandis.",
       "url": "https://sanjarme.uz",
-      "image": "https://sanjarme.uz/personaj.png",
+      "image": "https://sanjarme.uz/images/personaj-sanjarbek.webp",
       "email": "sanjarbekotabekov010@gmail.com",
       "nationality": {
         "@type": "Country",
@@ -141,7 +151,10 @@ const jsonLd = {
         "Git",
         "Telegram Bot Development",
         "REST API",
-        "Cloud Architecture"
+        "Cloud Architecture",
+        "Artificial Intelligence",
+        "Three.js",
+        "WebGL"
       ]
     },
     {
@@ -150,7 +163,7 @@ const jsonLd = {
       "url": "https://sanjarme.uz",
       "name": "Sanjarbek Otabekov — Full Stack Dasturchi | sanjarme.uz",
       "alternateName": "sanjarme.uz",
-      "description": "Sanjarbek Otabekovning rasmiy veb-sayti va portfoliosi: loyihalar, texnologiyalar, xizmatlar.",
+      "description": "Sanjarbek Otabekovning rasmiy veb-sayti va portfoliosi: jonli loyihalar, texnologiyalar, xizmatlar.",
       "inLanguage": ["uz", "en"],
       "publisher": {
         "@id": "https://sanjarme.uz/#person"
@@ -166,10 +179,99 @@ const jsonLd = {
       }
     },
     {
+      "@type": "BreadcrumbList",
+      "@id": "https://sanjarme.uz/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Bosh sahifa",
+          "item": "https://sanjarme.uz"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Loyihalar",
+          "item": "https://sanjarme.uz/#projects"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Xizmatlar",
+          "item": "https://sanjarme.uz/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Ko'nikmalar",
+          "item": "https://sanjarme.uz/#skills"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Sertifikatlar",
+          "item": "https://sanjarme.uz/#certificates"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Bog'lanish",
+          "item": "https://sanjarme.uz/#contact"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://sanjarme.uz/#projects-list",
+      "name": "Sanjarbek Otabekov — Jonli Dasturiy Loyihalar",
+      "itemListElement": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "mebelmashhura.uz",
+          "operatingSystem": "Web",
+          "applicationCategory": "BusinessApplication",
+          "url": "https://mebelmashhura.uz",
+          "description": "Mebel do'koni uchun yaratilgan zamonaviy elektron tijorat katalogi va buyurtma platformasi."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "FINALYTIX — AI Expense Analyzer",
+          "operatingSystem": "Web",
+          "applicationCategory": "FinanceApplication",
+          "url": "https://sanjarbek404.github.io/FINALYTIX-Dashboard/",
+          "description": "Google Gemini API NLP orqali xarajatlarni tabiiy tildan tahlil qiluvchi aqlli moliya paneli."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "3D Earth WebGL",
+          "operatingSystem": "Web",
+          "applicationCategory": "MultimediaApplication",
+          "url": "https://sanjarbek404.github.io/3d-earth/",
+          "description": "Three.js va WebGL asosidagi 60 FPS silliq interaktiv 3D Yer shari maketi."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "MovieMind — Kinolar Portali",
+          "operatingSystem": "Web",
+          "applicationCategory": "EntertainmentApplication",
+          "url": "https://sanjarbek404.github.io/Movie-Mind/",
+          "description": "TMDb API bilan integratsiyalangan, to'liq O'zbek tilidagi kinolar va treylerlar platformasi."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "TaskFlow Board",
+          "operatingSystem": "Web",
+          "applicationCategory": "ProductivityApplication",
+          "url": "https://sanjarbek404.github.io/TaskFlow-Board/",
+          "description": "Interaktiv drag-and-drop Kanban vazifalar boshqaruv taxtasi."
+        }
+      ]
+    },
+    {
       "@type": "ProfessionalService",
       "@id": "https://sanjarme.uz/#service",
       "name": "Sanjarbek Otabekov — Web & Bot Development",
-      "image": "https://sanjarme.uz/personaj.png",
+      "image": "https://sanjarme.uz/images/personaj-sanjarbek.webp",
       "url": "https://sanjarme.uz",
       "priceRange": "$$",
       "address": {

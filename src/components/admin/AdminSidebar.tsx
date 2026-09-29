@@ -29,7 +29,7 @@ const ADMIN_LINKS = [
 export const AdminSidebar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout, isDemoMode } = useAuth();
+  const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -67,15 +67,15 @@ export const AdminSidebar: React.FC = () => {
           </div>
         </div>
 
-        {/* Live / Demo Mode Pill */}
+        {/* Real Admin Status Pill */}
         <div className="px-3 py-2 rounded-2xl bg-neutral-100/90 dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between text-xs font-mono">
           <div className="flex items-center space-x-2">
-            <span className={`w-2 h-2 rounded-full ${isDemoMode ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500 animate-pulse'}`} />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-neutral-700 dark:text-neutral-300 font-medium">
-              {isDemoMode ? 'Preview Mode' : 'Cloud Firestore'}
+              Admin Studio Active
             </span>
           </div>
-          <span className="text-[10px] text-neutral-400 dark:text-neutral-500 uppercase">
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 uppercase font-semibold">
             Live
           </span>
         </div>
