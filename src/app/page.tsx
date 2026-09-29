@@ -16,7 +16,8 @@
   import { 
     subscribeProjects, 
     subscribeCertificates, 
-    subscribeSiteContent 
+    subscribeSiteContent,
+    seedFirestoreIfEmpty
   } from '@/lib/data-service';
   import { initialProjects, initialCertificates, initialSiteContent } from '@/lib/initial-data';
   import { Project, Certificate, SiteContent } from '@/lib/types';
@@ -33,6 +34,9 @@
     }, []);
 
     useEffect(() => {
+      // Ensure all 11 deployed projects are seeded into Cloud Firestore
+      seedFirestoreIfEmpty().catch(() => {});
+
       // Real-time listener for Projects (with instant local data fallback)
       const unsubProjects = subscribeProjects((newProjects) => {
         if (newProjects && newProjects.length > 0) {

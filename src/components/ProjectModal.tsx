@@ -15,7 +15,7 @@ import { GithubIcon } from '@/components/ui/Icons';
 import { Project } from '@/lib/types';
 
 interface ProjectModalProps {
-  project: Project | null;
+  project: Project | null;                
   onClose: () => void;
 }
 

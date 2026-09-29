@@ -66,19 +66,21 @@ const getLocalData = <T>(key: string, fallback: T): T => {
     const parsed = JSON.parse(item) as T;
     // Smart sync for projects: ensure all verified deployed projects are present
     if (key === STORAGE_KEYS.PROJECTS && Array.isArray(parsed) && Array.isArray(fallback)) {
-      if (parsed.length < fallback.length) {
-        const storedIds = new Set(parsed.map((p: any) => p.id || p.slug));
-        const merged = [...parsed];
-        for (const item of (fallback as any[])) {
-          if (!storedIds.has(item.id) && !storedIds.has(item.slug)) {
-            merged.push(item);
-          }
+      const storedIds = new Set(parsed.map((p: any) => p.id || p.slug));
+      const merged = [...parsed];
+      let hasMissing = false;
+      for (const item of (fallback as any[])) {
+        if (!storedIds.has(item.id) && !storedIds.has(item.slug)) {
+          merged.push(item);
+          hasMissing = true;
         }
+      }
+      if (hasMissing) {
         try {
           localStorage.setItem(key, JSON.stringify(merged));
         } catch {}
-        return merged as T;
       }
+      return merged as T;
     }
     return parsed;
   } catch {
@@ -257,15 +259,31 @@ export const subscribeProjects = (
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          if (!snapshot.empty) {
-            const projects = snapshot.docs.map(docSnap => 
-              normalizeProject(docSnap.id, docSnap.data())
-            );
-            // Sort by order ascending
-            projects.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
-            setLocalData(STORAGE_KEYS.PROJECTS, projects);
-            onUpdate(projects);
+          const firestoreProjects = !snapshot.empty
+            ? snapshot.docs.map(docSnap => normalizeProject(docSnap.id, docSnap.data()))
+            : [];
+
+          // Merge any initialProjects that are not yet in Firestore
+          const existingIds = new Set(firestoreProjects.map(p => p.id));
+          const existingSlugs = new Set(firestoreProjects.map(p => p.slug));
+
+          const missingProjects = initialProjects.filter(
+            p => !existingIds.has(p.id) && !existingSlugs.has(p.slug)
+          );
+
+          // If Firestore is missing projects, automatically seed them into Firestore
+          const firestoreDb = db;
+          if (missingProjects.length > 0 && firestoreDb) {
+            missingProjects.forEach(proj => {
+              setDoc(doc(firestoreDb, 'projects', proj.id), proj, { merge: true }).catch(() => {});
+            });
           }
+
+          const allProjects = [...firestoreProjects, ...missingProjects];
+          // Sort by order ascending
+          allProjects.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+          setLocalData(STORAGE_KEYS.PROJECTS, allProjects);
+          onUpdate(allProjects);
         },
         (error) => {
           // Gracefully maintain local cache when offline
@@ -654,25 +672,17 @@ export const populateFirestore = async (
   }
 
   try {
+    for (const proj of initialProjects) {
+      await setDoc(doc(db, 'projects', proj.id), proj, { merge: true });
+    }
     const projSnap = await getDocs(collection(db, 'projects'));
-    let projectsCount = projSnap.size;
+    const projectsCount = projSnap.size;
 
-    if (projSnap.empty || force) {
-      for (const proj of initialProjects) {
-        await setDoc(doc(db, 'projects', proj.id), proj, { merge: true });
-      }
-      projectsCount = initialProjects.length;
+    for (const cert of initialCertificates) {
+      await setDoc(doc(db, 'certificates', cert.id), cert, { merge: true });
     }
-
     const certSnap = await getDocs(collection(db, 'certificates'));
-    let certsCount = certSnap.size;
-
-    if (certSnap.empty || force) {
-      for (const cert of initialCertificates) {
-        await setDoc(doc(db, 'certificates', cert.id), cert, { merge: true });
-      }
-      certsCount = initialCertificates.length;
-    }
+    const certsCount = certSnap.size;
 
     return {
       success: true,
@@ -692,8 +702,8 @@ export const seedFirestoreIfEmpty = async (): Promise<boolean> => {
   if (!isFirebaseConfigured() || !db) return false;
   try {
     const projSnap = await getDocs(collection(db, 'projects'));
-    if (projSnap.empty) {
-      await populateFirestore(false);
+    if (projSnap.empty || projSnap.size < initialProjects.length) {
+      await populateFirestore(true);
       return true;
     }
     return false;
@@ -714,12 +724,28 @@ export const getProjects = async (): Promise<Project[]> => {
         setTimeout(() => reject(new Error('fetch timeout')), 2500)
       );
       const snapshot = await Promise.race([fetchPromise, timeoutPromise]);
-      if (!snapshot.empty) {
-        const projects = snapshot.docs.map(d => normalizeProject(d.id, d.data()));
-        projects.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
-        setLocalData(STORAGE_KEYS.PROJECTS, projects);
-        return projects;
+      const firestoreProjects = !snapshot.empty 
+        ? snapshot.docs.map(d => normalizeProject(d.id, d.data()))
+        : [];
+
+      const existingIds = new Set(firestoreProjects.map(p => p.id));
+      const existingSlugs = new Set(firestoreProjects.map(p => p.slug));
+
+      const missingProjects = initialProjects.filter(
+        p => !existingIds.has(p.id) && !existingSlugs.has(p.slug)
+      );
+
+      const firestoreDb = db;
+      if (missingProjects.length > 0 && firestoreDb) {
+        missingProjects.forEach(proj => {
+          setDoc(doc(firestoreDb, 'projects', proj.id), proj, { merge: true }).catch(() => {});
+        });
       }
+
+      const allProjects = [...firestoreProjects, ...missingProjects];
+      allProjects.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+      setLocalData(STORAGE_KEYS.PROJECTS, allProjects);
+      return allProjects;
     } catch {
       // Graceful fallback to local cache
     }
