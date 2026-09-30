@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Send, Mail, ArrowUp, Shield } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -50,6 +50,15 @@ export const Footer: React.FC = () => {
                 aria-label="Telegram"
               >
                 <Send className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="https://instagram.com/sanjarbek_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 transition-colors shadow-xs"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-3.5 h-3.5" />
               </a>
               <a
                 href="mailto:sanjarbekotabekov010@gmail.com"

@@ -14,7 +14,7 @@ import {
   Clock 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
 import { contactFormSchema, ContactFormData } from '@/lib/validations';
 import { submitContactMessage } from '@/lib/data-service';
 
@@ -160,6 +160,27 @@ export const Contact: React.FC = () => {
                 </a>
               </div>
 
+              {/* Direct Instagram Card with 1-Click Action */}
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-amber-500/10 border border-pink-500/20 flex items-center justify-between gap-3">
+                <div className="overflow-hidden">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-pink-600 dark:text-pink-400 font-semibold block">
+                    Instagram Sahifa
+                  </span>
+                  <span className="text-xs text-neutral-800 dark:text-neutral-200 font-medium block truncate">
+                    @sanjarbek_dev • Loyihalar & Jarayon
+                  </span>
+                </div>
+                <a
+                  href="https://instagram.com/sanjarbek_dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-xs shrink-0 transition-transform active:scale-95"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                  <span>Kuzatish</span>
+                </a>
+              </div>
+
               {/* Response Time Badge */}
               <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-600 dark:text-neutral-400 p-3 rounded-xl bg-neutral-100/60 dark:bg-neutral-900/50 border border-black/[0.04] dark:border-white/[0.06]">
                 <Clock className="w-4 h-4 text-emerald-500 flex-shrink-0" />
@@ -171,7 +192,7 @@ export const Contact: React.FC = () => {
                 <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 block">
                   Ijtimoiy Tarmoqlar
                 </span>
-                <div className="grid grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   <a
                     href="https://github.com/sanjarbek0828"
                     target="_blank"
@@ -190,6 +211,16 @@ export const Contact: React.FC = () => {
                   >
                     <Send className="w-4 h-4 text-sky-500 transition-colors" />
                     <span className="text-[11px] font-mono text-sky-600 dark:text-sky-400 font-semibold">Telegram</span>
+                  </a>
+
+                  <a
+                    href="https://instagram.com/sanjarbek_dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-xl bg-pink-500/10 dark:bg-pink-500/10 border border-pink-500/20 hover:border-pink-500/40 transition-all flex flex-col items-center justify-center gap-1 group"
+                  >
+                    <InstagramIcon className="w-4 h-4 text-pink-500 transition-colors" />
+                    <span className="text-[11px] font-mono text-pink-600 dark:text-pink-400 font-semibold">Instagram</span>
                   </a>
 
                   <a

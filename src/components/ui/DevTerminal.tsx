@@ -99,9 +99,10 @@ export const DevTerminal: React.FC = () => {
       case 'projects':
         result = (
           <div className="text-xs space-y-1.5 text-neutral-300">
-            <p>1. <span className="text-sky-400 font-semibold">mebelmashhura.uz</span> — Mebel do&apos;koni elektron tijorat veb sayti (&lt;1s yuklanish)</p>
-            <p>2. <span className="text-sky-400 font-semibold">3D Earth</span> — Three.js va WebGL 3D Yer sayyorasi modeli (60 FPS)</p>
-            <p>3. <span className="text-sky-400 font-semibold">Aura Habit Tracker</span> — Oflayn rejimda ishlovchi PWA ilovasi</p>
+            <p>1. <span className="text-rose-400 font-semibold">FilmX</span> — Kinolar va Seriallar Portali (1,700+ kino, 1080p FHD Tas-ix)</p>
+            <p>2. <span className="text-sky-400 font-semibold">mebelmashhura.uz</span> — Mebel do&apos;koni elektron tijorat veb sayti (&lt;1s yuklanish)</p>
+            <p>3. <span className="text-sky-400 font-semibold">FINALYTIX</span> — Google Gemini API AI Moliya va Xarajatlar Tahlilchisi</p>
+            <p>4. <span className="text-sky-400 font-semibold">3D Earth</span> — Three.js va WebGL 3D Yer sayyorasi modeli (60 FPS)</p>
           </div>
         );
         break;
@@ -110,6 +111,7 @@ export const DevTerminal: React.FC = () => {
           <div className="text-xs space-y-1 text-neutral-300">
             <p>📧 Email: <span className="text-sky-400">sanjarbekotabekov010@gmail.com</span></p>
             <p>💬 Telegram: <a href="https://t.me/sanjarbekdev" target="_blank" rel="noreferrer" className="text-sky-400 underline">@sanjarbekdev</a></p>
+            <p>📸 Instagram: <a href="https://instagram.com/sanjarbek_dev" target="_blank" rel="noreferrer" className="text-pink-400 underline">@sanjarbek_dev</a></p>
             <p>🐙 GitHub: <a href="https://github.com/sanjarbek0828" target="_blank" rel="noreferrer" className="text-sky-400 underline">github.com/sanjarbek0828</a></p>
           </div>
         );

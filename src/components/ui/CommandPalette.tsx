@@ -20,7 +20,7 @@ import {
   Briefcase,
   HeartHandshake 
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
 import { useTheme } from '@/lib/theme-context';
 
 interface CommandItem {
@@ -195,6 +195,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           onClose();
         },
         subtext: '@sanjarbekdev',
+      },
+      {
+        id: 'soc-instagram',
+        title: 'Instagram profilini ochish',
+        category: 'Social',
+        icon: <InstagramIcon className="w-4 h-4 text-pink-500" />,
+        perform: () => {
+          window.open('https://instagram.com/sanjarbek_dev', '_blank');
+          onClose();
+        },
+        subtext: '@sanjarbek_dev',
       },
       {
         id: 'soc-github',

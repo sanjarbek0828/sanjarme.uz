@@ -2,6 +2,36 @@ import { Project, Certificate, SkillItem, ServiceItem, UserSettings, SiteContent
 
 export const initialProjects: Project[] = [
   {
+    id: 'filmx-cinema-portal',
+    title: 'FilmX — Kinolar va Seriallar Portali',
+    slug: 'filmx-cinema-portal',
+    description: "1,700+ dan ortiq tarjima kinolar, ko'p qismli seriallar, real-time tomoshabinlar statistikasi va Tas-ix 1080p Full HD video oqimli ulkan kinoportal.",
+    desc: "Ulkan kinolar va seriallar onlayn platformasi",
+    longDescription: "FilmX — bu O'zbekistondagi eng ilg'or, tezyurar va keng qamrovli bepul onlayn kinoteatr platformasi. Saytda 1,700+ dan ortiq jahon durdonalari, yangi premyera filmlar, ko'p qismli seriallar, koreys doramalari va multfilmlar 1080p Full HD va 4K sifatda taqdim etiladi. Platforma real-time IP foydalanuvchilar monitoringi, Tas-ix tezyurar CDN, tezkor klaviatura qidiruvi (⌘K / Ctrl+K), sevimlilar ro'yxati, premyeralar slayderi va rasmiy Android APK ilovasi integratsiyasiga ega.",
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Tas-ix CDN', 'Real-time Stats', 'PWA'],
+    coverImageUrl: '/images/projects/filmx.jpg',
+    image: '/images/projects/filmx.jpg',
+    liveUrl: 'https://filmx-series.vercel.app/',
+    link: 'https://filmx-series.vercel.app/',
+    githubUrl: 'https://github.com/sanjarbek0828',
+    category: 'Full Stack & Streaming',
+    tag: 'Full Stack & Streaming',
+    color: 'bg-[#060913]',
+    featured: true,
+    order: 1,
+    challenges: [
+      "Katta hajmdagi video oqimlari va 6,450+ qismlar katalogini Tas-ix tarmog'ida buferlanishsiz, ultra-tezkor yuklanishini ta'minlash.",
+      "Real-time IP asoslangan onlayn tomoshabinlar hisoblagichi va interaktiv premyeralar slayderini yuqori unumdorlik bilan integratsiya qilish.",
+      "Klaviatura yordamida (⌘K / Ctrl+K) bir lahzada ishlovchi global debounced kinolar qidiruv tizimini ishlab chiqish."
+    ],
+    outcomes: [
+      "Vercel va tezyurar CDN arxitekturasi orqali sahifa yuklanish tezligi 98+ PageSpeed ko'rsatkichiga erishildi.",
+      "1,700+ kino va seriallar to'plami bilan foydalanuvchilar uchun qulay, reklamasiz va zamonaviy kinotomosha tajribasi yaratildi."
+    ],
+    role: 'Lead Architect & Full Stack Developer',
+    createdAt: '2026-07-20T10:00:00Z',
+  },
+  {
     id: 'R3GilTqRbXxxo3cY1rIY',
     title: 'mebelmashhura.uz',
     slug: 'mebelmashhura-uz',
@@ -590,7 +620,7 @@ export const initialSettings: UserSettings = {
   githubYearText: 'Bu yilgi faollik',
   spotifySong: 'Lofi Programming Coding Playlist',
   spotifyArtist: 'Coding Playlist',
-  instagram: '',
+  instagram: 'https://instagram.com/sanjarbek_dev',
 };
 
 export const initialSiteContent: SiteContent = {

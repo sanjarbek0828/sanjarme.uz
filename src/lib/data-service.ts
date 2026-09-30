@@ -235,7 +235,7 @@ export const normalizeSettings = (data: FirestoreDocData): UserSettings => {
     githubYearText: (data?.githubYearText as string) || initialSettings.githubYearText,
     spotifySong: (data?.spotifySong as string) || initialSettings.spotifySong,
     spotifyArtist: (data?.spotifyArtist as string) || initialSettings.spotifyArtist,
-    instagram: (data?.instagram as string) || '',
+    instagram: (data?.instagram as string) || initialSettings.instagram,
   };
 };
 
@@ -964,4 +964,23 @@ export const updateSiteContent = async (
   setLocalData(STORAGE_KEYS.SITE_CONTENT, updated);
   return updated;
 };
+
+export const updateUserSettings = async (
+  newSettings: Partial<UserSettings>
+): Promise<UserSettings> => {
+  const current = getLocalData<UserSettings>(STORAGE_KEYS.SETTINGS, initialSettings);
+  const updated = { ...current, ...newSettings };
+  setLocalData(STORAGE_KEYS.SETTINGS, updated);
+
+  if (isFirebaseConfigured() && db) {
+    try {
+      await setDoc(doc(db, 'settings', 'general'), updated, { merge: true });
+    } catch (err) {
+      console.warn('updateUserSettings error:', err);
+    }
+  }
+
+  return updated;
+};
+
 

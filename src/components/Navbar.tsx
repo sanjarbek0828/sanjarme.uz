@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CommandPalette } from './ui/CommandPalette';
+import { InstagramIcon } from '@/components/ui/Icons';
 
 const NAV_LINKS = [
   { name: 'Haqimda', href: '#about', icon: User },
@@ -222,6 +223,16 @@ export const Navbar: React.FC = () => {
                     aria-label="Telegram"
                   >
                     <Send className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://instagram.com/sanjarbek_dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 border border-pink-500/20 active:scale-95 transition-all"
+                    title="Instagram"
+                    aria-label="Instagram"
+                  >
+                    <InstagramIcon className="w-4 h-4" />
                   </a>
                 </div>
               </div>

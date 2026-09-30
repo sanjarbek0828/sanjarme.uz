@@ -13,20 +13,23 @@ import {
   Database,
   RefreshCw,
   Check,
-  AlertCircle
+  AlertCircle,
+  Share2
 } from 'lucide-react';
 import { 
   updateSiteContent, 
   populateFirestore, 
   getFirestoreConnectionStatus,
-  subscribeSiteContent
+  subscribeSiteContent,
+  subscribeSettings,
+  updateUserSettings
 } from '@/lib/data-service';
-import { SiteContent, SkillItem } from '@/lib/types';
-import { initialSiteContent } from '@/lib/initial-data';
+import { SiteContent, SkillItem, UserSettings } from '@/lib/types';
+import { initialSiteContent, initialSettings } from '@/lib/initial-data';
 
 export default function AdminSettingsPage() {
   const [siteContent, setSiteContent] = useState<SiteContent>(initialSiteContent);
-  const [activeTab, setActiveTab] = useState<'hero' | 'about' | 'skills' | 'database'>('hero');
+  const [activeTab, setActiveTab] = useState<'hero' | 'about' | 'skills' | 'socials' | 'database'>('hero');
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
@@ -69,6 +72,13 @@ export default function AdminSettingsPage() {
   const [newSkillCategory, setNewSkillCategory] = useState<SkillItem['category']>('Frontend');
   const [newSkillLevel, setNewSkillLevel] = useState<SkillItem['level']>('Expert');
 
+  // Socials state
+  const [instagramUrl, setInstagramUrl] = useState(initialSettings.instagram || '');
+  const [telegramUrl, setTelegramUrl] = useState(initialSettings.telegram || '');
+  const [githubUrl, setGithubUrl] = useState(initialSettings.github || '');
+  const [linkedinUrl, setLinkedinUrl] = useState(initialSettings.linkedin || '');
+  const [emailAddress, setEmailAddress] = useState(initialSettings.email || '');
+
   const fetchDbStatus = async () => {
     try {
       const status = await getFirestoreConnectionStatus();
@@ -109,11 +119,43 @@ export default function AdminSettingsPage() {
       }
     });
 
+    const unsubSettings = subscribeSettings((st) => {
+      if (st) {
+        setInstagramUrl(st.instagram || '');
+        setTelegramUrl(st.telegram || '');
+        setGithubUrl(st.github || '');
+        setLinkedinUrl(st.linkedin || '');
+        setEmailAddress(st.email || '');
+      }
+    });
+
     return () => {
       clearTimeout(timer);
       unsub();
+      unsubSettings();
     };
   }, []);
+
+  const handleSaveSocials = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    setSaveSuccess(false);
+    try {
+      await updateUserSettings({
+        instagram: instagramUrl,
+        telegram: telegramUrl,
+        github: githubUrl,
+        linkedin: linkedinUrl,
+        email: emailAddress,
+      });
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } catch (err) {
+      console.error('Save socials failed:', err);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleSeedDatabase = async () => {
     setSeedingDb(true);
@@ -278,6 +320,18 @@ export default function AdminSettingsPage() {
         >
           <Cpu className="w-3.5 h-3.5" />
           <span>Technical Skills</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('socials')}
+          className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer flex items-center space-x-2 ${
+            activeTab === 'socials'
+              ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+              : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
+          }`}
+        >
+          <Share2 className="w-3.5 h-3.5" />
+          <span>Social Channels</span>
         </button>
 
         <button
@@ -607,6 +661,109 @@ export default function AdminSettingsPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Tab: Social Links Configuration */}
+      {activeTab === 'socials' && (
+        <form onSubmit={handleSaveSocials} className="admin-glass-card p-6 sm:p-8 space-y-6">
+          <div className="pb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
+            <h2 className="text-lg font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
+              Social Links & Contact Channels
+            </h2>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+              Manage your Instagram, Telegram, GitHub, LinkedIn profiles and contact email shown across the portfolio.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                Instagram Profile URL
+              </label>
+              <input
+                type="text"
+                value={instagramUrl}
+                onChange={(e) => setInstagramUrl(e.target.value)}
+                placeholder="https://instagram.com/sanjarbek_dev"
+                className="w-full px-3.5 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-rose-500"
+              />
+              <span className="text-[11px] text-neutral-500">Masalan: https://instagram.com/sanjarbek_dev</span>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                Telegram Channel / Username
+              </label>
+              <input
+                type="text"
+                value={telegramUrl}
+                onChange={(e) => setTelegramUrl(e.target.value)}
+                placeholder="https://t.me/sanjarbekdev"
+                className="w-full px-3.5 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-sky-500"
+              />
+              <span className="text-[11px] text-neutral-500">Masalan: https://t.me/sanjarbekdev</span>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                GitHub Profile URL
+              </label>
+              <input
+                type="text"
+                value={githubUrl}
+                onChange={(e) => setGithubUrl(e.target.value)}
+                placeholder="https://github.com/sanjarbek0828"
+                className="w-full px-3.5 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                LinkedIn Profile URL
+              </label>
+              <input
+                type="text"
+                value={linkedinUrl}
+                onChange={(e) => setLinkedinUrl(e.target.value)}
+                placeholder="https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/"
+                className="w-full px-3.5 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="space-y-1.5 sm:col-span-2">
+              <label className="text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                Rasmiy Email Manzili
+              </label>
+              <input
+                type="email"
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
+                placeholder="sanjarbekotabekov010@gmail.com"
+                className="w-full px-3.5 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center justify-end">
+            <button
+              type="submit"
+              disabled={saving}
+              className="px-5 py-2 rounded-xl bg-black text-white dark:bg-white dark:text-black text-xs font-semibold hover:opacity-90 transition-opacity flex items-center space-x-2 shadow-xs disabled:opacity-50 cursor-pointer"
+            >
+              {saving ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Saving...</span>
+                </>
+              ) : (
+                <>
+                  <Save className="w-3.5 h-3.5" />
+                  <span>Save Social Links</span>
+                </>
+              )}
+            </button>
+          </div>
+        </form>
       )}
 
       {/* Tab 4: Database & Cloud Firestore */}
