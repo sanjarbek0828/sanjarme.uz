@@ -17,10 +17,9 @@ import {
   User, 
   ShieldCheck, 
   X,
-  Briefcase,
-  HeartHandshake 
+  Briefcase
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from '@/components/ui/Icons';
 import { useTheme } from '@/lib/theme-context';
 
 interface CommandItem {
@@ -131,15 +130,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         subtext: 'Coursera, Meta, Google, Packt va Pearson sertifikatlari',
       },
       {
-        id: 'nav-testimonials',
-        title: 'Mijozlar & Hamkorlar Fikrlari (Testimonials)',
-        category: 'Navigation',
-        icon: <HeartHandshake className="w-4 h-4 text-rose-500" />,
-        perform: () => navigateTo('#testimonials'),
-        shortcut: 'G T',
-        subtext: '5.0 reyting va haqiqiy mijozlar xulosalari',
-      },
-      {
         id: 'nav-contact',
         title: 'Bog\'lanish (Contact)',
         category: 'Navigation',
@@ -224,10 +214,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         category: 'Social',
         icon: <LinkedinIcon className="w-4 h-4 text-blue-500" />,
         perform: () => {
-          window.open('https://linkedin.com/in/sanjarbek-otabekov', '_blank');
+          window.open('https://linkedin.com/in/sanjarbek-otabekov-0600733bb/', '_blank');
           onClose();
         },
         subtext: 'linkedin.com/in/sanjarbek-otabekov',
+      },
+      {
+        id: 'soc-twitter',
+        title: 'X (Twitter) profilini ochish',
+        category: 'Social',
+        icon: <XIcon className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />,
+        perform: () => {
+          window.open('https://x.com/sanjarme08', '_blank');
+          onClose();
+        },
+        subtext: 'x.com/sanjarme08',
       },
 
       // System

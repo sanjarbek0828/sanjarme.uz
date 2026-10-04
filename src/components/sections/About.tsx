@@ -57,24 +57,24 @@ export const About: React.FC<AboutProps> = ({ content }) => {
   const commitsNum = parseInt(String(content.githubCommits || '110')) || 110;
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="about" className="relative py-16 sm:py-24 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-start mb-16">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3 block">
+        <div className="flex flex-col items-start mb-10 sm:mb-16">
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2 sm:mb-3 block">
             Falsafa & Tajriba
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             {content.heading || 'Men Haqimda'} — <span className="text-apple-headline">Maqsad & Yondashuv</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-3 max-w-2xl text-base font-normal leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base font-normal leading-relaxed">
             Murakkab texnik vazifalarga ijodiy, qulay va mustahkam arxitekturaviy yechimlar yaratish.
           </p>
         </div>
 
         {/* Apple Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           
           {/* Main Story & Philosophy */}
           <motion.div
@@ -82,13 +82,13 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7 space-y-6"
+            className="lg:col-span-7 space-y-4 sm:space-y-6"
           >
             <motion.div 
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-6 sm:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-5 gpu-layer"
+              className="p-5 sm:p-7 md:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 sm:space-y-5 gpu-layer"
             >
-              <h3 className="text-lg sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
+              <h3 className="text-base sm:text-xl lg:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
                 Raqamli qulaylik va yuqori tezlikdagi arxitektura
               </h3>
 

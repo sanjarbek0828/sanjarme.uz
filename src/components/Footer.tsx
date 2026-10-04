@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Send, Mail, ArrowUp, Shield } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -28,17 +28,19 @@ export const Footer: React.FC = () => {
                 href="https://github.com/sanjarbek0828"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors shadow-xs"
+                className="w-8 h-8 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 flex items-center justify-center transition-all hover:scale-110 shadow-xs"
                 aria-label="GitHub"
+                title="GitHub"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://linkedin.com/in/sanjarbek-otabekov"
+                href="https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors shadow-xs"
+                className="w-8 h-8 rounded-lg bg-[#0A66C2] text-white flex items-center justify-center transition-all hover:scale-110 shadow-xs shadow-[#0A66C2]/20"
                 aria-label="LinkedIn"
+                title="LinkedIn"
               >
                 <LinkedinIcon className="w-3.5 h-3.5" />
               </a>
@@ -46,24 +48,37 @@ export const Footer: React.FC = () => {
                 href="https://t.me/sanjarbekdev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-sky-500 hover:text-sky-600 dark:hover:text-white transition-colors shadow-xs"
+                className="w-8 h-8 rounded-lg bg-[#229ED9] text-white flex items-center justify-center transition-all hover:scale-110 shadow-xs shadow-[#229ED9]/20"
                 aria-label="Telegram"
+                title="Telegram"
               >
-                <Send className="w-3.5 h-3.5" />
+                <TelegramIcon className="w-3.5 h-3.5" />
               </a>
               <a
                 href="https://instagram.com/sanjarbek_dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 transition-colors shadow-xs"
+                className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center transition-all hover:scale-110 shadow-xs shadow-[#dc2743]/20"
                 aria-label="Instagram"
+                title="Instagram"
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
               </a>
               <a
+                href="https://x.com/sanjarme08"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-lg bg-black text-white dark:bg-white dark:text-black border border-white/10 dark:border-black/10 flex items-center justify-center transition-all hover:scale-110 shadow-xs"
+                aria-label="X (Twitter)"
+                title="X (Twitter)"
+              >
+                <XIcon className="w-3 h-3" />
+              </a>
+              <a
                 href="mailto:sanjarbekotabekov010@gmail.com"
-                className="w-8 h-8 rounded-lg bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors shadow-xs"
+                className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white flex items-center justify-center transition-all hover:scale-110 shadow-xs"
                 aria-label="Email"
+                title="Email"
               >
                 <Mail className="w-3.5 h-3.5" />
               </a>
@@ -93,9 +108,6 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#certificates" className="hover:text-black dark:hover:text-white transition-colors">Sertifikatlar</a>
-              </li>
-              <li>
-                <a href="#testimonials" className="hover:text-black dark:hover:text-white transition-colors">Fikrlar</a>
               </li>
               <li>
                 <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">Aloqa</a>

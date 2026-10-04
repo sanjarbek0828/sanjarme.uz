@@ -16,12 +16,11 @@ import {
   Award,
   Mail,
   Send,
-  Briefcase,
-  HeartHandshake
+  Briefcase
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { CommandPalette } from './ui/CommandPalette';
-import { InstagramIcon } from '@/components/ui/Icons';
+import { InstagramIcon, XIcon } from '@/components/ui/Icons';
 
 const NAV_LINKS = [
   { name: 'Haqimda', href: '#about', icon: User },
@@ -30,7 +29,6 @@ const NAV_LINKS = [
   { name: 'Xizmatlar', href: '#services', icon: Layers },
   { name: 'Loyihalar', href: '#projects', icon: FolderGit2 },
   { name: 'Sertifikatlar', href: '#certificates', icon: Award },
-  { name: 'Fikrlar', href: '#testimonials', icon: HeartHandshake },
   { name: 'Aloqa', href: '#contact', icon: Mail },
 ];
 
@@ -186,14 +184,17 @@ export const Navbar: React.FC = () => {
             >
               <div className="px-4 py-5 space-y-2 max-w-md mx-auto">
                 <div className="grid grid-cols-2 gap-2 pb-3">
-                  {NAV_LINKS.map((link) => {
+                  {NAV_LINKS.map((link, idx) => {
                     const Icon = link.icon;
+                    const isLast = idx === NAV_LINKS.length - 1;
                     return (
                       <a
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2.5 p-3 rounded-2xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/[0.04] dark:border-white/[0.06] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all"
+                        className={`flex items-center gap-2.5 p-3 rounded-2xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/[0.04] dark:border-white/[0.06] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all ${
+                          isLast ? 'col-span-2 justify-center' : ''
+                        }`}
                       >
                         <Icon className="w-4 h-4 text-sky-500 shrink-0" />
                         <span className="truncate">{link.name}</span>
@@ -201,8 +202,6 @@ export const Navbar: React.FC = () => {
                     );
                   })}
                 </div>
-
-
 
                 {/* Mobile Direct Action Buttons */}
                 <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2">
@@ -218,21 +217,31 @@ export const Navbar: React.FC = () => {
                     href="https://t.me/sanjarbekdev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 active:scale-95 transition-all"
+                    className="p-2.5 rounded-full bg-[#229ED9] text-white active:scale-95 transition-all shadow-xs"
                     title="Telegram"
                     aria-label="Telegram"
                   >
-                    <Send className="w-4 h-4" />
+                    <Send className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href="https://instagram.com/sanjarbek_dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 border border-pink-500/20 active:scale-95 transition-all"
+                    className="p-2.5 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white active:scale-95 transition-all shadow-xs"
                     title="Instagram"
                     aria-label="Instagram"
                   >
-                    <InstagramIcon className="w-4 h-4" />
+                    <InstagramIcon className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href="https://x.com/sanjarme08"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black border border-white/10 dark:border-black/10 active:scale-95 transition-all shadow-xs"
+                    title="X (Twitter)"
+                    aria-label="X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>

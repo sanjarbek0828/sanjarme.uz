@@ -289,7 +289,7 @@ const jsonLd = {
             "itemOffered": {
               "@type": "Service",
               "name": "Telegram Bot yaratish",
-              "description": "To'lov tizimlari va biznes logikasini avtomatlashtiruvchi Telegram botlar."
+              "description": "Biznes jarayonlarini avtomatlashtiruvchi va mijozlar bilan aloqani ta'minlovchi Telegram botlar."
             }
           },
           {

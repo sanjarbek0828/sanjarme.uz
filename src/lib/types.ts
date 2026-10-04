@@ -83,6 +83,7 @@ export interface UserSettings {
   spotifySong: string;
   spotifyArtist: string;
   instagram?: string;
+  twitter?: string;
 }
 
 export interface SiteContent {

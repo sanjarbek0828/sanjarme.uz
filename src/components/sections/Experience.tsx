@@ -41,7 +41,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
   };
 
   return (
-    <section id="experience" className="relative py-28 sm:py-36 bg-[#fafafc] dark:bg-[#08080a] transition-colors duration-300 overflow-hidden">
+    <section id="experience" className="relative py-16 sm:py-28 lg:py-36 bg-[#fafafc] dark:bg-[#08080a] transition-colors duration-300 overflow-hidden">
       {/* Background ambient light */}
       <div className="absolute top-1/4 -right-40 w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-sky-500/5 dark:bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -49,24 +49,24 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-4 shadow-2xs">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 shadow-2xs">
             <Briefcase className="w-3.5 h-3.5 text-sky-500" />
             <span className="tracking-wide uppercase font-semibold">Faoliyat & Yo&apos;nalish</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Tajriba & <span className="text-apple-headline">Rivojlanish Yo&apos;li</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base lg:text-lg font-normal leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-4 max-w-2xl text-xs sm:text-base lg:text-lg font-normal leading-relaxed">
             Amaliy loyihalar, xalqaro akkreditatsiyalar va uzluksiz texnologik yuksalish bosqichlari.
           </p>
 
           {/* Segmented Filter Pills */}
-          <div className="mt-8 inline-flex p-1 rounded-full apple-glass-pill shadow-xs">
+          <div className="mt-6 sm:mt-8 inline-flex p-1 rounded-full apple-glass-pill shadow-xs max-w-full overflow-x-auto no-scrollbar">
             <button
               onClick={() => setActiveTab('all')}
-              className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
                 activeTab === 'all'
                   ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
@@ -76,7 +76,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
             </button>
             <button
               onClick={() => setActiveTab('work')}
-              className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
                 activeTab === 'work'
                   ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
@@ -86,7 +86,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
             </button>
             <button
               onClick={() => setActiveTab('education')}
-              className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
                 activeTab === 'education'
                   ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
@@ -102,7 +102,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
           {/* Vertical central subtle line (desktop) */}
           <div className="hidden md:block absolute left-8 top-4 bottom-4 w-px bg-gradient-to-b from-sky-500/20 via-black/[0.08] dark:via-white/[0.08] to-transparent pointer-events-none" />
 
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             <AnimatePresence mode="popLayout">
               {filteredMilestones.map((item, index) => (
                 <motion.div
@@ -112,7 +112,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.35, delay: index * 0.05 }}
-                  className="relative flex flex-col md:flex-row gap-4 sm:gap-6 items-start group"
+                  className="relative flex flex-col md:flex-row gap-3 sm:gap-6 items-start group"
                 >
                   {/* Left Icon Node */}
                   <div className="hidden md:flex relative z-10 w-16 h-16 rounded-2xl apple-glass-card border border-black/[0.08] dark:border-white/[0.1] items-center justify-center shrink-0 group-hover:scale-105 group-hover:border-sky-500/40 transition-all duration-300 shadow-xs">
@@ -120,7 +120,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                   </div>
 
                   {/* Main Milestone Card */}
-                  <div className="flex-1 w-full p-5 sm:p-7 md:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 hover:shadow-xl transition-all duration-300">
+                  <div className="flex-1 w-full p-4 sm:p-7 md:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-3 sm:space-y-4 hover:shadow-xl transition-all duration-300">
                     
                     {/* Top Row: Title, Organization & Period Badge */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">

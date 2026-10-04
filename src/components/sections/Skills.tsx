@@ -51,7 +51,7 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
   };
 
   return (
-    <section id="skills" className="relative py-28 sm:py-36 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="skills" className="relative py-16 sm:py-28 lg:py-36 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       {/* Ambient Glassmorphism Refraction Glows */}
       <div className="absolute top-1/4 -left-48 w-96 h-96 bg-sky-500/10 dark:bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -59,21 +59,21 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean Editorial */}
-        <div className="flex flex-col items-center text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-4">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5 text-sky-500" />
             <span className="tracking-wide uppercase font-semibold">Texnik Ko&apos;nikmalar</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Amaliy <span className="text-apple-headline">Texnologiyalar & Stack</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-4 max-w-2xl text-base sm:text-lg font-normal leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-4 max-w-2xl text-sm sm:text-base font-normal leading-relaxed">
             Haqiqiy loyihalarda sinovdan o&apos;tgan, tezkor va xavfsiz tizimlarni yaratishda foydalaniladigan zamonaviy vositalar.
           </p>
 
           {/* Controls: Segmented Category Pills & Search Input */}
-          <div className="mt-10 flex flex-col md:flex-row items-center gap-4 w-full max-w-4xl justify-center">
+          <div className="mt-6 sm:mt-10 flex flex-col md:flex-row items-center gap-3 sm:gap-4 w-full max-w-4xl justify-center">
             
             {/* Apple Segmented Filter Pills */}
             <div className="inline-flex p-1 rounded-full apple-glass-pill max-w-full overflow-x-auto no-scrollbar">

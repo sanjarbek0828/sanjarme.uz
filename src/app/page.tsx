@@ -10,7 +10,6 @@
   import { Services } from '@/components/sections/Services';
   import { Projects } from '@/components/sections/Projects';
   import { Certificates } from '@/components/sections/Certificates';
-  import { Testimonials } from '@/components/sections/Testimonials';
   import { Contact } from '@/components/sections/Contact';
   import { Footer } from '@/components/Footer';
   import { 
@@ -99,10 +98,6 @@
 
         <div className="section-deferred">
           <Certificates certificates={certificates} />
-        </div>
-
-        <div className="section-deferred">
-          <Testimonials />
         </div>
 
         <div className="section-deferred">

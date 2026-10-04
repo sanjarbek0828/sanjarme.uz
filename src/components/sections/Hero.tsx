@@ -10,9 +10,11 @@ import {
   Check, 
   Zap, 
   Bot, 
-  Clock 
+  Clock,
+  Sparkles,
+  Send 
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 import { SiteContent } from '@/lib/types';
 
 interface HeroProps {
@@ -50,130 +52,104 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
   };
 
   return (
-    <section className="relative min-h-[92vh] pt-32 pb-20 flex items-center justify-center overflow-hidden bg-white dark:bg-black transition-colors duration-300">
+    <section className="relative min-h-[80vh] sm:min-h-[85vh] pt-20 sm:pt-28 pb-8 sm:pb-14 flex items-center justify-center overflow-hidden bg-white dark:bg-black transition-colors duration-300">
       {/* Smooth Atmospheric Ambient Glows (Zero-Jank GPU Layers) */}
       <div className="absolute top-1/4 left-1/12 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-sky-500/10 dark:bg-sky-500/8 blur-3xl pointer-events-none animate-ambient-float gpu-layer" />
       <div className="absolute bottom-1/4 right-1/12 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-indigo-500/10 dark:bg-indigo-500/8 blur-3xl pointer-events-none animate-ambient-float gpu-layer" style={{ animationDelay: '-7s' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Apple Editorial Typography & CTAs */}
+          {/* Left Column: Clean, High-Impact Professional Presentation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 flex flex-col items-start text-left space-y-6 gpu-layer"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 flex flex-col items-start text-left space-y-4 sm:space-y-5 gpu-layer"
           >
-            {/* Apple-style Minimal Status Badge with Live Tashkent Time */}
+            {/* Live Availability Status */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               className="flex flex-wrap items-center gap-2"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900/90 border border-black/[0.08] dark:border-white/[0.08] text-xs font-mono text-neutral-700 dark:text-neutral-300 shadow-2xs">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] text-[11px] sm:text-xs font-mono text-neutral-700 dark:text-neutral-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{content.availabilityStatus || 'Loyihalar va frilans uchun ochiq'}</span>
               </div>
 
               {timeStr && (
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] text-[11px] sm:text-xs font-mono text-neutral-500 dark:text-neutral-400">
                   <Clock className="w-3 h-3 text-sky-500" />
-                  <span>Toshkent · {timeStr} (UTC+5)</span>
+                  <span>Toshkent · {timeStr}</span>
                 </div>
               )}
             </motion.div>
 
-            {/* Apple Grand Headline */}
+            {/* Clear, Confident Headline */}
             <motion.div 
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-2 w-full"
-            >
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-['Space_Grotesk'] text-neutral-950 dark:text-white leading-[1.1] break-words">
-                <span className="block">{content.name || 'Sanjarbek Otabekov'}</span>
-                <span className="block text-apple-headline font-semibold mt-1">
-                  {content.role || 'Full Stack Dasturchi'}
-                </span>
-              </h1>
-            </motion.div>
-
-            {/* Editorial Tagline */}
-            <motion.p 
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg lg:text-xl text-neutral-700 dark:text-neutral-300 max-w-2xl font-normal leading-relaxed"
-            >
-              {content.tagline || 'Tezkor, xavfsiz va zamonaviy raqamli tizimlar arxitekturasi.'}
-            </motion.p>
-
-            <motion.p 
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xs sm:text-sm md:text-base text-neutral-500 dark:text-neutral-400 max-w-xl leading-relaxed font-normal"
+              transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1 w-full"
             >
-              {content.subtext || 'Next.js 15, TypeScript va zamonaviy veb texnologiyalar yordamida biznes va foydalanuvchilar uchun yuqori unumdorlikka ega mahsulotlar yarataman.'}
-            </motion.p>
+              <h1 className="text-[1.65rem] xs:text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight font-['Space_Grotesk'] text-neutral-950 dark:text-white leading-[1.1]">
+                {content.name || 'Sanjarbek Otabekov'}
+              </h1>
+              <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold text-apple-headline tracking-tight">
+                {content.role || 'Full Stack Dasturchi'}
+              </p>
+            </motion.div>
 
-            {/* Quick Metrics Bar in Hero */}
-            <motion.div
+            {/* Concise, Professional Summary (No fluff, straight to value) */}
+            <motion.p 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="grid grid-cols-3 gap-3 py-2 w-full max-w-lg border-y border-black/[0.06] dark:border-white/[0.08]"
+              transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[13px] sm:text-base lg:text-lg text-neutral-600 dark:text-neutral-300 max-w-xl font-normal leading-relaxed"
             >
-              <div>
-                <span className="text-xl sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">15+</span>
-                <span className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 block">Tugallangan loyiha</span>
-              </div>
-              <div>
-                <span className="text-xl sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">11+</span>
-                <span className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 block">Sertifikatlar</span>
-              </div>
-              <div>
-                <span className="text-xl sm:text-2xl font-bold font-['Space_Grotesk'] text-emerald-600 dark:text-emerald-400">99.9%</span>
-                <span className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 block">Yuklanish sifati</span>
-              </div>
-            </motion.div>
+              {content.subtext || content.tagline || 'Next.js, TypeScript va zamonaviy veb texnologiyalar asosida tezkor, xavfsiz va biznes uchun yuqori unumdorlikka ega raqamli mahsulotlar yarataman.'}
+            </motion.p>
 
-            {/* Apple Signature Action Buttons */}
+            {/* Primary Action Group */}
             <motion.div 
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-1 flex flex-wrap items-center gap-2.5 sm:gap-3 w-full"
+              transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1 flex flex-wrap items-center gap-2 sm:gap-3 w-full"
             >
+              {/* Primary: Projects */}
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#projects"
-                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-colors inline-flex items-center gap-2 shadow-xs group cursor-pointer"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-1.5 sm:gap-2 shadow-xs group cursor-pointer"
               >
                 <span>{content.primaryCtaText || 'Loyihalarni ko‘rish'}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
-              <motion.a
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                href="#contact"
-                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold text-neutral-900 dark:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.1] dark:border-white/[0.12] transition-colors cursor-pointer inline-flex items-center gap-2"
-              >
-                <span>{content.secondaryCtaText || 'Bog‘lanish'}</span>
-              </motion.a>
-
+              {/* Professional Services & Pricing button */}
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#services"
-                className="px-4 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-medium text-sky-600 dark:text-sky-400 bg-sky-500/10 hover:bg-sky-500/15 border border-sky-500/20 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold text-sky-600 dark:text-sky-400 bg-sky-500/[0.08] hover:bg-sky-500/[0.14] border border-sky-500/25 transition-all cursor-pointer inline-flex items-center gap-1.5 sm:gap-2 group shadow-xs"
               >
-                <Zap className="w-3.5 h-3.5" />
+                <Sparkles className="w-3.5 h-3.5 text-sky-500 group-hover:scale-110 transition-transform" />
                 <span>Xizmatlar & Narxlar</span>
+              </motion.a>
+
+              {/* Secondary: Contact */}
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                href="#contact"
+                className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold text-neutral-900 dark:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.1] dark:border-white/[0.14] transition-all cursor-pointer inline-flex items-center gap-1.5 sm:gap-2 group shadow-xs"
+              >
+                <Send className="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-300 group-hover:translate-x-0.5 transition-transform" />
+                <span>{content.secondaryCtaText || 'Bog‘lanish'}</span>
               </motion.a>
 
               {/* Instant Copy Email Pill */}
@@ -181,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleCopyEmail}
-                className="px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white bg-black/[0.03] dark:bg-white/[0.04] hover:bg-black/[0.06] dark:hover:bg-white/[0.08] border border-black/[0.08] dark:border-white/[0.1] transition-colors inline-flex items-center gap-2 cursor-pointer"
+                className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white bg-black/[0.02] dark:bg-white/[0.03] hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border border-black/[0.06] dark:border-white/[0.08] transition-colors inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
                 title="Email manzilni nusxalash"
               >
                 {copiedEmail ? (
@@ -199,61 +175,82 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               </motion.button>
             </motion.div>
 
-            {/* Apple Minimalist Footer Line: Social & Core Tech */}
+            {/* Social Profiles & Core Stack */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.42 }}
-              className="pt-4 flex flex-wrap items-center gap-4 sm:gap-6 border-t border-black/[0.08] dark:border-white/[0.08] w-full text-xs font-mono text-neutral-500 dark:text-neutral-400"
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="pt-3 flex flex-wrap items-center gap-3 sm:gap-6 border-t border-black/[0.08] dark:border-white/[0.08] w-full text-xs font-mono text-neutral-500 dark:text-neutral-400"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                {/* GitHub */}
                 <a
                   href="https://github.com/sanjarbek0828"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors p-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-neutral-900 text-white hover:bg-black dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 transition-all duration-300 hover:scale-110 flex items-center justify-center shadow-xs"
                   aria-label="GitHub Profile"
+                  title="GitHub"
                 >
                   <GithubIcon className="w-4 h-4" />
                 </a>
+
+                {/* LinkedIn */}
                 <a
                   href="https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors p-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#0A66C2] text-white hover:bg-[#004182] transition-all duration-300 hover:scale-110 flex items-center justify-center shadow-xs shadow-[#0A66C2]/20"
                   aria-label="LinkedIn Profile"
+                  title="LinkedIn"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
+
+                {/* Telegram */}
                 <a
                   href="https://t.me/sanjarbekdev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 dark:text-neutral-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors p-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#229ED9] text-white hover:bg-[#1d82b3] transition-all duration-300 hover:scale-110 flex items-center justify-center shadow-xs shadow-[#229ED9]/20"
                   aria-label="Telegram"
+                  title="Telegram"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-                  </svg>
+                  <TelegramIcon className="w-4 h-4" />
                 </a>
+
+                {/* Instagram */}
                 <a
                   href="https://instagram.com/sanjarbek_dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 dark:text-neutral-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors p-1"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white transition-all duration-300 hover:scale-110 flex items-center justify-center shadow-xs shadow-[#dc2743]/20"
                   aria-label="Instagram Profile"
+                  title="Instagram"
                 >
                   <InstagramIcon className="w-4 h-4" />
+                </a>
+
+                {/* X (Twitter) */}
+                <a
+                  href="https://x.com/sanjarme08"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 border border-white/10 dark:border-black/10 transition-all duration-300 hover:scale-110 flex items-center justify-center shadow-xs"
+                  aria-label="X (Twitter) Profile"
+                  title="X (Twitter)"
+                >
+                  <XIcon className="w-3.5 h-3.5" />
                 </a>
               </div>
 
               <div className="h-4 w-[1px] bg-neutral-300 dark:bg-neutral-800 hidden sm:block" />
 
-              <div className="flex flex-wrap items-center gap-2">
-                {['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Python', 'Three.js'].map((tech) => (
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                {['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Python'].map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-[11px] font-mono text-neutral-700 dark:text-neutral-300 hover:border-black/20 dark:hover:border-white/20 transition-colors"
+                    className="px-2 sm:px-2.5 py-0.5 rounded-full bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-[10px] sm:text-[11px] font-mono text-neutral-700 dark:text-neutral-300 hover:border-black/20 dark:hover:border-white/20 transition-colors"
                   >
                     {tech}
                   </span>
@@ -262,7 +259,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Free-Standing Character Cutout with Dynamic Interactive Floating Badges */}
+          {/* Right Column: Hero Portrait Photo with Dynamic Interactive Floating Badges */}
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ 
@@ -279,57 +276,65 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative flex items-center justify-center w-full gpu-layer"
             >
-              {/* Radial backlight aura for depth & crisp silhouette separation */}
-              <div className="absolute inset-0 -m-8 rounded-full bg-gradient-to-tr from-sky-400/15 via-indigo-500/10 to-transparent dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-transparent blur-3xl pointer-events-none -z-10" />
+              {/* Radial backlight aura for depth & ambient glow */}
+              <div className="absolute inset-0 -m-8 rounded-full bg-gradient-to-tr from-sky-400/20 via-indigo-500/15 to-transparent dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-transparent blur-3xl pointer-events-none -z-10" />
 
-              {/* Floating Badge 1: Next.js 15 & React 19 (Top Right) */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-4 -right-2 sm:right-2 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-lg backdrop-blur-xl"
-              >
-                <div className="p-1 rounded-lg bg-sky-500/10 text-sky-500">
-                  <Zap className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Framework</span>
-                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">Next.js 15 & React 19</span>
-                </div>
-              </motion.div>
+              <div className="relative w-full max-w-[220px] xs:max-w-[260px] sm:max-w-[320px] lg:max-w-[370px] mx-auto">
+                {/* Floating Badge 1: Next.js 15 & React 19 (Top Right) */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="absolute -top-3 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
+                >
+                  <div className="p-1 rounded-lg bg-sky-500/10 text-sky-500">
+                    <Zap className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Framework</span>
+                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Next.js 15 & React 19</span>
+                  </div>
+                </motion.div>
 
-              {/* Floating Badge 2: Telegram Bot & APIs (Bottom Left) */}
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-12 -left-2 sm:left-0 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-lg backdrop-blur-xl"
-              >
-                <div className="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">
-                  <Bot className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Automations</span>
-                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">Telegram Bots & APIs</span>
-                </div>
-              </motion.div>
+                {/* Floating Badge 2: Telegram Bot & APIs (Bottom Left) */}
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-3 -left-2 sm:-left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
+                >
+                  <div className="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">
+                    <Bot className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Automations</span>
+                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Telegram Bots & APIs</span>
+                  </div>
+                </motion.div>
 
-              {/* Character Cutout - Optimized WebP (400KB instead of 3.3MB) */}
-              <Image
-                src="/images/personaj-sanjarbek.webp"
-                alt="Sanjarbek Otabekov — Full Stack Dasturchi (sanjarme.uz)"
-                width={1561}
-                height={1774}
-                priority
-                quality={90}
-                className="object-contain max-h-[380px] sm:max-h-[520px] lg:max-h-[640px] w-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_30px_60px_rgba(0,0,0,0.9)] pointer-events-none crisp-render"
-                sizes="(max-width: 768px) 340px, (max-width: 1200px) 500px, 600px"
-              />
+                {/* Apple-grade Ultra Glass Portrait Showcase */}
+                <div className="relative p-1.5 sm:p-2.5 rounded-[22px] sm:rounded-[34px] ultra-glass shadow-2xl transition-all duration-500 hover:shadow-sky-500/10">
+                  <div className="relative overflow-hidden rounded-[18px] sm:rounded-[28px] aspect-[1792/2400] bg-neutral-900">
+                    <Image
+                      src="/boy.jpg"
+                      alt="Sanjarbek Otabekov — Full Stack Dasturchi (sanjarme.uz)"
+                      width={1792}
+                      height={2400}
+                      priority
+                      quality={95}
+                      className="w-full h-full object-cover select-none pointer-events-none"
+                      sizes="(max-width: 480px) 220px, (max-width: 640px) 260px, (max-width: 1024px) 320px, 370px"
+                    />
+                    {/* Subtle ambient light gradient for premium depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
 
         </div>
 
         {/* Quiet Scroll Indicator */}
-        <div className="pt-16 flex justify-center">
+        <div className="pt-6 sm:pt-10 flex justify-center">
           <a
             href="#about"
             className="flex items-center gap-1.5 text-xs font-mono text-neutral-400 dark:text-neutral-500 hover:text-black dark:hover:text-neutral-300 transition-colors group cursor-pointer"

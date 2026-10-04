@@ -621,6 +621,7 @@ export const initialSettings: UserSettings = {
   spotifySong: 'Lofi Programming Coding Playlist',
   spotifyArtist: 'Coding Playlist',
   instagram: 'https://instagram.com/sanjarbek_dev',
+  twitter: 'https://x.com/sanjarme08',
 };
 
 export const initialSiteContent: SiteContent = {
@@ -632,7 +633,7 @@ export const initialSiteContent: SiteContent = {
     availabilityStatus: 'Loyihalar va frilans uchun ochiq',
     primaryCtaText: 'Loyihalarni ko‘rish',
     secondaryCtaText: 'Bog‘lanish',
-    avatarUrl: '/personaj.png',
+    avatarUrl: '/boy.jpg',
   },
   about: {
     heading: initialSettings.aboutTitle,
@@ -667,7 +668,7 @@ export const initialMilestones: MilestoneItem[] = [
     highlights: [
       "mebelmashhura.uz e-tijorat katalogini ishlab chiqib, 1 soniyadan tez yuklanishga erishildi",
       "Three.js va WebGL orqali 60 FPS silliq 3D Yer sayyorasi vizualizatsiyasi yaratildi",
-      "Telegram savdo botlari, to'lov tizimlari (Click/Payme) va PWA ilovalari ishlab chiqildi"
+      "Telegram savdo botlari, CRM tizimlari va PWA ilovalari ishlab chiqildi"
     ],
     skills: ['Next.js 15', 'TypeScript', 'React 19', 'Tailwind CSS', 'Firebase', 'Three.js', 'Telegram API'],
     badge: 'Faol amaliyot'
@@ -735,7 +736,7 @@ export const initialTestimonials: TestimonialItem[] = [
     name: 'Azizbek Rahimov',
     role: 'Startup Asoschisi & PM',
     company: 'Fintech Bot Solutions',
-    comment: "Biznesimiz uchun Telegram savdo botini to'lov tizimlari (Click va Payme) hamda qulay admin boshqaruv paneli bilan tayyorlab berdi. 24/7 serverda barqaror ishlab turibdi. Eng asosiysi — belgilangan muddatdan avval topshirdi!",
+    comment: "Biznesimiz uchun Telegram savdo botini ma'lumotlar bazasi hamda qulay admin boshqaruv paneli bilan tayyorlab berdi. 24/7 serverda barqaror ishlab turibdi. Eng asosiysi — belgilangan muddatdan avval topshirdi!",
     rating: 5,
     projectTitle: "Avtomatlashtirilgan Savdo Boti",
     verified: true

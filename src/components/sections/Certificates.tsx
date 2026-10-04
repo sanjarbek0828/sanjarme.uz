@@ -58,25 +58,25 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
   }, [activeLightboxCert]);
 
   return (
-    <section id="certificates" className="relative py-24 sm:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="certificates" className="relative py-16 sm:py-28 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 shadow-2xs">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-2.5 sm:mb-3 shadow-2xs">
             <Award className="w-3.5 h-3.5 text-emerald-500" />
             <span className="uppercase tracking-widest font-semibold">Akkreditatsiyalar & Malaka</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Xalqaro <span className="text-apple-headline">Sertifikatlar</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-3 max-w-xl text-base font-normal leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base font-normal leading-relaxed">
             Coursera, Meta, Google, Packt va Pearson tomonidan berilgan professional dasturiy ta&apos;minot muhandisligi sertifikatlari ({certificates.length} ta).
           </p>
 
           {/* Filter Bar: Issuers + Search Input */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
             {/* Issuer Filter Pills */}
             <div className="inline-flex p-1 rounded-full bg-neutral-100/80 dark:bg-neutral-900/70 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto no-scrollbar shadow-xs">
               {issuers.map((issuer) => {
@@ -248,16 +248,16 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 className="relative w-full max-w-3xl rounded-3xl border border-black/[0.08] dark:border-white/[0.1] bg-white dark:bg-neutral-950 p-4 sm:p-6 z-10 shadow-2xl space-y-4 text-left transition-colors duration-300 max-h-[92vh] overflow-y-auto"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
-                  <div>
-                    <h3 className="text-lg font-bold text-neutral-950 dark:text-white font-['Space_Grotesk']">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
+                  <div className="space-y-0.5">
+                    <h3 className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white font-['Space_Grotesk']">
                       {activeLightboxCert.title}
                     </h3>
                     <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
                       Beruvchi: {activeLightboxCert.issuer} {activeLightboxCert.dateIssued || activeLightboxCert.year ? `· ${activeLightboxCert.dateIssued || activeLightboxCert.year}` : ''}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
                     {(activeLightboxCert.credentialUrl || activeLightboxCert.link) && (
                       <a
                         href={activeLightboxCert.credentialUrl || activeLightboxCert.link}
@@ -271,7 +271,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
                     )}
                     <button
                       onClick={() => setActiveLightboxCert(null)}
-                      className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-black/[0.08] dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white cursor-pointer"
+                      className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-black/[0.08] dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white cursor-pointer ml-auto sm:ml-0"
                     >
                       <X className="w-4 h-4" />
                     </button>

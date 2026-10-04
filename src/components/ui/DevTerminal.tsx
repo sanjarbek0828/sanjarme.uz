@@ -92,7 +92,7 @@ export const DevTerminal: React.FC = () => {
             <p><span className="text-sky-400 font-semibold">Frontend:</span> Next.js 15, React 19, TypeScript, Tailwind CSS, Three.js, WebGL</p>
             <p><span className="text-indigo-400 font-semibold">Backend:</span> Node.js, Python, Django, REST API, WebSockets</p>
             <p><span className="text-emerald-400 font-semibold">Baza & Cloud:</span> Firebase, PostgreSQL, MySQL, Docker, Vercel</p>
-            <p><span className="text-amber-400 font-semibold">Botlar:</span> Aiogram, Python Telegram Bot, Click/Payme integratsiyasi</p>
+            <p><span className="text-amber-400 font-semibold">Botlar:</span> Aiogram, Python Telegram Bot, API & Webhook integratsiyasi</p>
           </div>
         );
         break;
@@ -196,10 +196,13 @@ export const DevTerminal: React.FC = () => {
         {history.map((item, idx) => (
           <div key={idx} className="space-y-1.5">
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-emerald-400">sanjarbek@dev:~$</span>
+              <span className="text-emerald-400">
+                <span className="hidden sm:inline">sanjarbek@dev:~$</span>
+                <span className="sm:hidden">dev:~$</span>
+              </span>
               <span className="text-white font-semibold">{item.command}</span>
             </div>
-            <div className="pl-4 border-l border-white/10 py-0.5">
+            <div className="pl-3 sm:pl-4 border-l border-white/10 py-0.5">
               {item.output}
             </div>
           </div>
@@ -207,14 +210,17 @@ export const DevTerminal: React.FC = () => {
 
         {/* Active Command Input Line */}
         <div className="flex items-center gap-2 text-xs pt-1">
-          <span className="text-emerald-400 shrink-0">sanjarbek@dev:~$</span>
+          <span className="text-emerald-400 shrink-0">
+            <span className="hidden sm:inline">sanjarbek@dev:~$</span>
+            <span className="sm:hidden">dev:~$</span>
+          </span>
           <input
             ref={inputRef}
             type="text"
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="buyruq kiriting (masalan: help)"
+            placeholder="buyruq... (help)"
             className="flex-1 bg-transparent text-white focus:outline-none placeholder-neutral-600 font-mono text-xs"
           />
           <button

@@ -195,25 +195,25 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   }, [projects, activeCategory, searchQuery]);
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="projects" className="relative py-16 sm:py-28 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3 shadow-2xs">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-2.5 sm:mb-3 shadow-2xs">
             <FolderGit2 className="w-3.5 h-3.5 text-indigo-500" />
             <span className="uppercase tracking-widest font-semibold">Mening Loyihalarim</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
             Saralangan <span className="text-apple-headline">Loyiha & Ishlanmalar</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-3 max-w-xl text-base font-normal leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base font-normal leading-relaxed">
             Haqiqiy mijozlar uchun ishlab chiqilgan veb-platformalar, 3D interaktiv grafikalar va PWA ilovalari.
           </p>
 
           {/* Filter Bar: Segmented Categories + Search Input */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-2xl">
             {/* Apple Segmented Filter Pill */}
             <div className="inline-flex p-1 rounded-full bg-neutral-100/80 dark:bg-neutral-900/70 border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl max-w-full overflow-x-auto no-scrollbar shadow-xs">
               {categories.map((cat) => {

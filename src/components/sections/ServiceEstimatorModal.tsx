@@ -32,7 +32,7 @@ const SERVICE_TYPES = [
 ];
 
 const AVAILABLE_FEATURES: FeatureOption[] = [
-  { id: 'payments', name: "Click / Payme to'lov tizimlari", price: 70, days: 2 },
+  { id: 'api_integration', name: "Tashqi API va CRM integratsiyasi", price: 70, days: 2 },
   { id: 'admin_panel', name: 'Qulay Admin boshqaruv paneli', price: 90, days: 3 },
   { id: 'multilang', name: "Ko'p tillilik (UZ / RU / EN)", price: 40, days: 1 },
   { id: 'pwa', name: 'PWA (Telefonga ilova kabi o\'rnatish)', price: 50, days: 2 },
@@ -127,19 +127,19 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/10 rounded-3xl shadow-2xl p-5 sm:p-8 overflow-hidden z-10 max-h-[90vh] flex flex-col"
+          className="relative w-full max-w-2xl bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/10 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 overflow-hidden z-10 max-h-[90vh] flex flex-col"
         >
           {/* Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-black/[0.08] dark:border-white/[0.08]">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-sky-500/10 text-sky-500">
-                <Calculator className="w-5 h-5" />
+          <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-black/[0.08] dark:border-white/[0.08]">
+            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 pr-2">
+              <div className="p-2 rounded-xl bg-sky-500/10 text-sky-500 shrink-0">
+                <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
+              <div className="min-w-0">
+                <h3 className="text-sm sm:text-lg md:text-xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white truncate sm:whitespace-normal">
                   Loyiha Narxini Hisoblash & Buyurtma
                 </h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400">
                   Kerakli opsiyalarni tanlang va taxminiy narx hamda muddatni ko&apos;ring
                 </p>
               </div>
@@ -147,35 +147,35 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
 
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-black/[0.05] dark:hover:bg-white/[0.08] text-neutral-500 transition-colors"
+              className="p-1.5 sm:p-2 rounded-full hover:bg-black/[0.05] dark:hover:bg-white/[0.08] text-neutral-500 transition-colors shrink-0"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Modal Body - Scrollable */}
-          <div className="flex-1 overflow-y-auto py-5 space-y-6 pr-1 no-scrollbar">
+          <div className="flex-1 overflow-y-auto py-4 sm:py-5 space-y-5 sm:space-y-6 pr-1 no-scrollbar">
             
             {/* Step 1: Select Project Type */}
             <div>
-              <label className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-2.5 font-semibold">
+              <label className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-2 sm:mb-2.5 font-semibold">
                 1. Loyiha turini tanlang:
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                 {SERVICE_TYPES.map((type) => {
                   const isSelected = selectedType === type.id;
                   return (
                     <div
                       key={type.id}
                       onClick={() => setSelectedType(type.id)}
-                      className={`p-3.5 rounded-2xl border cursor-pointer transition-all ${
+                      className={`p-3 sm:p-3.5 rounded-2xl border cursor-pointer transition-all ${
                         isSelected
                           ? 'border-sky-500 bg-sky-500/5 dark:bg-sky-500/10 shadow-xs'
                           : 'border-black/[0.07] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 bg-black/[0.01] dark:bg-white/[0.02]'
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold text-neutral-950 dark:text-white">
+                        <span className="text-xs sm:text-sm font-semibold text-neutral-950 dark:text-white">
                           {type.name}
                         </span>
                         <span className="text-xs font-mono text-sky-600 dark:text-sky-400 font-bold">
@@ -193,7 +193,7 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
 
             {/* Step 2: Desired Features */}
             <div>
-              <label className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-2.5 font-semibold">
+              <label className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-2 sm:mb-2.5 font-semibold">
                 2. Kerakli qo&apos;shimcha imkoniyatlar:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -203,7 +203,7 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
                     <div
                       key={feature.id}
                       onClick={() => toggleFeature(feature.id)}
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center justify-between gap-2 transition-all ${
+                      className={`p-2.5 sm:p-3 rounded-xl border cursor-pointer flex items-center justify-between gap-2 transition-all ${
                         isChecked
                           ? 'border-emerald-500/50 bg-emerald-500/5 dark:bg-emerald-500/10'
                           : 'border-black/[0.06] dark:border-white/[0.06] hover:border-black/15 dark:hover:border-white/15'
@@ -219,7 +219,7 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
                         >
                           {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                         </div>
-                        <span className="text-xs font-medium text-neutral-800 dark:text-neutral-200 truncate">
+                        <span className="text-xs font-medium text-neutral-800 dark:text-neutral-200 leading-tight">
                           {feature.name}
                         </span>
                       </div>

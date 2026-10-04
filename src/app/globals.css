@@ -466,3 +466,47 @@ html, body, button, a, input, select, textarea {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* ============================================================================
+   FULL RESPONSIVE SYSTEM — Phones, Tablets, Desktops
+   Ensures every element is clear, readable and professional at any viewport.
+   ============================================================================ */
+
+/* Safe-area support for notched phones (iPhone, etc.) */
+@supports(padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+  }
+}
+
+/* Mobile-first responsive optimizations */
+@media (max-width: 480px) {
+  /* Prevent iOS zoom on focus without breaking small buttons */
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+    font-size: 16px;
+  }
+
+  /* Fix overflow on very narrow screens */
+  .max-w-7xl {
+    max-width: 100%;
+  }
+
+  /* Ensure long words/emails don't break layouts */
+  body {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+/* Ensure all images are responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent unwanted hover transform sticky state on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .apple-glass-card:hover {
+    transform: none;
+  }
+}
+

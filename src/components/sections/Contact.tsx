@@ -14,7 +14,7 @@ import {
   Clock 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { GithubIcon, LinkedinIcon, InstagramIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 import { contactFormSchema, ContactFormData } from '@/lib/validations';
 import { submitContactMessage } from '@/lib/data-service';
 
@@ -192,45 +192,60 @@ export const Contact: React.FC = () => {
                 <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 block">
                   Ijtimoiy Tarmoqlar
                 </span>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                   <a
                     href="https://github.com/sanjarbek0828"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-neutral-100/80 dark:bg-neutral-900/80 border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 transition-all flex flex-col items-center justify-center gap-1 group"
+                    className="p-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs"
+                    title="GitHub"
                   >
-                    <GithubIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                    <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 group-hover:text-black dark:group-hover:text-white">GitHub</span>
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="text-[10px] font-mono">GitHub</span>
                   </a>
 
                   <a
                     href="https://t.me/sanjarbekdev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-sky-500/10 dark:bg-sky-500/10 border border-sky-500/20 hover:border-sky-500/40 transition-all flex flex-col items-center justify-center gap-1 group"
+                    className="p-2.5 rounded-xl bg-[#229ED9] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#229ED9]/20"
+                    title="Telegram"
                   >
-                    <Send className="w-4 h-4 text-sky-500 transition-colors" />
-                    <span className="text-[11px] font-mono text-sky-600 dark:text-sky-400 font-semibold">Telegram</span>
+                    <TelegramIcon className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-medium">Telegram</span>
                   </a>
 
                   <a
                     href="https://instagram.com/sanjarbek_dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-pink-500/10 dark:bg-pink-500/10 border border-pink-500/20 hover:border-pink-500/40 transition-all flex flex-col items-center justify-center gap-1 group"
+                    className="p-2.5 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#dc2743]/20"
+                    title="Instagram"
                   >
-                    <InstagramIcon className="w-4 h-4 text-pink-500 transition-colors" />
-                    <span className="text-[11px] font-mono text-pink-600 dark:text-pink-400 font-semibold">Instagram</span>
+                    <InstagramIcon className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-medium">Instagram</span>
                   </a>
 
                   <a
-                    href="https://linkedin.com/in/sanjarbek-otabekov"
+                    href="https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-neutral-100/80 dark:bg-neutral-900/80 border border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 transition-all flex flex-col items-center justify-center gap-1 group"
+                    className="p-2.5 rounded-xl bg-[#0A66C2] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#0A66C2]/20"
+                    title="LinkedIn"
                   >
-                    <LinkedinIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                    <span className="text-[11px] font-mono text-neutral-600 dark:text-neutral-400 group-hover:text-black dark:group-hover:text-white">LinkedIn</span>
+                    <LinkedinIcon className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-medium">LinkedIn</span>
+                  </a>
+
+                  <a
+                    href="https://x.com/sanjarme08"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-black text-white dark:bg-white dark:text-black border border-white/10 dark:border-black/10 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs"
+                    title="X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5" />
+                    <span className="text-[10px] font-mono font-medium">X</span>
                   </a>
                 </div>
               </div>
