@@ -17,8 +17,10 @@ import confetti from 'canvas-confetti';
 import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 import { contactFormSchema, ContactFormData } from '@/lib/validations';
 import { submitContactMessage } from '@/lib/data-service';
+import { useLanguage } from '@/lib/language-context';
 
 export const Contact: React.FC = () => {
+  const { language, t } = useLanguage();
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
@@ -34,12 +36,7 @@ export const Contact: React.FC = () => {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const TEMPLATES = [
-    { label: 'Telegram Bot', subject: 'Telegram Bot yaratish', placeholder: "Biznesimiz uchun Telegram bot yaratmoqchiman. Talablar: " },
-    { label: 'Veb-sayt / Landing', subject: 'Veb-sayt buyurtma qilish', placeholder: "Kompaniyamiz uchun zamonaviy veb-sayt kerak. Asosiy maqsad: " },
-    { label: 'Full Stack Ilova', subject: 'Full Stack Web Ilova ishlab chiqish', placeholder: "Next.js va ma'lumotlar bazasi asosida yangi tizim yaratish bo'yicha: " },
-    { label: 'Maslahat / Konsultatsiya', subject: "Dasturlash bo'yicha maslahat", placeholder: "Loyihamiz arxitekturasi va texnologiyalari bo'yicha maslahat olmoqchi edim: " },
-  ];
+  const templates = t.contact.templates;
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -66,7 +63,13 @@ export const Contact: React.FC = () => {
       } catch {}
     } catch (err) {
       console.error('Contact submission error:', err);
-      setErrorMessage('Something went wrong. Please try again or email directly.');
+      setErrorMessage(
+        language === 'uz'
+          ? 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring yoki to\'g\'ridan-to\'g\'ri email yozing.'
+          : language === 'ru'
+          ? 'Произошла ошибка. Пожалуйста, повторите попытку или напишите на email.'
+          : 'Something went wrong. Please try again or email directly.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -79,47 +82,49 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="contact" className="relative py-14 sm:py-28 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3 block">
-            Aloqa & Hamkorlik
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-16">
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2 sm:mb-3 block">
+            {t.contact.badge}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
-            Birgalikda loyiha <span className="text-apple-headline">boshlaymizmi?</span>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+            {t.contact.headingPart1} <span className="text-apple-headline">{t.contact.headingPart2}</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-3 max-w-xl text-base font-normal leading-relaxed">
-            Yangi loyihalar, veb-sayt, Telegram bot yaratish yoki maslahat olish uchun istalgan vaqtda bog&apos;lanishingiz mumkin.
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base font-normal leading-relaxed">
+            {t.contact.sub}
           </p>
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-start">
           
           {/* Left Info Column */}
-          <div className="lg:col-span-5 space-y-5">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <motion.div 
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-6 sm:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-6 gpu-layer"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 sm:space-y-6 gpu-layer"
             >
-              <h3 className="text-xl sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
-                To&apos;g&apos;ridan-to&apos;g&apos;ri aloqa
+              <h3 className="text-lg sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
+                {t.contact.directContact}
               </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed font-normal">
-                Shoshilinch loyihalar yoki ish takliflari bo&apos;yicha quyidagi rasmiy kanallar orqali tezkor javob olishingiz mumkin.
+              <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed font-normal">
+                {t.contact.directDesc}
               </p>
 
               {/* Direct Email Card with One-Click Copy */}
-              <div className="p-4 rounded-2xl bg-neutral-100/80 dark:bg-neutral-900/80 border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between">
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-9 h-9 rounded-xl bg-neutral-200/70 dark:bg-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300 shrink-0">
+              <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-neutral-100/80 dark:bg-neutral-900/80 border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5 sm:gap-3 overflow-hidden min-w-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-neutral-200/70 dark:bg-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300 shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">Rasmiy Email</span>
-                    <span className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-white font-mono truncate block">
+                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
+                      {t.contact.officialEmail}
+                    </span>
+                    <span className="text-[11px] sm:text-sm font-semibold text-neutral-900 dark:text-white font-mono truncate block">
                       sanjarbekotabekov010@gmail.com
                     </span>
                   </div>
@@ -127,8 +132,8 @@ export const Contact: React.FC = () => {
 
                 <button
                   onClick={copyEmailToClipboard}
-                  className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
-                  title="Email manzilidan nusxa olish"
+                  className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 hover:bg-neutral-300 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-1"
+                  title={language === 'uz' ? 'Email manzilidan nusxa olish' : language === 'ru' ? 'Скопировать email' : 'Copy email address'}
                   aria-label="Copy email"
                 >
                   {copiedEmail ? (
@@ -143,10 +148,10 @@ export const Contact: React.FC = () => {
               <div className="p-4 rounded-2xl bg-sky-500/10 dark:bg-sky-500/10 border border-sky-500/20 flex items-center justify-between gap-3">
                 <div className="overflow-hidden">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 font-semibold block">
-                    Tezkor Muloqot
+                    {t.contact.quickTelegram}
                   </span>
                   <span className="text-xs text-neutral-800 dark:text-neutral-200 font-medium block truncate">
-                    Telegramda 5 daqiqada javob oling
+                    {t.contact.telegramSub}
                   </span>
                 </div>
                 <a
@@ -156,7 +161,7 @@ export const Contact: React.FC = () => {
                   className="px-3.5 py-1.5 rounded-full bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-xs shrink-0 transition-transform active:scale-95"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Yozish</span>
+                  <span>{t.contact.write}</span>
                 </a>
               </div>
 
@@ -164,10 +169,10 @@ export const Contact: React.FC = () => {
               <div className="p-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-amber-500/10 border border-pink-500/20 flex items-center justify-between gap-3">
                 <div className="overflow-hidden">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-pink-600 dark:text-pink-400 font-semibold block">
-                    Instagram Sahifa
+                    {t.contact.instagramTitle}
                   </span>
                   <span className="text-xs text-neutral-800 dark:text-neutral-200 font-medium block truncate">
-                    @sanjarbek_dev • Loyihalar & Jarayon
+                    {t.contact.instagramSub}
                   </span>
                 </div>
                 <a
@@ -177,27 +182,27 @@ export const Contact: React.FC = () => {
                   className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-xs shrink-0 transition-transform active:scale-95"
                 >
                   <InstagramIcon className="w-3.5 h-3.5" />
-                  <span>Kuzatish</span>
+                  <span>{t.contact.follow}</span>
                 </a>
               </div>
 
               {/* Response Time Badge */}
               <div className="flex items-center gap-2.5 text-xs font-mono text-neutral-600 dark:text-neutral-400 p-3 rounded-xl bg-neutral-100/60 dark:bg-neutral-900/50 border border-black/[0.04] dark:border-white/[0.06]">
                 <Clock className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>O&apos;rtacha javob berish vaqti: 2 soat ichida</span>
+                <span>{t.contact.responseTime}</span>
               </div>
 
               {/* Social Channels */}
-              <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] space-y-3">
+              <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] space-y-2.5 sm:space-y-3">
                 <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 block">
-                  Ijtimoiy Tarmoqlar
+                  {t.contact.socials}
                 </span>
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 sm:gap-2">
                   <a
                     href="https://github.com/sanjarbek0828"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs"
+                    className="p-2 sm:p-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs"
                     title="GitHub"
                   >
                     <GithubIcon className="w-4 h-4" />
@@ -208,7 +213,7 @@ export const Contact: React.FC = () => {
                     href="https://t.me/sanjarbekdev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-[#229ED9] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#229ED9]/20"
+                    className="p-2 sm:p-2.5 rounded-xl bg-[#229ED9] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#229ED9]/20"
                     title="Telegram"
                   >
                     <TelegramIcon className="w-4 h-4" />
@@ -219,7 +224,7 @@ export const Contact: React.FC = () => {
                     href="https://instagram.com/sanjarbek_dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#dc2743]/20"
+                    className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#dc2743]/20"
                     title="Instagram"
                   >
                     <InstagramIcon className="w-4 h-4" />
@@ -230,7 +235,7 @@ export const Contact: React.FC = () => {
                     href="https://www.linkedin.com/in/sanjarbek-otabekov-0600733bb/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-[#0A66C2] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#0A66C2]/20"
+                    className="p-2 sm:p-2.5 rounded-xl bg-[#0A66C2] text-white transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs shadow-[#0A66C2]/20"
                     title="LinkedIn"
                   >
                     <LinkedinIcon className="w-4 h-4" />
@@ -241,7 +246,7 @@ export const Contact: React.FC = () => {
                     href="https://x.com/sanjarme08"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-black text-white dark:bg-white dark:text-black border border-white/10 dark:border-black/10 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs"
+                    className="p-2 sm:p-2.5 rounded-xl bg-black text-white dark:bg-white dark:text-black border border-white/10 dark:border-black/10 transition-all hover:scale-105 flex flex-col items-center justify-center gap-1 shadow-xs col-span-2 sm:col-span-1"
                     title="X (Twitter)"
                   >
                     <XIcon className="w-3.5 h-3.5" />
@@ -255,16 +260,16 @@ export const Contact: React.FC = () => {
 
           {/* Right Form Column */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-10 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] relative gpu-layer">
+            <div className="p-4 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] relative gpu-layer">
               
               {/* Submission Success Banner */}
               {submitted && (
                 <div className="mb-6 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/30 flex items-start gap-3 text-emerald-700 dark:text-emerald-300">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" />
                   <div className="text-sm">
-                    <p className="font-semibold text-neutral-950 dark:text-white">Xabaringiz muvaffaqiyatli yuborildi!</p>
+                    <p className="font-semibold text-neutral-950 dark:text-white">{t.contact.successTitle}</p>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-                      Rahmat, xabaringiz to&apos;g&apos;ridan-to&apos;g&apos;ri qabul qilindi. Tez orada siz bilan bog&apos;lanaman.
+                      {t.contact.successDesc}
                     </p>
                   </div>
                 </div>
@@ -279,12 +284,12 @@ export const Contact: React.FC = () => {
               )}
 
               {/* Quick Topic Presets */}
-              <div className="mb-6 space-y-2">
+              <div className="mb-5 sm:mb-6 space-y-2">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block font-semibold">
-                  Tezkor mavzuni tanlang:
+                  {t.contact.chooseTopic}
                 </span>
-                <div className="flex flex-wrap gap-2">
-                  {TEMPLATES.map((tmpl) => (
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {templates.map((tmpl) => (
                     <button
                       key={tmpl.label}
                       type="button"
@@ -292,7 +297,7 @@ export const Contact: React.FC = () => {
                         setValue('subject', tmpl.subject);
                         setValue('message', tmpl.placeholder);
                       }}
-                      className="px-3 py-1.5 rounded-full text-xs font-medium bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.1] text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
+                      className="px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.1] text-neutral-800 dark:text-neutral-200 transition-colors cursor-pointer"
                     >
                       {tmpl.label}
                     </button>
@@ -300,19 +305,19 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5 sm:space-y-4">
                 
                 {/* Name field */}
-                <div className="space-y-1.5 text-left">
+                <div className="space-y-1 sm:space-y-1.5 text-left">
                   <label htmlFor="name" className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-wider block">
-                    Ism-familiyangiz
+                    {t.contact.formName}
                   </label>
                   <input
                     id="name"
                     type="text"
-                    placeholder="Ali Valiyev"
+                    placeholder={t.contact.namePlaceholder}
                     {...register('name')}
-                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs ${
+                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs ${
                       errors.name ? 'border-red-500/60' : ''
                     }`}
                   />
@@ -324,16 +329,16 @@ export const Contact: React.FC = () => {
                 </div>
 
                 {/* Email field */}
-                <div className="space-y-1.5 text-left">
+                <div className="space-y-1 sm:space-y-1.5 text-left">
                   <label htmlFor="email" className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-wider block">
-                    Email manzilingiz
+                    {t.contact.formEmail}
                   </label>
                   <input
                     id="email"
                     type="email"
-                    placeholder="ali@misol.uz"
+                    placeholder={t.contact.emailPlaceholder}
                     {...register('email')}
-                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs ${
+                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs ${
                       errors.email ? 'border-red-500/60' : ''
                     }`}
                   />
@@ -345,30 +350,30 @@ export const Contact: React.FC = () => {
                 </div>
 
                 {/* Subject field (Optional) */}
-                <div className="space-y-1.5 text-left">
+                <div className="space-y-1 sm:space-y-1.5 text-left">
                   <label htmlFor="subject" className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-wider block">
-                    Mavzu (Ixtiyoriy)
+                    {t.contact.formSubject}
                   </label>
                   <input
                     id="subject"
                     type="text"
-                    placeholder="Loyiha taklifi / Telegram bot / Hamkorlik"
+                    placeholder={t.contact.subjectPlaceholder}
                     {...register('subject')}
-                    className="w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-4 py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs"
+                    className="w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors shadow-xs"
                   />
                 </div>
 
                 {/* Message field */}
-                <div className="space-y-1.5 text-left">
+                <div className="space-y-1 sm:space-y-1.5 text-left">
                   <label htmlFor="message" className="text-xs font-mono text-neutral-600 dark:text-neutral-400 uppercase tracking-wider block">
-                    Xabar matni
+                    {t.contact.formMessage}
                   </label>
                   <textarea
                     id="message"
                     rows={4}
-                    placeholder="Loyihangiz maqsadi, talablari yoki savollaringiz haqida yozing..."
+                    placeholder={t.contact.messagePlaceholder}
                     {...register('message')}
-                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl p-4 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors resize-none shadow-xs ${
+                    className={`w-full bg-white dark:bg-neutral-950/80 border border-black/[0.1] dark:border-white/[0.1] focus:border-black/40 dark:focus:border-white/30 rounded-xl p-3.5 sm:p-4 text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none transition-colors resize-none shadow-xs ${
                       errors.message ? 'border-red-500/60' : ''
                     }`}
                   />
@@ -388,10 +393,10 @@ export const Contact: React.FC = () => {
                   className="w-full py-3.5 rounded-full font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 text-sm shadow-xs cursor-pointer disabled:opacity-50 mt-2"
                 >
                   {isSubmitting ? (
-                    <span>Yuborilmoqda...</span>
+                    <span>{t.contact.submitting}</span>
                   ) : (
                     <span className="inline-flex items-center gap-2">
-                      <span>Xabarni Yuborish</span>
+                      <span>{t.contact.submitBtn}</span>
                       <Send className="w-4 h-4" />
                     </span>
                   )}
@@ -408,3 +413,4 @@ export const Contact: React.FC = () => {
     </section>
   );
 };
+

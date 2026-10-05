@@ -476,24 +476,9 @@ html, body, button, a, input, select, textarea {
   .safe-bottom {
     padding-bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
   }
-}
-
-/* Mobile-first responsive optimizations */
-@media (max-width: 480px) {
-  /* Prevent iOS zoom on focus without breaking small buttons */
-  input:not([type="checkbox"]):not([type="radio"]), select, textarea {
-    font-size: 16px;
-  }
-
-  /* Fix overflow on very narrow screens */
-  .max-w-7xl {
-    max-width: 100%;
-  }
-
-  /* Ensure long words/emails don't break layouts */
   body {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 }
 
@@ -507,6 +492,72 @@ img {
 @media (hover: none) and (pointer: coarse) {
   .apple-glass-card:hover {
     transform: none;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST: Full Phone Responsive Rules (≤ 640px)
+   Covers 320px (iPhone SE) → 430px (iPhone 15 Pro Max) → 640px (sm breakpoint)
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Prevent iOS zoom on focus (16px minimum prevents auto-zoom) */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Fix overflow on very narrow screens */
+  .max-w-7xl {
+    max-width: 100%;
+  }
+
+  /* Ensure long words/emails/URLs don't break layouts */
+  body {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Ensure all sections have consistent comfortable padding */
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Tighter section vertical padding on phones */
+  section[id] {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Ensure modal dialogs fit mobile viewport perfectly */
+  [class*="fixed inset-0"] [class*="max-w-"] {
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  /* Minimum touch target size (44px per Apple/Google guidelines) */
+  button:not([class*="rounded-full"]),
+  a[href]:not([class*="text-"]):not([class*="inline"]) {
+    min-height: 44px;
+  }
+}
+
+/* Ultra-Narrow Screens (320px iPhone SE class devices) */
+@media (max-width: 374px) {
+  /* Reduce horizontal padding to prevent content squeeze */
+  .max-w-7xl {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Scale down card padding */
+  .apple-glass-card {
+    padding: 0.75rem !important;
+  }
+
+  /* Prevent filter pills from being too squished */
+  .apple-glass-pill {
+    gap: 0 !important;
   }
 }
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import { ThemeProvider } from "@/lib/theme-context";
+import { LanguageProvider } from "@/lib/language-context";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sanjarme.uz"),
@@ -105,6 +106,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
 const jsonLd = {
@@ -320,7 +322,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="uz" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -335,6 +337,14 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              try {
+                var lang = localStorage.getItem('preferred_language');
+                if (lang) {
+                  document.documentElement.lang = lang;
+                } else {
+                  document.documentElement.lang = 'en';
+                }
+              } catch (e) {}
               try {
                 var t = localStorage.getItem('theme');
                 if (t === 'light' || (!t && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -367,9 +377,11 @@ export default function RootLayout({
         className="min-h-screen bg-white dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-300"
       >
         <AuthProvider>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

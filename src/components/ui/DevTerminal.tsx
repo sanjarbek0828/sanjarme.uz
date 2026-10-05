@@ -2,43 +2,48 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { CornerDownLeft, Copy, Check } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 interface CommandOutput {
   command: string;
   output: React.ReactNode;
 }
 
-const INITIAL_COMMANDS: CommandOutput[] = [
-  {
-    command: 'whoami',
-    output: (
-      <div className="space-y-1 text-xs">
-        <p className="text-emerald-400 font-semibold">Sanjarbek Otabekov — Full Stack Dasturchi & Muhandis</p>
-        <p className="text-neutral-400">Next.js 15, TypeScript, Three.js va Telegram botlar arxitektori.</p>
-      </div>
-    ),
-  },
-  {
-    command: 'skills --core',
-    output: (
-      <div className="flex flex-wrap gap-2 text-xs py-1">
-        <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">Next.js 15 (95%)</span>
-        <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">TypeScript (90%)</span>
-        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">React 19 (90%)</span>
-        <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Telegram Bot (95%)</span>
-        <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Three.js / WebGL (85%)</span>
-      </div>
-    ),
-  },
-];
-
 export const DevTerminal: React.FC = () => {
-  const [history, setHistory] = useState<CommandOutput[]>(INITIAL_COMMANDS);
+  const { language, t } = useLanguage();
+  const [history, setHistory] = useState<CommandOutput[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [copied, setCopied] = useState(false);
   const terminalBodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const isInitialMount = useRef(true);
+
+  // Initialize terminal output according to current language
+  useEffect(() => {
+    setHistory([
+      {
+        command: 'whoami',
+        output: (
+          <div className="space-y-1 text-xs">
+            <p className="text-emerald-400 font-semibold">{t.terminal.commands.whoamiTitle}</p>
+            <p className="text-neutral-400">{t.terminal.commands.whoamiDesc}</p>
+          </div>
+        ),
+      },
+      {
+        command: 'skills --core',
+        output: (
+          <div className="flex flex-wrap gap-2 text-xs py-1">
+            <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">Next.js 15 (95%)</span>
+            <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">TypeScript (90%)</span>
+            <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">React 19 (90%)</span>
+            <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Telegram Bot (95%)</span>
+            <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Three.js / WebGL (85%)</span>
+          </div>
+        ),
+      },
+    ]);
+  }, [language, t]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -69,20 +74,20 @@ export const DevTerminal: React.FC = () => {
       case 'help':
         result = (
           <div className="space-y-1 text-xs text-neutral-300">
-            <p className="text-sky-400 font-semibold">Mavjud buyruqlar ro&apos;yxati:</p>
-            <p>• <span className="text-emerald-400">about</span> — Sanjarbek haqida qisqacha ma&apos;lumot</p>
-            <p>• <span className="text-emerald-400">skills</span> — Asosiy texnologik stek</p>
-            <p>• <span className="text-emerald-400">projects</span> — Saralangan loyihalar ro&apos;yxati</p>
-            <p>• <span className="text-emerald-400">contact</span> — Rasmiy aloqa vositalari</p>
-            <p>• <span className="text-emerald-400">whoami</span> — Tizim egasi profili</p>
-            <p>• <span className="text-emerald-400">clear</span> — Terminal ekranini tozalash</p>
+            <p className="text-sky-400 font-semibold">{t.terminal.commands.helpTitle}</p>
+            <p>• <span className="text-emerald-400">about</span> — {t.terminal.commands.helpAbout}</p>
+            <p>• <span className="text-emerald-400">skills</span> — {t.terminal.commands.helpSkills}</p>
+            <p>• <span className="text-emerald-400">projects</span> — {t.terminal.commands.helpProjects}</p>
+            <p>• <span className="text-emerald-400">contact</span> — {t.terminal.commands.helpContact}</p>
+            <p>• <span className="text-emerald-400">whoami</span> — {t.terminal.commands.helpWhoami}</p>
+            <p>• <span className="text-emerald-400">clear</span> — {t.terminal.commands.helpClear}</p>
           </div>
         );
         break;
       case 'about':
         result = (
           <p className="text-xs text-neutral-300 leading-relaxed">
-            Zamonaviy veb-arxitektura va yuqori tezlikdagi raqamli mahsulotlar yaratuvchi Full Stack muhandis. Meta va Pearson xalqaro sertifikatlari sohibi.
+            {t.terminal.commands.aboutText}
           </p>
         );
         break;
@@ -91,18 +96,18 @@ export const DevTerminal: React.FC = () => {
           <div className="text-xs space-y-1 text-neutral-300">
             <p><span className="text-sky-400 font-semibold">Frontend:</span> Next.js 15, React 19, TypeScript, Tailwind CSS, Three.js, WebGL</p>
             <p><span className="text-indigo-400 font-semibold">Backend:</span> Node.js, Python, Django, REST API, WebSockets</p>
-            <p><span className="text-emerald-400 font-semibold">Baza & Cloud:</span> Firebase, PostgreSQL, MySQL, Docker, Vercel</p>
-            <p><span className="text-amber-400 font-semibold">Botlar:</span> Aiogram, Python Telegram Bot, API & Webhook integratsiyasi</p>
+            <p><span className="text-emerald-400 font-semibold">Database & Cloud:</span> Firebase, PostgreSQL, MySQL, Docker, Vercel</p>
+            <p><span className="text-amber-400 font-semibold">Bots:</span> Aiogram, Python Telegram Bot, API & Webhooks</p>
           </div>
         );
         break;
       case 'projects':
         result = (
           <div className="text-xs space-y-1.5 text-neutral-300">
-            <p>1. <span className="text-rose-400 font-semibold">FilmX</span> — Kinolar va Seriallar Portali (1,700+ kino, 1080p FHD Tas-ix)</p>
-            <p>2. <span className="text-sky-400 font-semibold">mebelmashhura.uz</span> — Mebel do&apos;koni elektron tijorat veb sayti (&lt;1s yuklanish)</p>
+            <p>1. <span className="text-rose-400 font-semibold">FilmX</span> — Kinolar va Seriallar Portali (1,700+ media, 1080p FHD Tas-ix)</p>
+            <p>2. <span className="text-sky-400 font-semibold">mebelmashhura.uz</span> — Mebel do&apos;koni elektron tijorat platformasi (&lt;1s load)</p>
             <p>3. <span className="text-sky-400 font-semibold">FINALYTIX</span> — Google Gemini API AI Moliya va Xarajatlar Tahlilchisi</p>
-            <p>4. <span className="text-sky-400 font-semibold">3D Earth</span> — Three.js va WebGL 3D Yer sayyorasi modeli (60 FPS)</p>
+            <p>4. <span className="text-sky-400 font-semibold">3D Earth</span> — Three.js va WebGL 3D Yer sayyorasi interaktiv modeli (60 FPS)</p>
           </div>
         );
         break;
@@ -117,12 +122,24 @@ export const DevTerminal: React.FC = () => {
         );
         break;
       case 'sudo':
-        result = <p className="text-xs text-rose-400">Ruxsat yo&apos;q: root huquqlari xavfsizlik maqsadida cheklangan :)</p>;
+        result = (
+          <p className="text-xs text-rose-400">
+            {language === 'uz'
+              ? 'Ruxsat yo\'q: root huquqlari xavfsizlik maqsadida cheklangan :)'
+              : language === 'ru'
+              ? 'Доступ запрещён: права root ограничены в целях безопасности :)'
+              : 'Permission denied: root privileges are restricted for security :)'}
+          </p>
+        );
         break;
       default:
         result = (
           <p className="text-xs text-neutral-400">
-            Buyruq topilmadi: &quot;{trimmed}&quot;. Mavjud buyruqlarni ko&apos;rish uchun <span className="text-sky-400 font-mono">help</span> deb yozing.
+            {language === 'uz'
+              ? `Buyruq topilmadi: "${trimmed}". Mavjud buyruqlarni ko'rish uchun help deb yozing.`
+              : language === 'ru'
+              ? `Команда не найдена: "${trimmed}". Введите help для списка доступных команд.`
+              : `Command not found: "${trimmed}". Type help to see available commands.`}
           </p>
         );
     }
@@ -162,20 +179,20 @@ export const DevTerminal: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopyHistory}
-            className="p-1.5 rounded-md hover:bg-white/10 text-neutral-400 hover:text-white transition-colors"
-            title="Tarixni nusxalash"
+            className="p-1.5 rounded-md hover:bg-white/10 text-neutral-400 hover:text-white transition-colors cursor-pointer"
+            title={language === 'uz' ? 'Tarixni nusxalash' : language === 'ru' ? 'Скопировать историю' : 'Copy history'}
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
           </button>
           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            ONLINE
+            {t.terminal.online}
           </span>
         </div>
       </div>
 
       {/* Quick Action Pill Bar */}
       <div className="px-4 py-2 bg-[#12131b] border-b border-white/5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-400">
-        <span className="text-[11px] text-neutral-500 mr-1 hidden sm:inline">Tezkor buyruqlar:</span>
+        <span className="text-[11px] text-neutral-500 mr-1 hidden sm:inline">{t.terminal.quickCommands}:</span>
         {['about', 'skills', 'projects', 'contact', 'help', 'clear'].map((c) => (
           <button
             key={c}
@@ -220,12 +237,12 @@ export const DevTerminal: React.FC = () => {
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="buyruq... (help)"
+            placeholder={t.terminal.placeholder}
             className="flex-1 bg-transparent text-white focus:outline-none placeholder-neutral-600 font-mono text-xs"
           />
           <button
             onClick={() => executeCommand(inputVal)}
-            className="p-1 text-neutral-500 hover:text-emerald-400 transition-colors"
+            className="p-1 text-neutral-500 hover:text-emerald-400 transition-colors cursor-pointer"
           >
             <CornerDownLeft className="w-3.5 h-3.5" />
           </button>
@@ -234,3 +251,4 @@ export const DevTerminal: React.FC = () => {
     </div>
   );
 };
+

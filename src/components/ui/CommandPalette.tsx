@@ -21,11 +21,12 @@ import {
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, XIcon } from '@/components/ui/Icons';
 import { useTheme } from '@/lib/theme-context';
+import { useLanguage } from '@/lib/language-context';
 
 interface CommandItem {
   id: string;
   title: string;
-  category: 'Navigation' | 'Actions' | 'Social' | 'System';
+  category: string;
   icon: React.ReactNode;
   perform: () => void;
   shortcut?: string;
@@ -40,6 +41,7 @@ interface CommandPaletteProps {
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
+  const { language, t } = useLanguage();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -68,94 +70,94 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       // Navigation
       {
         id: 'nav-home',
-        title: 'Asosiy Sahifa (Home)',
-        category: 'Navigation',
+        title: language === 'uz' ? 'Asosiy Sahifa (Home)' : language === 'ru' ? 'Главная страница (Home)' : 'Home Page',
+        category: t.commandPalette.navCategory,
         icon: <Sparkles className="w-4 h-4 text-sky-500" />,
         perform: () => navigateTo('#'),
         shortcut: 'G H',
-        subtext: 'Yuqori qismga qaytish',
+        subtext: language === 'uz' ? 'Yuqori qismga qaytish' : language === 'ru' ? 'Вернуться наверх' : 'Back to top',
       },
       {
         id: 'nav-about',
-        title: 'Men haqimda (About)',
-        category: 'Navigation',
+        title: t.nav.about,
+        category: t.commandPalette.navCategory,
         icon: <User className="w-4 h-4 text-neutral-500" />,
         perform: () => navigateTo('#about'),
         shortcut: 'G A',
-        subtext: 'Falsafa, tajriba va Spotify coding vibe',
+        subtext: language === 'uz' ? 'Falsafa, tajriba va Spotify coding vibe' : language === 'ru' ? 'Философия, опыт и атмосфера работы' : 'Philosophy, background, and workflow',
       },
       {
         id: 'nav-skills',
-        title: 'Texnik Ko\'nikmalar (Skills)',
-        category: 'Navigation',
+        title: t.nav.skills,
+        category: t.commandPalette.navCategory,
         icon: <Sparkles className="w-4 h-4 text-amber-500" />,
         perform: () => navigateTo('#skills'),
         shortcut: 'G S',
-        subtext: '12+ dasturlash texnologiyalari va tajriba foizlari',
+        subtext: language === 'uz' ? '12+ dasturlash texnologiyalari va tajriba foizlari' : language === 'ru' ? '12+ технологий и уровень владения' : '12+ technologies and skill percentages',
       },
       {
         id: 'nav-experience',
-        title: 'Tajriba & Rivojlanish (Experience)',
-        category: 'Navigation',
+        title: t.nav.experience,
+        category: t.commandPalette.navCategory,
         icon: <Briefcase className="w-4 h-4 text-sky-500" />,
         perform: () => navigateTo('#experience'),
         shortcut: 'G E',
-        subtext: 'Amaliy loyihalar, Meta akkreditatsiyasi va kiberxavfsizlik',
+        subtext: language === 'uz' ? 'Amaliy loyihalar, Meta akkreditatsiyasi va kiberxavfsizlik' : language === 'ru' ? 'Практические проекты, аккредитации и развитие' : 'Hands-on projects, credentials, and achievements',
       },
       {
         id: 'nav-services',
-        title: 'Xizmatlar & Narxlar (Services)',
-        category: 'Navigation',
+        title: t.nav.services,
+        category: t.commandPalette.navCategory,
         icon: <Sparkles className="w-4 h-4 text-violet-500" />,
         perform: () => navigateTo('#services'),
         shortcut: 'G X',
-        subtext: 'Telegram botlar, Landing sahifalar va narx kalkulyatori',
+        subtext: language === 'uz' ? 'Telegram botlar, Landing sahifalar va narx kalkulyatori' : language === 'ru' ? 'Telegram боты, лендинги и онлайн-калькулятор' : 'Telegram bots, landing pages, and price estimator',
       },
       {
         id: 'nav-projects',
-        title: 'Tanlangan Loyihalar (Projects)',
-        category: 'Navigation',
+        title: t.nav.projects,
+        category: t.commandPalette.navCategory,
         icon: <FolderGit2 className="w-4 h-4 text-indigo-500" />,
         perform: () => navigateTo('#projects'),
         shortcut: 'G P',
-        subtext: 'Mebel Mashhura, 3D Earth, Aura Tracker',
+        subtext: 'Mebel Mashhura, FilmX, 3D Earth, Finalytix',
       },
       {
         id: 'nav-certificates',
-        title: 'Xalqaro Sertifikatlar (Certificates)',
-        category: 'Navigation',
+        title: t.nav.certificates,
+        category: t.commandPalette.navCategory,
         icon: <Award className="w-4 h-4 text-emerald-500" />,
         perform: () => navigateTo('#certificates'),
         shortcut: 'G C',
-        subtext: 'Coursera, Meta, Google, Packt va Pearson sertifikatlari',
+        subtext: language === 'uz' ? 'Coursera, Meta, Google, Packt va Pearson sertifikatlari' : language === 'ru' ? 'Сертификаты Coursera, Meta, Google, Packt и Pearson' : 'Coursera, Meta, Google, Packt, and Pearson certificates',
       },
       {
         id: 'nav-contact',
-        title: 'Bog\'lanish (Contact)',
-        category: 'Navigation',
+        title: t.nav.contact,
+        category: t.commandPalette.navCategory,
         icon: <Mail className="w-4 h-4 text-sky-500" />,
         perform: () => navigateTo('#contact'),
         shortcut: 'G M',
-        subtext: 'Xabar yoki loyiha taklifini yuborish',
+        subtext: language === 'uz' ? 'Xabar yoki loyiha taklifini yuborish' : language === 'ru' ? 'Отправить сообщение или предложение о проекте' : 'Send an inquiry or project proposal',
       },
 
       // Actions
       {
         id: 'act-theme',
-        title: theme === 'dark' ? 'Yorug\' rejimga o\'tish (Light)' : 'Tungi rejimga o\'tish (Dark)',
-        category: 'Actions',
+        title: t.commandPalette.switchTheme,
+        category: t.commandPalette.actionsCategory,
         icon: theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-neutral-800" />,
         perform: () => {
           toggleTheme();
           onClose();
         },
         shortcut: 'T',
-        subtext: 'Sayt interfeysi ko\'rinishini almashtirish',
+        subtext: language === 'uz' ? 'Sayt interfeysi ko\'rinishini almashtirish' : language === 'ru' ? 'Переключить тему оформления' : 'Toggle dark and light color theme',
       },
       {
         id: 'act-copy-email',
-        title: copiedEmail ? 'Nusxa olindi!' : 'Email manzilidan nusxa olish',
-        category: 'Actions',
+        title: copiedEmail ? t.commandPalette.emailCopied : t.commandPalette.copyEmail,
+        category: t.commandPalette.actionsCategory,
         icon: copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Mail className="w-4 h-4 text-neutral-500" />,
         perform: copyEmail,
         shortcut: 'C E',
@@ -163,8 +165,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'act-resume',
-        title: 'GitHub Repozitoriyalarni ko\'rish',
-        category: 'Actions',
+        title: language === 'uz' ? 'GitHub Repozitoriyalarni ko\'rish' : language === 'ru' ? 'Открыть репозитории GitHub' : 'View GitHub Repositories',
+        category: t.commandPalette.actionsCategory,
         icon: <FileText className="w-4 h-4 text-blue-500" />,
         perform: () => {
           window.open('https://github.com/sanjarbek0828', '_blank');
@@ -177,8 +179,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       // Social
       {
         id: 'soc-telegram',
-        title: 'Telegram orqali bog\'lanish',
-        category: 'Social',
+        title: language === 'uz' ? 'Telegram orqali bog\'lanish' : language === 'ru' ? 'Связаться через Telegram' : 'Connect via Telegram',
+        category: t.commandPalette.socialCategory,
         icon: <Sparkles className="w-4 h-4 text-sky-500" />,
         perform: () => {
           window.open('https://t.me/sanjarbekdev', '_blank');
@@ -188,8 +190,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'soc-instagram',
-        title: 'Instagram profilini ochish',
-        category: 'Social',
+        title: language === 'uz' ? 'Instagram profilini ochish' : language === 'ru' ? 'Открыть профиль Instagram' : 'Open Instagram Profile',
+        category: t.commandPalette.socialCategory,
         icon: <InstagramIcon className="w-4 h-4 text-pink-500" />,
         perform: () => {
           window.open('https://instagram.com/sanjarbek_dev', '_blank');
@@ -199,8 +201,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'soc-github',
-        title: 'GitHub profilini ochish',
-        category: 'Social',
+        title: language === 'uz' ? 'GitHub profilini ochish' : language === 'ru' ? 'Открыть профиль GitHub' : 'Open GitHub Profile',
+        category: t.commandPalette.socialCategory,
         icon: <GithubIcon className="w-4 h-4 text-neutral-600 dark:text-neutral-300" />,
         perform: () => {
           window.open('https://github.com/sanjarbek0828', '_blank');
@@ -210,8 +212,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'soc-linkedin',
-        title: 'LinkedIn profilini ochish',
-        category: 'Social',
+        title: language === 'uz' ? 'LinkedIn profilini ochish' : language === 'ru' ? 'Открыть профиль LinkedIn' : 'Open LinkedIn Profile',
+        category: t.commandPalette.socialCategory,
         icon: <LinkedinIcon className="w-4 h-4 text-blue-500" />,
         perform: () => {
           window.open('https://linkedin.com/in/sanjarbek-otabekov-0600733bb/', '_blank');
@@ -221,8 +223,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'soc-twitter',
-        title: 'X (Twitter) profilini ochish',
-        category: 'Social',
+        title: language === 'uz' ? 'X (Twitter) profilini ochish' : language === 'ru' ? 'Открыть профиль X (Twitter)' : 'Open X (Twitter) Profile',
+        category: t.commandPalette.socialCategory,
         icon: <XIcon className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />,
         perform: () => {
           window.open('https://x.com/sanjarme08', '_blank');
@@ -234,17 +236,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       // System
       {
         id: 'sys-admin',
-        title: 'Admin Boshqaruv Paneliga kirish',
-        category: 'System',
+        title: t.commandPalette.openAdmin,
+        category: t.commandPalette.systemCategory,
         icon: <ShieldCheck className="w-4 h-4 text-emerald-500" />,
         perform: () => {
           router.push('/admin');
           onClose();
         },
-        subtext: 'Loyihalar, sertifikatlar, xizmatlar va xabarlarni boshqarish',
+        subtext: t.commandPalette.adminDesc,
       },
     ];
-  }, [theme, toggleTheme, copiedEmail, navigateTo, copyEmail, router, onClose]);
+  }, [theme, toggleTheme, copiedEmail, navigateTo, copyEmail, router, onClose, language, t]);
 
   const filteredItems = useMemo(() => {
     if (!query.trim()) return items;
@@ -322,7 +324,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 setQuery(e.target.value);
                 setSelectedIndex(0);
               }}
-              placeholder="Qidirish yoki buyruq kiritish..."
+              placeholder={t.commandPalette.placeholder}
               className="flex-1 bg-transparent text-base sm:text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none"
             />
             <button
@@ -337,7 +339,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-transparent">
             {filteredItems.length === 0 ? (
               <div className="py-12 text-center text-xs text-neutral-500 font-mono">
-                No commands matching &quot;{query}&quot;
+                {language === 'uz'
+                  ? `"${query}" bo'yicha buyruqlar topilmadi`
+                  : language === 'ru'
+                  ? `Команды по запросу "${query}" не найдены`
+                  : `No commands matching "${query}"`}
               </div>
             ) : (
               filteredItems.map((item, index) => {
@@ -386,9 +392,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           {/* Footer Shortcuts */}
           <div className="px-4 py-2.5 border-t border-black/[0.06] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between text-[11px] font-mono text-neutral-400 dark:text-neutral-500">
             <div className="flex items-center gap-3">
-              <span>↑↓ Navigate</span>
-              <span>↵ Select</span>
-              <span>ESC Close</span>
+              <span>↑↓ {language === 'uz' ? 'Harakat' : language === 'ru' ? 'Навигация' : 'Navigate'}</span>
+              <span>↵ {language === 'uz' ? 'Tanlash' : language === 'ru' ? 'Выбрать' : 'Select'}</span>
+              <span>ESC {language === 'uz' ? 'Yopish' : language === 'ru' ? 'Закрыть' : 'Close'}</span>
             </div>
             <span>Sanjarbek Portfolio</span>
           </div>
@@ -397,3 +403,4 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     </AnimatePresence>
   );
 };
+

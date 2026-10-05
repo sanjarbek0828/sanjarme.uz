@@ -2,26 +2,29 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Send, Mail, ArrowUp, Shield } from 'lucide-react';
+import { ArrowUp, Shield } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
+import { useLanguage } from '@/lib/language-context';
 
 export const Footer: React.FC = () => {
+  const { t } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="relative border-t border-black/[0.06] dark:border-white/[0.08] bg-[#f5f5f7] dark:bg-black pt-16 pb-12 overflow-hidden transition-colors duration-300">
+    <footer className="relative border-t border-black/[0.06] dark:border-white/[0.08] bg-[#f5f5f7] dark:bg-black pt-12 sm:pt-16 pb-8 sm:pb-12 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-black/[0.06] dark:border-white/[0.06]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 pb-8 sm:pb-12 border-b border-black/[0.06] dark:border-white/[0.06]">
           
           {/* Col 1: Bio / Brand */}
           <div className="md:col-span-2 space-y-3">
-            <span className="font-['Space_Grotesk'] text-xl font-bold text-neutral-950 dark:text-white tracking-tight block">
+            <span className="font-['Space_Grotesk'] text-lg sm:text-xl font-bold text-neutral-950 dark:text-white tracking-tight block">
               Sanjarbek Otabekov
             </span>
-            <p className="text-neutral-600 dark:text-neutral-400 text-sm max-w-md leading-relaxed font-normal">
-              Full Stack muhandis — Next.js, React, Node.js, Telegram botlar va bulutli infratuzilmalar bo&apos;yicha ixtisoslashgan. Har bir loyihada tezlik, toza arxitektura va yuqori ishonchlilik ustuvor hisoblanadi.
+            <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm max-w-md leading-relaxed font-normal">
+              {t.footer.bio}
             </p>
             <div className="flex items-center gap-2 pt-2">
               <a
@@ -74,43 +77,35 @@ export const Footer: React.FC = () => {
               >
                 <XIcon className="w-3 h-3" />
               </a>
-              <a
-                href="mailto:sanjarbekotabekov010@gmail.com"
-                className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white flex items-center justify-center transition-all hover:scale-110 shadow-xs"
-                aria-label="Email"
-                title="Email"
-              >
-                <Mail className="w-3.5 h-3.5" />
-              </a>
             </div>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Navigatsiya
+              {t.footer.navigation}
             </h4>
             <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
               <li>
-                <a href="#about" className="hover:text-black dark:hover:text-white transition-colors">Haqimda</a>
+                <a href="#about" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.about}</a>
               </li>
               <li>
-                <a href="#skills" className="hover:text-black dark:hover:text-white transition-colors">Ko&apos;nikmalar</a>
+                <a href="#skills" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.skills}</a>
               </li>
               <li>
-                <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors">Tajriba</a>
+                <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.experience}</a>
               </li>
               <li>
-                <a href="#services" className="hover:text-black dark:hover:text-white transition-colors">Xizmatlar</a>
+                <a href="#services" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.services}</a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-black dark:hover:text-white transition-colors">Loyihalar</a>
+                <a href="#projects" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.projects}</a>
               </li>
               <li>
-                <a href="#certificates" className="hover:text-black dark:hover:text-white transition-colors">Sertifikatlar</a>
+                <a href="#certificates" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.certificates}</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">Aloqa</a>
+                <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.contact}</a>
               </li>
             </ul>
           </div>
@@ -118,7 +113,7 @@ export const Footer: React.FC = () => {
           {/* Col 3: Portal & Controls */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Tizim & Status
+              {t.footer.systemStatus}
             </h4>
             <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
               <li>
@@ -127,17 +122,17 @@ export const Footer: React.FC = () => {
                   className="inline-flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
                 >
                   <Shield className="w-3 h-3 text-neutral-500" />
-                  <span>Admin Boshqaruv</span>
+                  <span>{t.footer.adminPanel}</span>
                 </Link>
               </li>
               <li>
                 <span className="text-emerald-600 dark:text-emerald-400 font-mono block">
-                  ● Yangi loyihalar uchun ochiq
+                  {t.footer.available}
                 </span>
               </li>
               <li>
                 <span className="text-neutral-500 block">
-                  Toshkent, O&apos;zbekiston · UTC+5
+                  {t.footer.location}
                 </span>
               </li>
             </ul>
@@ -145,9 +140,9 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p suppressHydrationWarning>
-            © {new Date().getFullYear()} Sanjarbek Otabekov • <span className="text-neutral-700 dark:text-neutral-300 font-medium">sanjarme.uz</span>. Barcha huquqlar himoyalangan.
+        <div className="pt-6 sm:pt-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 text-center sm:text-left">
+          <p suppressHydrationWarning className="leading-relaxed">
+            © {new Date().getFullYear()} Sanjarbek Otabekov • <span className="text-neutral-700 dark:text-neutral-300 font-medium">sanjarme.uz</span>. {t.footer.rights}
           </p>
 
           <button
@@ -155,7 +150,7 @@ export const Footer: React.FC = () => {
             className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white px-3 py-1.5 rounded-full bg-white dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] transition-colors cursor-pointer text-xs shadow-xs"
             aria-label="Back to top"
           >
-            <span>Yuqoriga</span>
+            <span>{t.footer.backToTop}</span>
             <ArrowUp className="w-3 h-3" />
           </button>
         </div>
@@ -163,3 +158,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

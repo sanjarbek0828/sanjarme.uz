@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { MapPin, Globe2, Clock, Zap, Layers, Music, Award, GitBranch, Terminal } from 'lucide-react';
 import { SiteContent } from '@/lib/types';
 import { DevTerminal } from '@/components/ui/DevTerminal';
+import { useLanguage } from '@/lib/language-context';
 
 interface AboutProps {
   content: SiteContent['about'];
@@ -50,26 +51,42 @@ const AnimatedCounter: React.FC<{ value: number; suffix?: string; decimals?: num
 };
 
 export const About: React.FC<AboutProps> = ({ content }) => {
+  const { t, language } = useLanguage();
+
   const expYearsNum = typeof content.yearsExperience === 'number' 
     ? content.yearsExperience 
-    : parseInt(String(content.yearsExperience)) || 1;
+    : parseInt(String(content.yearsExperience)) || 4;
 
   const commitsNum = parseInt(String(content.githubCommits || '110')) || 110;
 
+  const uxTitle = language === 'ru' ? 'Пользовательский Опыт (UX)' : language === 'en' ? 'User Experience (UX)' : 'Foydalanuvchi Tajribasi (UX)';
+  const uxDesc = language === 'ru'
+    ? 'Интуитивный и чистый дизайн, создающий ощущение легкости и доверия у каждого посетителя.'
+    : language === 'en'
+    ? 'Intuitive, fluid design engineered so every visitor feels empowered, engaged, and delighted.'
+    : "Saytga kirgan har bir inson o'zini erkin va ishonchli his qilishi uchun qulay dizayn.";
+
+  const archTitle = language === 'ru' ? 'Чистая & Модульная Архитектура' : language === 'en' ? 'Clean & Modular Architecture' : 'Toza & Modulli Arxitektura';
+  const archDesc = language === 'ru'
+    ? 'Строгая типизация TypeScript, надежные компоненты и легко масштабируемая кодовая база.'
+    : language === 'en'
+    ? 'Strict TypeScript, isolated components, and a bulletproof, future-proof codebase.'
+    : 'TypeScript, toza komponentlar va kelajakda oson kengayuvchi mustahkam kod bazasi.';
+
   return (
-    <section id="about" className="relative py-16 sm:py-24 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
+    <section id="about" className="relative py-14 sm:py-24 lg:py-32 bg-white dark:bg-black transition-colors duration-300 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header - Apple Clean */}
         <div className="flex flex-col items-start mb-10 sm:mb-16">
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2 sm:mb-3 block">
-            Falsafa & Tajriba
+            {t.about.badge}
           </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
-            {content.heading || 'Men Haqimda'} — <span className="text-apple-headline">Maqsad & Yondashuv</span>
+          <h2 className="text-[1.5rem] sm:text-4xl lg:text-5xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white tracking-tight">
+            {t.about.heading} — <span className="text-apple-headline">{t.about.cards.philosophy}</span>
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base font-normal leading-relaxed">
-            Murakkab texnik vazifalarga ijodiy, qulay va mustahkam arxitekturaviy yechimlar yaratish.
+          <p className="text-neutral-600 dark:text-neutral-400 mt-2 sm:mt-3 max-w-2xl text-[13px] sm:text-base font-normal leading-relaxed">
+            {t.about.quote}
           </p>
         </div>
 
@@ -86,28 +103,17 @@ export const About: React.FC<AboutProps> = ({ content }) => {
           >
             <motion.div 
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-5 sm:p-7 md:p-8 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 sm:space-y-5 gpu-layer"
+              className="p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-3.5 sm:space-y-5 gpu-layer"
             >
               <h3 className="text-base sm:text-xl lg:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
-                Raqamli qulaylik va yuqori tezlikdagi arxitektura
+                {t.about.cards.philosophy}
               </h3>
 
-              {content.bioParagraphs && content.bioParagraphs.length > 0 ? (
-                content.bioParagraphs.map((paragraph, idx) => (
-                  <p key={idx} className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-xs sm:text-sm md:text-base font-normal">
-                    {paragraph}
-                  </p>
-                ))
-              ) : (
-                <>
-                  <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-xs sm:text-sm md:text-base font-normal">
-                    Zamonaviy veb-arxitektura va yuqori tezlikdagi raqamli mahsulotlar yaratishga ixtisoslashgan Full Stack muhandisman. Murakkab vazifalarga toza kod, ilg&apos;or texnologiyalar va intuitiv interfeyslar orqali qulay yechim topaman.
-                  </p>
-                  <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed text-xs sm:text-sm md:text-base font-normal">
-                    Mening maqsadim — har bir loyihada yuqori yuklanish tezligi, xavfsizlik va mukammal foydalanuvchi tajribasini (UX) ta&apos;minlash. Next.js, TypeScript va zamonaviy texnologiyalar bilan bizneslar uchun aniq natija beruvchi yechimlar yarataman.
-                  </p>
-                </>
-              )}
+              <div className="space-y-3 text-neutral-700 dark:text-neutral-300 leading-relaxed text-xs sm:text-sm md:text-base font-normal">
+                <p>{t.about.p1}</p>
+                <p>{t.about.p2}</p>
+                <p>{t.about.p3}</p>
+              </div>
 
               {/* Working Principles */}
               <div className="pt-5 border-t border-black/[0.06] dark:border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
@@ -116,9 +122,9 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                     <Zap className="w-4 h-4 text-amber-500" />
                   </div>
                   <div>
-                    <h4 className="text-xs sm:text-sm font-semibold text-neutral-950 dark:text-white">Foydalanuvchi Tajribasi (UX)</h4>
+                    <h4 className="text-xs sm:text-sm font-semibold text-neutral-950 dark:text-white">{uxTitle}</h4>
                     <p className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-1 leading-relaxed">
-                      Saytga kirgan har bir inson o&apos;zini erkin va ishonchli his qilishi uchun qulay dizayn.
+                      {uxDesc}
                     </p>
                   </div>
                 </div>
@@ -128,9 +134,9 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                     <Layers className="w-4 h-4 text-sky-500" />
                   </div>
                   <div>
-                    <h4 className="text-xs sm:text-sm font-semibold text-neutral-950 dark:text-white">Toza & Modulli Arxitektura</h4>
+                    <h4 className="text-xs sm:text-sm font-semibold text-neutral-950 dark:text-white">{archTitle}</h4>
                     <p className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-1 leading-relaxed">
-                      TypeScript, toza komponentlar va kelajakda oson kengayuvchi mustahkam kod bazasi.
+                      {archDesc}
                     </p>
                   </div>
                 </div>
@@ -140,15 +146,19 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             {/* Quick Facts Card */}
             <motion.div 
               whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-4 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 gpu-layer"
+              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 gpu-layer"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-400">
                   <MapPin className="w-4 h-4 text-sky-500" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">Manzil</span>
-                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">{content.location || 'Toshkent, UZ'}</span>
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
+                    {language === 'ru' ? 'Локация' : language === 'en' ? 'Location' : 'Manzil'}
+                  </span>
+                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">
+                    {language === 'ru' ? 'Ташкент, UZ' : language === 'en' ? 'Tashkent, UZ' : 'Toshkent, UZ'}
+                  </span>
                 </div>
               </div>
 
@@ -157,8 +167,12 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                   <Clock className="w-4 h-4 text-emerald-500" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">Bandlik</span>
-                  <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">{content.availability || 'Frilans & Loyihalar'}</span>
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
+                    {language === 'ru' ? 'Занятость' : language === 'en' ? 'Status' : 'Bandlik'}
+                  </span>
+                  <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                    {language === 'ru' ? 'Фриланс & Проекты' : language === 'en' ? 'Freelance & Projects' : 'Frilans & Loyihalar'}
+                  </span>
                 </div>
               </div>
 
@@ -167,8 +181,12 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                   <Globe2 className="w-4 h-4 text-indigo-500" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">Muloqot tillari</span>
-                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">O&apos;zbek, Ingliz, Rus</span>
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
+                    {language === 'ru' ? 'Языки' : language === 'en' ? 'Languages' : 'Muloqot tillari'}
+                  </span>
+                  <span className="text-xs font-semibold text-neutral-900 dark:text-white">
+                    {language === 'ru' ? 'Узбекский, Русский, EN' : language === 'en' ? 'Uzbek, English, RU' : "O'zbek, Ingliz, Rus"}
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -189,13 +207,15 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
                 className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
               >
-                <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">Tajriba</span>
+                <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
+                  {language === 'ru' ? 'Опыт' : language === 'en' ? 'Experience' : 'Tajriba'}
+                </span>
                 <div>
                   <span className="text-2xl sm:text-4xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white block">
                     <AnimatedCounter value={expYearsNum} suffix="+" />
                   </span>
                   <span className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-1 block leading-tight">
-                    Yillik amaliy dasturlash tajribasi
+                    {language === 'ru' ? 'Года практического опыта' : language === 'en' ? 'Years of production engineering' : 'Yillik amaliy dasturlash tajribasi'}
                   </span>
                 </div>
               </motion.div>
@@ -206,7 +226,9 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">GitHub Faollik</span>
+                  <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
+                    {language === 'ru' ? 'Активность' : language === 'en' ? 'GitHub' : 'GitHub Faollik'}
+                  </span>
                   <GitBranch className="w-3.5 h-3.5 text-neutral-400" />
                 </div>
                 <div>
@@ -214,7 +236,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                     <AnimatedCounter value={commitsNum} suffix="+" />
                   </span>
                   <span className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-1 block leading-tight">
-                    Ushbu yildagi faol commitlar
+                    {language === 'ru' ? 'Активных коммитов в этом году' : language === 'en' ? 'Active commits this year' : 'Ushbu yildagi faol commitlar'}
                   </span>
                 </div>
               </motion.div>
@@ -225,7 +247,9 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">Sertifikatlar</span>
+                  <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
+                    {language === 'ru' ? 'Сертификаты' : language === 'en' ? 'Certs' : 'Sertifikatlar'}
+                  </span>
                   <Award className="w-3.5 h-3.5 text-emerald-500" />
                 </div>
                 <div>
@@ -243,13 +267,15 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
                 className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
               >
-                <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">Barqarorlik</span>
+                <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
+                  {language === 'ru' ? 'Надежность' : language === 'en' ? 'Reliability' : 'Barqarorlik'}
+                </span>
                 <div>
                   <span className="text-2xl sm:text-4xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white block">
                     <AnimatedCounter value={99.9} suffix="%" decimals={1} />
                   </span>
                   <span className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-1 block leading-tight">
-                    Toza kod & sifat kafolati
+                    {language === 'ru' ? 'Чистый код и стандарты качества' : language === 'en' ? 'Clean code & QA standards' : 'Toza kod & sifat kafolati'}
                   </span>
                 </div>
               </motion.div>
@@ -258,7 +284,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             {/* Spotify "Coding Vibe / Music in Progress" Card */}
             <motion.div
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-4 sm:p-5 rounded-3xl apple-glass-card border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20 flex items-center justify-between gap-3 sm:gap-4 gpu-layer overflow-hidden"
+              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl apple-glass-card border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20 flex items-center justify-between gap-3 sm:gap-4 gpu-layer overflow-hidden"
             >
               <div className="flex items-center gap-3.5">
                 <div className="relative w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center flex-shrink-0 shadow-inner">
@@ -301,12 +327,16 @@ export const About: React.FC<AboutProps> = ({ content }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-12 sm:mt-16 max-w-4xl mx-auto"
+          className="mt-10 sm:mt-16 max-w-4xl mx-auto"
         >
           <div className="flex items-center gap-2 mb-3 px-1 text-xs font-mono text-neutral-500 dark:text-neutral-400">
             <Terminal className="w-4 h-4 text-emerald-500" />
-            <span className="uppercase tracking-wider font-semibold">Interaktiv Dasturchi Terminali (CLI)</span>
-            <span className="text-neutral-400 dark:text-neutral-600 hidden sm:inline">• buyruq yozib tekshirib ko&apos;ring</span>
+            <span className="uppercase tracking-wider font-semibold">
+              {language === 'ru' ? 'Интерактивный Терминал Разработчика (CLI)' : language === 'en' ? 'Interactive Developer Terminal (CLI)' : 'Interaktiv Dasturchi Terminali (CLI)'}
+            </span>
+            <span className="text-neutral-400 dark:text-neutral-600 hidden sm:inline">
+              {language === 'ru' ? '• введите команду для проверки' : language === 'en' ? '• type a command to explore' : "• buyruq yozib tekshirib ko'ring"}
+            </span>
           </div>
           <DevTerminal />
         </motion.div>

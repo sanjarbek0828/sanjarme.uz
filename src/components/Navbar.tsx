@@ -19,23 +19,26 @@ import {
   Briefcase
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageToggle } from './LanguageToggle';
 import { CommandPalette } from './ui/CommandPalette';
 import { InstagramIcon, XIcon } from '@/components/ui/Icons';
-
-const NAV_LINKS = [
-  { name: 'Haqimda', href: '#about', icon: User },
-  { name: 'Ko\'nikmalar', href: '#skills', icon: Wrench },
-  { name: 'Tajriba', href: '#experience', icon: Briefcase },
-  { name: 'Xizmatlar', href: '#services', icon: Layers },
-  { name: 'Loyihalar', href: '#projects', icon: FolderGit2 },
-  { name: 'Sertifikatlar', href: '#certificates', icon: Award },
-  { name: 'Aloqa', href: '#contact', icon: Mail },
-];
+import { useLanguage } from '@/lib/language-context';
 
 export const Navbar: React.FC = () => {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
+
+  const navLinks = [
+    { name: t.nav.about, href: '#about', icon: User },
+    { name: t.nav.skills, href: '#skills', icon: Wrench },
+    { name: t.nav.experience, href: '#experience', icon: Briefcase },
+    { name: t.nav.services, href: '#services', icon: Layers },
+    { name: t.nav.projects, href: '#projects', icon: FolderGit2 },
+    { name: t.nav.certificates, href: '#certificates', icon: Award },
+    { name: t.nav.contact, href: '#contact', icon: Mail },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +58,18 @@ export const Navbar: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Lock body scroll when mobile menu is open to prevent background scrolling
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Global shortcut: ⌘K or Ctrl+K
   useEffect(() => {
@@ -88,13 +103,13 @@ export const Navbar: React.FC = () => {
                 Sanjarbek Otabekov
               </span>
               <span className="text-[11px] font-mono text-neutral-500 hidden sm:inline-block">
-                / Full Stack
+                {t.nav.fullStack}
               </span>
             </Link>
 
             {/* Desktop Navigation - Apple Segmented Clean Links */}
             <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full apple-glass-pill shadow-2xs">
-              {NAV_LINKS.map((link) => (
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -111,56 +126,43 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => setCmdPaletteOpen(true)}
                 className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full apple-glass-pill text-xs font-mono text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
-                title="Tezkor Qidiruv (⌘K)"
-                aria-label="Quick Search"
+                title={t.nav.searchShortcut}
+                aria-label={t.nav.search}
               >
                 <Search className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline text-[11px]">Qidiruv</span>
+                <span className="hidden lg:inline text-[11px]">{t.nav.search}</span>
                 <kbd className="px-1.5 py-0.5 rounded text-[10px] bg-black/[0.05] dark:bg-white/[0.08] border border-black/[0.05] dark:border-white/[0.08]">
                   ⌘K
                 </kbd>
               </button>
+
+              {/* Language Switcher Pill */}
+              <LanguageToggle variant="pill" />
 
               <ThemeToggle />
 
               <Link
                 href="/admin"
                 className="p-2 text-neutral-500 hover:text-black dark:hover:text-neutral-300 rounded-full hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors"
-                title="Admin Boshqaruv Paneli"
-                aria-label="Admin Panel"
+                title={t.nav.adminPanel}
+                aria-label={t.nav.adminPanel}
               >
                 <ShieldCheck className="w-4 h-4" />
               </Link>
-
 
               <a
                 href="#contact"
                 className="px-4 py-1.5 rounded-full text-xs font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 active:scale-[0.98] transition-all inline-flex items-center gap-1.5 shadow-xs"
               >
-                <span>Bog&apos;lanish</span>
+                <span>{t.nav.connect}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
 
             {/* Mobile Menu Controls */}
             <div className="flex md:hidden items-center gap-1">
-              <button
-                onClick={() => setCmdPaletteOpen(true)}
-                className="p-2 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white active:scale-95 transition-all"
-                title="Tezkor Qidiruv"
-                aria-label="Search"
-              >
-                <Search className="w-4 h-4" />
-              </button>
+              <LanguageToggle variant="compact" />
               <ThemeToggle />
-              <Link
-                href="/admin"
-                className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white active:scale-95 transition-all"
-                title="Admin"
-                aria-label="Admin"
-              >
-                <ShieldCheck className="w-4 h-4" />
-              </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded-xl text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] active:scale-95 transition-all"
@@ -182,11 +184,16 @@ export const Navbar: React.FC = () => {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="md:hidden overflow-hidden bg-white/95 dark:bg-neutral-950/95 backdrop-blur-2xl border-b border-black/[0.08] dark:border-white/[0.1] shadow-xl"
             >
-              <div className="px-4 py-5 space-y-2 max-w-md mx-auto">
+              <div className="px-4 py-5 space-y-3 max-w-md mx-auto">
+                {/* Mobile Full Language Selector */}
+                <div className="pb-2">
+                  <LanguageToggle variant="full" />
+                </div>
+
                 <div className="grid grid-cols-2 gap-2 pb-3">
-                  {NAV_LINKS.map((link, idx) => {
+                  {navLinks.map((link, idx) => {
                     const Icon = link.icon;
-                    const isLast = idx === NAV_LINKS.length - 1;
+                    const isLast = idx === navLinks.length - 1;
                     return (
                       <a
                         key={link.name}
@@ -204,15 +211,35 @@ export const Navbar: React.FC = () => {
                 </div>
 
                 {/* Mobile Direct Action Buttons */}
-                <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2">
+                <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-1.5 sm:gap-2">
                   <a
                     href="#contact"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex-1 text-center py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-semibold shadow-xs active:scale-[0.98] transition-all flex items-center justify-center gap-1.5"
                   >
-                    <span>Bog&apos;lanish</span>
+                    <span>{t.nav.connect}</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setCmdPaletteOpen(true);
+                    }}
+                    className="p-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white active:scale-95 transition-all shadow-xs"
+                    title={t.nav.search}
+                    aria-label={t.nav.search}
+                  >
+                    <Search className="w-3.5 h-3.5" />
+                  </button>
+                  <Link
+                    href="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white active:scale-95 transition-all shadow-xs"
+                    title={t.nav.adminPanel}
+                    aria-label={t.nav.adminPanel}
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                  </Link>
                   <a
                     href="https://t.me/sanjarbekdev"
                     target="_blank"

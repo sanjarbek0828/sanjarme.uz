@@ -16,12 +16,14 @@ import {
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 import { SiteContent } from '@/lib/types';
+import { useLanguage } from '@/lib/language-context';
 
 interface HeroProps {
   content: SiteContent['hero'];
 }
 
 export const Hero: React.FC<HeroProps> = ({ content }) => {
+  const { t, language } = useLanguage();
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [timeStr, setTimeStr] = useState<string>('');
 
@@ -29,7 +31,8 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
     const updateTime = () => {
       try {
         const now = new Date();
-        const formatter = new Intl.DateTimeFormat('uz-UZ', {
+        const locale = language === 'ru' ? 'ru-RU' : language === 'en' ? 'en-US' : 'uz-UZ';
+        const formatter = new Intl.DateTimeFormat(locale, {
           timeZone: 'Asia/Tashkent',
           hour: '2-digit',
           minute: '2-digit',
@@ -43,7 +46,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
     updateTime();
     const interval = setInterval(updateTime, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [language]);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('sanjarbekotabekov010@gmail.com');
@@ -51,14 +54,16 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
+  const cityLabel = language === 'ru' ? 'Ташкент' : language === 'en' ? 'Tashkent' : 'Toshkent';
+
   return (
-    <section className="relative min-h-[80vh] sm:min-h-[85vh] pt-20 sm:pt-28 pb-8 sm:pb-14 flex items-center justify-center overflow-hidden bg-white dark:bg-black transition-colors duration-300">
+    <section className="relative min-h-[85vh] sm:min-h-[85vh] pt-24 sm:pt-28 pb-10 sm:pb-14 flex items-center justify-center overflow-hidden bg-white dark:bg-black transition-colors duration-300">
       {/* Smooth Atmospheric Ambient Glows (Zero-Jank GPU Layers) */}
       <div className="absolute top-1/4 left-1/12 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-sky-500/10 dark:bg-sky-500/8 blur-3xl pointer-events-none animate-ambient-float gpu-layer" />
       <div className="absolute bottom-1/4 right-1/12 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-indigo-500/10 dark:bg-indigo-500/8 blur-3xl pointer-events-none animate-ambient-float gpu-layer" style={{ animationDelay: '-7s' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Clean, High-Impact Professional Presentation */}
           <motion.div
@@ -76,13 +81,13 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             >
               <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] text-[11px] sm:text-xs font-mono text-neutral-700 dark:text-neutral-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{content.availabilityStatus || 'Loyihalar va frilans uchun ochiq'}</span>
+                <span>{t.hero.statusBadge}</span>
               </div>
 
               {timeStr && (
                 <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] text-[11px] sm:text-xs font-mono text-neutral-500 dark:text-neutral-400">
                   <Clock className="w-3 h-3 text-sky-500" />
-                  <span>Toshkent · {timeStr}</span>
+                  <span>{cityLabel} · {timeStr}</span>
                 </div>
               )}
             </motion.div>
@@ -94,22 +99,22 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-1 w-full"
             >
-              <h1 className="text-[1.65rem] xs:text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight font-['Space_Grotesk'] text-neutral-950 dark:text-white leading-[1.1]">
-                {content.name || 'Sanjarbek Otabekov'}
+              <h1 className="text-[1.75rem] xs:text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight font-['Space_Grotesk'] text-neutral-950 dark:text-white leading-[1.1]">
+                {t.hero.name}
               </h1>
               <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold text-apple-headline tracking-tight">
-                {content.role || 'Full Stack Dasturchi'}
+                {t.hero.titlePart1} <span className="text-apple-headline">{t.hero.titlePart2}</span> {t.hero.titlePart3}
               </p>
             </motion.div>
 
-            {/* Concise, Professional Summary (No fluff, straight to value) */}
+            {/* Concise, Professional Summary */}
             <motion.p 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[13px] sm:text-base lg:text-lg text-neutral-600 dark:text-neutral-300 max-w-xl font-normal leading-relaxed"
+              className="text-sm sm:text-base lg:text-lg text-neutral-600 dark:text-neutral-300 max-w-xl font-normal leading-relaxed"
             >
-              {content.subtext || content.tagline || 'Next.js, TypeScript va zamonaviy veb texnologiyalar asosida tezkor, xavfsiz va biznes uchun yuqori unumdorlikka ega raqamli mahsulotlar yarataman.'}
+              {t.hero.description}
             </motion.p>
 
             {/* Primary Action Group */}
@@ -117,16 +122,16 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="pt-1 flex flex-wrap items-center gap-2 sm:gap-3 w-full"
+              className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3 w-full"
             >
               {/* Primary: Projects */}
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#projects"
-                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-1.5 sm:gap-2 shadow-xs group cursor-pointer"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-2 shadow-xs group cursor-pointer"
               >
-                <span>{content.primaryCtaText || 'Loyihalarni ko‘rish'}</span>
+                <span>{t.hero.viewProjects}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
@@ -135,10 +140,10 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#services"
-                className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold text-sky-600 dark:text-sky-400 bg-sky-500/[0.08] hover:bg-sky-500/[0.14] border border-sky-500/25 transition-all cursor-pointer inline-flex items-center gap-1.5 sm:gap-2 group shadow-xs"
+                className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold text-sky-600 dark:text-sky-400 bg-sky-500/[0.08] hover:bg-sky-500/[0.14] border border-sky-500/25 transition-all cursor-pointer inline-flex items-center gap-2 group shadow-xs"
               >
                 <Sparkles className="w-3.5 h-3.5 text-sky-500 group-hover:scale-110 transition-transform" />
-                <span>Xizmatlar & Narxlar</span>
+                <span>{t.hero.calcPrice}</span>
               </motion.a>
 
               {/* Secondary: Contact */}
@@ -146,10 +151,10 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#contact"
-                className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-semibold text-neutral-900 dark:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.1] dark:border-white/[0.14] transition-all cursor-pointer inline-flex items-center gap-1.5 sm:gap-2 group shadow-xs"
+                className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold text-neutral-900 dark:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.1] dark:border-white/[0.14] transition-all cursor-pointer inline-flex items-center gap-2 group shadow-xs"
               >
                 <Send className="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-300 group-hover:translate-x-0.5 transition-transform" />
-                <span>{content.secondaryCtaText || 'Bog‘lanish'}</span>
+                <span>{t.nav.connect}</span>
               </motion.a>
 
               {/* Instant Copy Email Pill */}
@@ -157,19 +162,19 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleCopyEmail}
-                className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-full text-[12px] sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white bg-black/[0.02] dark:bg-white/[0.03] hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border border-black/[0.06] dark:border-white/[0.08] transition-colors inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
-                title="Email manzilni nusxalash"
+                className="px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white bg-black/[0.02] dark:bg-white/[0.03] hover:bg-black/[0.05] dark:hover:bg-white/[0.07] border border-black/[0.06] dark:border-white/[0.08] transition-colors inline-flex items-center gap-2 cursor-pointer"
+                title="Email"
               >
                 {copiedEmail ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                    <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400">Nusxalandi!</span>
+                    <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400">{t.contact.copiedEmail}</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 shrink-0" />
                     <span className="text-xs font-mono hidden sm:inline">sanjarbekotabekov010@gmail.com</span>
-                    <span className="text-xs font-mono sm:hidden">Email nusxalash</span>
+                    <span className="text-xs font-mono sm:hidden">Email</span>
                   </>
                 )}
               </motion.button>
@@ -180,7 +185,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-3 flex flex-wrap items-center gap-3 sm:gap-6 border-t border-black/[0.08] dark:border-white/[0.08] w-full text-xs font-mono text-neutral-500 dark:text-neutral-400"
+              className="pt-4 flex flex-wrap items-center gap-3 sm:gap-6 border-t border-black/[0.08] dark:border-white/[0.08] w-full text-xs font-mono text-neutral-500 dark:text-neutral-400"
             >
               <div className="flex items-center gap-1.5 sm:gap-2">
                 {/* GitHub */}
