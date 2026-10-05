@@ -225,7 +225,7 @@ export const Services: React.FC<ServicesProps> = ({ services = [] }) => {
                   viewport={{ once: true }}
                   whileHover={{ y: -5, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
                   transition={{ duration: 0.35, delay: idx * 0.08 }}
-                  className="rounded-2xl sm:rounded-3xl apple-glass-card p-4 sm:p-8 md:p-9 border border-black/[0.08] dark:border-white/[0.1] flex flex-col justify-between relative overflow-hidden group shadow-sm hover:shadow-xl transition-all"
+                  className="rounded-2xl sm:rounded-3xl vision-glass-card p-4 sm:p-8 md:p-9 border border-black/[0.08] dark:border-white/[0.1] flex flex-col justify-between relative overflow-hidden group shadow-sm hover:shadow-2xl transition-all"
                 >
                   <div className="space-y-4 sm:space-y-6 relative z-10">
                     {/* Top Bar: Icon + Price Range */}

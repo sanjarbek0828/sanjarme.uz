@@ -18,7 +18,7 @@ interface ProjectsProps {
   projects: Project[];
 }
 
-// Project Card with Apple Vision Mouse Spotlight Glare
+// Project Card with Apple Vision Mouse Spotlight Glare (Hardware Accelerated)
 const ProjectCard: React.FC<{
   project: Project;
   idx: number;
@@ -28,15 +28,12 @@ const ProjectCard: React.FC<{
   demoLabel: string;
 }> = ({ project, idx, onSelect, featuredLabel, detailsLabel, demoLabel }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    cardRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    cardRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   };
 
   return (
@@ -49,13 +46,13 @@ const ProjectCard: React.FC<{
       whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
       transition={{ duration: 0.3, delay: idx * 0.025 }}
       onMouseMove={handleMouseMove}
-      className="group relative rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden gpu-layer cursor-pointer"
+      className="group relative rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden gpu-layer cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-300"
     >
-      {/* Dynamic Mouse Spotlight Refraction Glow */}
+      {/* Dynamic Mouse Spotlight Refraction Glow (Zero React Re-renders) */}
       <div
         className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10"
         style={{
-          background: `radial-gradient(420px circle at ${mousePos.x}px ${mousePos.y}px, rgba(56, 189, 248, 0.12), transparent 70%)`,
+          background: 'radial-gradient(420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(56, 189, 248, 0.14), transparent 70%)',
         }}
       />
 

@@ -126,7 +126,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                   </div>
 
                   {/* Main Milestone Card */}
-                  <div className="flex-1 w-full p-3.5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-2.5 sm:space-y-4 hover:shadow-xl transition-all duration-300">
+                  <div className="flex-1 w-full p-3.5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-2.5 sm:space-y-4 hover:shadow-2xl transition-all duration-300">
                     
                     {/* Top Row: Title, Organization & Period Badge */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">

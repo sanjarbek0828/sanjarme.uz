@@ -74,7 +74,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               viewport={{ once: true }}
               whileHover={{ y: -5, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
               transition={{ duration: 0.35, delay: idx * 0.08 }}
-              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between space-y-4 sm:space-y-6 relative overflow-hidden group shadow-sm hover:shadow-xl transition-all"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between space-y-4 sm:space-y-6 relative overflow-hidden group shadow-sm hover:shadow-2xl transition-all"
             >
               {/* Quote Mark Watermark */}
               <Quote className="absolute top-4 right-4 w-12 h-12 text-black/[0.03] dark:text-white/[0.04] pointer-events-none -rotate-12" />

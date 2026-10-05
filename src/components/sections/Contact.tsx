@@ -105,7 +105,7 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <motion.div 
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 sm:space-y-6 gpu-layer"
+              className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-4 sm:space-y-6 gpu-layer"
             >
               <h3 className="text-lg sm:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
                 {t.contact.directContact}
@@ -260,7 +260,7 @@ export const Contact: React.FC = () => {
 
           {/* Right Form Column */}
           <div className="lg:col-span-7">
-            <div className="p-4 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] relative gpu-layer">
+            <div className="p-4 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] relative gpu-layer">
               
               {/* Submission Success Banner */}
               {submitted && (
