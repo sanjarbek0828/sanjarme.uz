@@ -171,7 +171,7 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl p-3.5 sm:p-6 md:p-8 overflow-hidden z-10 max-h-[92vh] sm:max-h-[90vh] flex flex-col text-left"
+          className="relative w-full max-w-2xl bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl p-3.5 sm:p-6 md:p-8 overflow-y-auto overscroll-contain z-10 max-h-[92vh] sm:max-h-[90vh] flex flex-col text-left"
         >
           {/* Header */}
           <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-black/[0.08] dark:border-white/[0.08]">

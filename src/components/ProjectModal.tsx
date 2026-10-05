@@ -60,7 +60,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 14 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-black/[0.08] dark:border-white/[0.1] bg-white dark:bg-neutral-950 p-4 sm:p-8 z-10 shadow-2xl text-left transition-colors duration-300"
+          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl sm:rounded-3xl border border-black/[0.08] dark:border-white/[0.1] bg-white dark:bg-neutral-950 p-4 sm:p-8 z-10 shadow-2xl text-left transition-colors duration-300"
         >
           {/* Close button */}
           <button

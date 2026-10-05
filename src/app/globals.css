@@ -312,46 +312,58 @@ html, body, button, a, input, select, textarea {
 
 /* Mobile GPU & 60-120 FPS Rendering Engine (Zero Jank, Zero Stutter) */
 @media (max-width: 768px) {
-  /* Pause background float on mobile to save GPU cycles & thermals */
+  /* Prevent rubber-banding and nested bounce stutter */
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  /* Pause continuous 3D transforms on ambient circles to prevent GPU overdraw */
   .animate-ambient-float,
   .animate-float-gentle {
     animation: none !important;
     transform: none !important;
   }
 
-  /* Optimized mobile frosted glass — balanced blur for max framerate */
+  /* Optimized mobile frosted glass — balanced blur for max 120 FPS framerate */
   .apple-glass {
-    backdrop-filter: blur(14px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
-    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
   }
   .dark .apple-glass {
-    backdrop-filter: blur(14px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
-    background: rgba(14, 14, 20, 0.9) !important;
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+    background: rgba(14, 14, 20, 0.93) !important;
   }
 
   .apple-glass-card,
   .vision-glass-card {
-    backdrop-filter: blur(12px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px) saturate(130%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
   }
   .dark .apple-glass-card,
   .dark .vision-glass-card {
-    backdrop-filter: blur(12px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-    background: rgba(18, 18, 26, 0.88) !important;
+    backdrop-filter: blur(8px) saturate(130%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
+    background: rgba(18, 18, 26, 0.92) !important;
   }
 
   .ultra-glass {
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
   }
 
-  .apple-glass-pill {
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+  .apple-glass-pill,
+  .floating-badge-glass {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* Auto-defer off-screen sections on mobile to eliminate initial paint delay */
+  #about, #skills, #experience, #services, #projects, #certificates, #testimonials, #contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 700px;
   }
 }
 
