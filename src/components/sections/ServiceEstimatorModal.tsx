@@ -165,18 +165,18 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
           className="fixed inset-0 bg-black/60 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
+        {/* Modal Window - VisionOS Frosted Sheet */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl p-3.5 sm:p-6 md:p-8 overflow-y-auto overscroll-contain z-10 max-h-[92vh] sm:max-h-[90vh] flex flex-col text-left"
+          className="relative w-full max-w-2xl apple-glass specular-rim dark:bg-[#0e0e14]/92 border border-white/90 dark:border-white/15 rounded-2xl sm:rounded-3xl shadow-[0_24px_70px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_28px_80px_-12px_rgba(0,0,0,0.9)] p-3.5 sm:p-6 md:p-8 overflow-y-auto overscroll-contain z-10 max-h-[92vh] sm:max-h-[90vh] flex flex-col text-left backdrop-blur-2xl"
         >
           {/* Header */}
           <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-black/[0.08] dark:border-white/[0.08]">
             <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 pr-2">
-              <div className="p-2 rounded-xl bg-sky-500/10 text-sky-500 shrink-0">
+              <div className="p-2 sm:p-2.5 rounded-xl bg-sky-500/15 text-sky-500 border border-sky-500/20 shadow-xs shrink-0">
                 <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div className="min-w-0">
@@ -191,7 +191,7 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
 
             <button
               onClick={onClose}
-              className="p-1.5 sm:p-2 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-neutral-500 transition-colors shrink-0"
+              className="p-1.5 sm:p-2 rounded-full bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-neutral-500 transition-colors shrink-0 cursor-pointer"
               aria-label="Close estimator"
             >
               <X className="w-5 h-5" />
@@ -215,8 +215,8 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
                       onClick={() => setSelectedType(type.id)}
                       className={`p-3 sm:p-3.5 rounded-2xl border cursor-pointer transition-all ${
                         isSelected
-                          ? 'border-sky-500 bg-sky-500/5 dark:bg-sky-500/10 shadow-xs'
-                          : 'border-black/[0.07] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 bg-black/[0.01] dark:bg-white/[0.02]'
+                          ? 'border-sky-500 bg-sky-500/10 dark:bg-sky-500/15 shadow-sm shadow-sky-500/10 ring-1 ring-sky-500/30'
+                          : 'border-black/[0.07] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 bg-white/40 dark:bg-white/[0.03] backdrop-blur-xs'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -250,15 +250,15 @@ Ushbu loyiha tafsilotlari bo'yicha maslahatlashsak bo'ladimi?`;
                       onClick={() => toggleFeature(feature.id)}
                       className={`p-2.5 sm:p-3 rounded-xl border cursor-pointer flex items-center justify-between gap-2 transition-all ${
                         isChecked
-                          ? 'border-emerald-500/50 bg-emerald-500/5 dark:bg-emerald-500/10'
-                          : 'border-black/[0.06] dark:border-white/[0.06] hover:border-black/15 dark:hover:border-white/15'
+                          ? 'border-emerald-500/60 bg-emerald-500/10 dark:bg-emerald-500/15 shadow-xs ring-1 ring-emerald-500/30'
+                          : 'border-black/[0.06] dark:border-white/[0.06] hover:border-black/15 dark:hover:border-white/15 bg-white/30 dark:bg-white/[0.02] backdrop-blur-xs'
                       }`}
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
                         <div
                           className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
                             isChecked
-                              ? 'bg-emerald-500 border-emerald-500 text-white'
+                              ? 'bg-emerald-500 border-emerald-500 text-white shadow-xs'
                               : 'border-neutral-400 dark:border-neutral-600'
                           }`}
                         >

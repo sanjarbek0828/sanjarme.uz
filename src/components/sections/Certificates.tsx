@@ -145,7 +145,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
                 viewport={{ once: true }}
                 whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
                 transition={{ duration: 0.3, delay: index * 0.03 }}
-                className="rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden group gpu-layer cursor-pointer"
+                className="rounded-2xl sm:rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden group gpu-layer cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-300"
               >
                 {/* Preview Image with zoom trigger */}
                 <div 
@@ -257,7 +257,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ certificates }) => {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                className="relative w-full max-w-3xl rounded-2xl sm:rounded-3xl border border-black/[0.08] dark:border-white/[0.1] bg-white dark:bg-neutral-950 p-3 sm:p-6 z-10 shadow-2xl space-y-3 sm:space-y-4 text-left transition-colors duration-300 max-h-[92vh] overflow-y-auto"
+                className="relative w-full max-w-3xl rounded-2xl sm:rounded-3xl border border-white/90 dark:border-white/15 apple-glass specular-rim dark:bg-[#0c0c12]/95 backdrop-blur-2xl p-3 sm:p-6 z-10 shadow-[0_24px_70px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_90px_-15px_rgba(0,0,0,0.9)] space-y-3 sm:space-y-4 text-left transition-colors duration-300 max-h-[92vh] overflow-y-auto"
               >
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
                   <div className="space-y-0.5">

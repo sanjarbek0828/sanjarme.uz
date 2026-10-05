@@ -162,9 +162,9 @@ export const DevTerminal: React.FC = () => {
   };
 
   return (
-    <div className="w-full rounded-3xl bg-[#0c0d12] border border-white/10 shadow-2xl overflow-hidden font-mono text-left">
+    <div className="w-full rounded-3xl bg-[#0c0d12]/95 border border-white/12 shadow-2xl overflow-hidden font-mono text-left specular-rim backdrop-blur-2xl">
       {/* Terminal Window Top Bar */}
-      <div className="px-4 py-3 bg-[#161720] border-b border-white/10 flex items-center justify-between select-none">
+      <div className="px-4 py-3 bg-[#161720]/80 backdrop-blur-xl border-b border-white/10 flex items-center justify-between select-none">
         {/* macOS Traffic Lights */}
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block shadow-inner" />

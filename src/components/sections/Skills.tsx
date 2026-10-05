@@ -161,14 +161,14 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
                   exit={{ opacity: 0, scale: 0.96 }}
                   whileHover={{ y: -3, scale: 1.015, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
                   transition={{ duration: 0.28, delay: index * 0.012 }}
-                  className="apple-glass-card rounded-xl sm:rounded-2xl p-3 sm:p-5 group cursor-default gpu-layer flex flex-col justify-between"
+                  className="vision-glass-card specular-rim rounded-xl sm:rounded-2xl p-3 sm:p-5 group cursor-default gpu-layer flex flex-col justify-between hover:shadow-xl transition-all duration-300"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       
                       {/* Left: Authentic Logo + Skill Name & Experience */}
                       <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-                        <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] shadow-xs flex items-center justify-center p-1.5 sm:p-2.5 group-hover:scale-110 group-hover:bg-white dark:group-hover:bg-neutral-800/80 transition-all duration-300 shrink-0">
+                        <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] shadow-xs flex items-center justify-center p-1.5 sm:p-2.5 group-hover:scale-110 group-hover:bg-white dark:group-hover:bg-neutral-800 transition-all duration-300 shrink-0">
                           {skill.iconUrl ? (
                             /* eslint-disable-next-line @next/next/no-img-element */
                             <img 
@@ -199,14 +199,14 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
 
                     </div>
 
-                    {/* Progress Bar */}
+                    {/* Progress Bar with Glowing Tip */}
                     <div className="mt-3.5 w-full bg-black/[0.04] dark:bg-white/[0.06] rounded-full h-1.5 overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${numLevel}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="h-full rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 dark:from-sky-400 dark:to-indigo-400"
+                        className="h-full rounded-full bg-gradient-to-r from-sky-500 via-indigo-500 to-sky-400 dark:from-sky-400 dark:via-indigo-400 dark:to-cyan-300 shadow-[0_0_8px_rgba(56,189,248,0.5)]"
                       />
                     </div>
                   </div>
@@ -228,7 +228,7 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
 
         {/* Empty state when search yields no matches */}
         {filteredSkills.length === 0 && (
-          <div className="text-center py-16 apple-glass-card rounded-2xl max-w-md mx-auto">
+          <div className="text-center py-16 vision-glass-card specular-rim rounded-2xl max-w-md mx-auto">
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               {language === 'uz' 
                 ? `"${searchQuery}" bo'yicha ko'nikmalar topilmadi.`

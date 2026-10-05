@@ -311,7 +311,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: -10 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-xl rounded-3xl apple-glass-card border border-black/10 dark:border-white/15 bg-white/95 dark:bg-neutral-950/95 shadow-2xl overflow-hidden z-10 text-left"
+          className="relative w-full max-w-xl rounded-3xl apple-glass specular-rim border border-white/90 dark:border-white/15 dark:bg-[#0d0d13]/95 shadow-[0_24px_70px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_28px_80px_-12px_rgba(0,0,0,0.9)] backdrop-blur-2xl overflow-hidden z-10 text-left"
         >
           {/* Header Search Bar */}
           <div className="flex items-center px-4 py-3.5 border-b border-black/[0.08] dark:border-white/[0.08] gap-3">

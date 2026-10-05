@@ -123,7 +123,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                   </div>
 
                   {/* Main Milestone Card with Shimmer Rim Light */}
-                  <div className="flex-1 w-full p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-3 sm:space-y-4 hover:shadow-2xl transition-all duration-300 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400/60 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500">
+                  <div className="flex-1 w-full p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] space-y-3 sm:space-y-4 hover:shadow-2xl transition-all duration-300 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400/60 before:to-transparent before:opacity-30 group-hover:before:opacity-100 before:transition-opacity before:duration-500">
                     
                     {/* Top Row: Title, Organization & Period Badge */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">

@@ -103,7 +103,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
           >
             <motion.div 
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-3.5 sm:space-y-5 gpu-layer"
+              className="p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] space-y-3.5 sm:space-y-5 gpu-layer hover:shadow-2xl transition-all duration-300"
             >
               <h3 className="text-base sm:text-xl lg:text-2xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
                 {t.about.cards.philosophy}
@@ -118,7 +118,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               {/* Working Principles */}
               <div className="pt-5 border-t border-black/[0.06] dark:border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-neutral-200/60 dark:bg-neutral-800/80 border border-black/[0.04] dark:border-white/[0.08] text-neutral-800 dark:text-neutral-300 mt-0.5 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] text-neutral-800 dark:text-neutral-300 mt-0.5 shrink-0 shadow-xs">
                     <Zap className="w-4 h-4 text-amber-500" />
                   </div>
                   <div>
@@ -130,7 +130,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-neutral-200/60 dark:bg-neutral-800/80 border border-black/[0.04] dark:border-white/[0.08] text-neutral-800 dark:text-neutral-300 mt-0.5 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] text-neutral-800 dark:text-neutral-300 mt-0.5 shrink-0 shadow-xs">
                     <Layers className="w-4 h-4 text-sky-500" />
                   </div>
                   <div>
@@ -146,10 +146,10 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             {/* Quick Facts Card */}
             <motion.div 
               whileHover={{ y: -2, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 gpu-layer"
+              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 gpu-layer hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-400">
+                <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] text-neutral-700 dark:text-neutral-400 shadow-xs">
                   <MapPin className="w-4 h-4 text-sky-500" />
                 </div>
                 <div>
@@ -163,7 +163,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-400">
+                <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] text-neutral-700 dark:text-neutral-400 shadow-xs">
                   <Clock className="w-4 h-4 text-emerald-500" />
                 </div>
                 <div>
@@ -177,7 +177,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-400">
+                <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.1] text-neutral-700 dark:text-neutral-400 shadow-xs">
                   <Globe2 className="w-4 h-4 text-indigo-500" />
                 </div>
                 <div>
@@ -205,7 +205,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               {/* Stat 1: Tajriba */}
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
-                className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
+                className="p-3.5 sm:p-5 rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default hover:shadow-xl transition-all duration-300"
               >
                 <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
                   {language === 'ru' ? 'Опыт' : language === 'en' ? 'Experience' : 'Tajriba'}
@@ -223,7 +223,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               {/* Stat 2: GitHub Commits */}
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
-                className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
+                className="p-3.5 sm:p-5 rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
@@ -244,7 +244,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               {/* Stat 3: Xalqaro Sertifikatlar */}
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
-                className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
+                className="p-3.5 sm:p-5 rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
@@ -265,7 +265,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
               {/* Stat 4: Sifat va Ishonchlilik */}
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 450, damping: 25 } }}
-                className="p-3.5 sm:p-5 rounded-3xl apple-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default"
+                className="p-3.5 sm:p-5 rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between min-h-[8.5rem] sm:min-h-[10rem] gpu-layer cursor-default hover:shadow-xl transition-all duration-300"
               >
                 <span className="text-[10px] sm:text-xs font-mono text-neutral-500 uppercase">
                   {language === 'ru' ? 'Надежность' : language === 'en' ? 'Reliability' : 'Barqarorlik'}
@@ -284,7 +284,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             {/* Spotify "Coding Vibe / Music in Progress" Card */}
             <motion.div
               whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
-              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl apple-glass-card border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20 flex items-center justify-between gap-3 sm:gap-4 gpu-layer overflow-hidden"
+              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl vision-glass-card specular-rim border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/20 flex items-center justify-between gap-3 sm:gap-4 gpu-layer overflow-hidden shadow-xs hover:shadow-emerald-500/10 transition-all duration-300"
             >
               <div className="flex items-center gap-3.5">
                 <div className="relative w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center flex-shrink-0 shadow-inner">

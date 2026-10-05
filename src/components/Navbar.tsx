@@ -108,12 +108,12 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation - Apple Segmented Clean Links */}
-            <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full apple-glass-pill shadow-2xs">
+            <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full apple-glass-pill specular-rim shadow-2xs">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-full transition-colors"
+                  className="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-full transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.08]"
                 >
                   {link.name}
                 </a>
@@ -199,7 +199,7 @@ export const Navbar: React.FC = () => {
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`flex items-center gap-2.5 p-3 rounded-2xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/[0.04] dark:border-white/[0.06] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all ${
+                        className={`flex items-center gap-2.5 p-3 rounded-2xl vision-glass-card border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all ${
                           isLast ? 'col-span-2 justify-center' : ''
                         }`}
                       >

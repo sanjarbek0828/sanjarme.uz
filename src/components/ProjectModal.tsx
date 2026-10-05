@@ -54,13 +54,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md transition-opacity"
         />
 
-        {/* Modal Dialog Card - Apple Clean Sheet */}
+        {/* Modal Dialog Card - VisionOS Frosted Sheet */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97, y: 14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 14 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl sm:rounded-3xl border border-black/[0.08] dark:border-white/[0.1] bg-white dark:bg-neutral-950 p-4 sm:p-8 z-10 shadow-2xl text-left transition-colors duration-300"
+          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl sm:rounded-3xl border border-white/90 dark:border-white/15 apple-glass specular-rim dark:bg-[#0c0c12]/94 backdrop-blur-2xl p-4 sm:p-8 z-10 shadow-[0_24px_70px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_90px_-15px_rgba(0,0,0,0.9)] text-left transition-colors duration-300"
         >
           {/* Close button */}
           <button

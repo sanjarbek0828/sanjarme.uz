@@ -46,7 +46,7 @@ const ProjectCard: React.FC<{
       whileHover={{ y: -4, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
       transition={{ duration: 0.3, delay: idx * 0.025 }}
       onMouseMove={handleMouseMove}
-      className="group relative rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden gpu-layer cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-300"
+      className="group relative rounded-3xl vision-glass-card specular-rim border border-black/[0.07] dark:border-white/[0.09] flex flex-col justify-between overflow-hidden gpu-layer cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-300"
     >
       {/* Dynamic Mouse Spotlight Refraction Glow (Zero React Re-renders) */}
       <div
