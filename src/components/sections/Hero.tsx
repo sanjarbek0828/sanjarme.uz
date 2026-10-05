@@ -79,9 +79,12 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="flex flex-wrap items-center gap-2"
             >
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-black/[0.08] dark:border-white/[0.08] text-[11px] sm:text-xs font-mono text-neutral-700 dark:text-neutral-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{t.hero.statusBadge}</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/[0.08] dark:bg-emerald-500/[0.14] border border-emerald-500/25 text-[11px] sm:text-xs font-mono text-emerald-800 dark:text-emerald-300 shadow-xs">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="font-semibold">{t.hero.statusBadge}</span>
               </div>
 
               {timeStr && (
@@ -129,7 +132,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href="#projects"
-                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-2 shadow-xs group cursor-pointer"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-2 shadow-md hover:shadow-xl group cursor-pointer"
               >
                 <span>{t.hero.viewProjects}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -289,7 +292,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -top-3 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
+                  className="absolute -top-3 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl vision-glass-card border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
                 >
                   <div className="p-1 rounded-lg bg-sky-500/10 text-sky-500">
                     <Zap className="w-3.5 h-3.5" />
@@ -304,7 +307,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-3 -left-2 sm:-left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl apple-glass border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
+                  className="absolute -bottom-3 -left-2 sm:-left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl vision-glass-card border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
                 >
                   <div className="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">
                     <Bot className="w-3.5 h-3.5" />
@@ -315,8 +318,9 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                   </div>
                 </motion.div>
 
-                {/* Apple-grade Ultra Glass Portrait Showcase */}
-                <div className="relative p-1.5 sm:p-2.5 rounded-[22px] sm:rounded-[34px] ultra-glass shadow-2xl transition-all duration-500 hover:shadow-sky-500/10">
+                {/* Apple-grade Ultra Glass Portrait Showcase with Ambient Glow Rim */}
+                <div className="relative p-1.5 sm:p-2.5 rounded-[22px] sm:rounded-[34px] ultra-glass shadow-2xl transition-all duration-500 hover:shadow-sky-500/20 group">
+                  <div className="absolute -inset-0.5 rounded-[24px] sm:rounded-[36px] bg-gradient-to-tr from-sky-500/30 via-indigo-500/20 to-purple-500/30 opacity-40 group-hover:opacity-80 blur-xs transition-opacity -z-10" />
                   <div className="relative overflow-hidden rounded-[18px] sm:rounded-[28px] aspect-[1792/2400] bg-neutral-900">
                     <Image
                       src="/boy.jpg"
@@ -325,7 +329,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                       height={2400}
                       priority
                       quality={95}
-                      className="w-full h-full object-cover select-none pointer-events-none"
+                      className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                       sizes="(max-width: 480px) 220px, (max-width: 640px) 260px, (max-width: 1024px) 320px, 370px"
                     />
                     {/* Subtle ambient light gradient for premium depth */}

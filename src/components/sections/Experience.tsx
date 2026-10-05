@@ -68,47 +68,44 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
             {t.experience.sub}
           </p>
 
-          {/* Segmented Filter Pills */}
+          {/* Segmented Filter Pills with iOS Spring Motion */}
           <div className="mt-5 sm:mt-8 inline-flex p-1 rounded-full apple-glass-pill shadow-xs max-w-full overflow-x-auto no-scrollbar">
-            <button
-              onClick={() => setActiveTab('all')}
-              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                activeTab === 'all'
-                  ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-              }`}
-            >
-              {t.experience.filterAll} ({milestones.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('work')}
-              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                activeTab === 'work'
-                  ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-              }`}
-            >
-              {t.experience.filterWork}
-            </button>
-            <button
-              onClick={() => setActiveTab('education')}
-              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                activeTab === 'education'
-                  ? 'bg-white dark:bg-white/15 text-black dark:text-white shadow-xs font-semibold'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white'
-              }`}
-            >
-              {t.experience.filterEdu}
-            </button>
+            {(
+              [
+                { id: 'all', label: `${t.experience.filterAll} (${milestones.length})` },
+                { id: 'work', label: t.experience.filterWork },
+                { id: 'education', label: t.experience.filterEdu },
+              ] as const
+            ).map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className="relative px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeExperienceTab"
+                      className="absolute inset-0 bg-white dark:bg-white/15 rounded-full shadow-xs border border-black/5 dark:border-white/10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  <span className={`relative z-10 ${isActive ? 'text-black dark:text-white font-semibold' : ''}`}>
+                    {tab.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Timeline Container */}
         <div className="relative max-w-4xl mx-auto">
-          {/* Vertical central subtle line (desktop) */}
-          <div className="hidden md:block absolute left-8 top-4 bottom-4 w-px bg-gradient-to-b from-sky-500/20 via-black/[0.08] dark:via-white/[0.08] to-transparent pointer-events-none" />
+          {/* Vertical central subtle line (desktop) with glowing gradient */}
+          <div className="hidden md:block absolute left-8 top-6 bottom-6 w-0.5 bg-gradient-to-b from-sky-500/40 via-indigo-500/20 to-transparent pointer-events-none" />
 
-          <div className="space-y-3 sm:space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             <AnimatePresence mode="popLayout">
               {filteredMilestones.map((item, index) => (
                 <motion.div
@@ -120,27 +117,28 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                   transition={{ duration: 0.35, delay: index * 0.05 }}
                   className="relative flex flex-col md:flex-row gap-3 sm:gap-6 items-start group"
                 >
-                  {/* Left Icon Node */}
-                  <div className="hidden md:flex relative z-10 w-16 h-16 rounded-2xl apple-glass-card border border-black/[0.08] dark:border-white/[0.1] items-center justify-center shrink-0 group-hover:scale-105 group-hover:border-sky-500/40 transition-all duration-300 shadow-xs">
+                  {/* Left Icon Node with Glowing Aura */}
+                  <div className="hidden md:flex relative z-10 w-16 h-16 rounded-2xl vision-glass-card border border-black/[0.08] dark:border-white/[0.1] items-center justify-center shrink-0 group-hover:scale-105 group-hover:border-sky-500/50 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300 shadow-xs">
                     {getCategoryIcon(item.category)}
                   </div>
 
-                  {/* Main Milestone Card */}
-                  <div className="flex-1 w-full p-3.5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-2.5 sm:space-y-4 hover:shadow-2xl transition-all duration-300">
+                  {/* Main Milestone Card with Shimmer Rim Light */}
+                  <div className="flex-1 w-full p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl vision-glass-card border border-black/[0.07] dark:border-white/[0.09] space-y-3 sm:space-y-4 hover:shadow-2xl transition-all duration-300 relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-transparent before:via-sky-400/60 before:to-transparent before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500">
                     
                     {/* Top Row: Title, Organization & Period Badge */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="md:hidden p-1.5 rounded-lg bg-black/[0.04] dark:bg-white/[0.08]">
+                          <span className="md:hidden p-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.06] dark:border-white/[0.08]">
                             {getCategoryIcon(item.category)}
                           </span>
-                          <h3 className="text-base sm:text-xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white">
+                          <h3 className="text-base sm:text-xl font-bold font-['Space_Grotesk'] text-neutral-950 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
                             {item.title}
                           </h3>
                         </div>
-                        <p className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                          {item.organization}
+                        <p className="text-xs sm:text-sm font-medium text-neutral-600 dark:text-neutral-400 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-sky-500/60 inline-block" />
+                          <span>{item.organization}</span>
                         </p>
                       </div>
 
@@ -151,7 +149,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                           </span>
                         )}
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-neutral-700 dark:text-neutral-300">
-                          <Calendar className="w-3 h-3 text-neutral-400" />
+                          <Calendar className="w-3 h-3 text-sky-500" />
                           <span>{item.period}</span>
                         </span>
                       </div>
@@ -164,7 +162,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
 
                     {/* Highlights / Accomplishments */}
                     {item.highlights && item.highlights.length > 0 && (
-                      <div className="pt-2 space-y-2 border-t border-black/[0.05] dark:border-white/[0.06]">
+                      <div className="pt-2.5 space-y-2 border-t border-black/[0.05] dark:border-white/[0.06]">
                         {item.highlights.map((point, pIdx) => (
                           <div key={pIdx} className="flex items-start gap-2.5 text-xs text-neutral-600 dark:text-neutral-400">
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
@@ -180,7 +178,7 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
                         {item.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2.5 py-0.5 rounded-md bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08] text-[11px] font-mono text-neutral-700 dark:text-neutral-300"
+                            className="px-2.5 py-0.5 rounded-lg bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.06] dark:hover:bg-white/[0.1] border border-black/[0.05] dark:border-white/[0.08] text-[11px] font-mono text-neutral-700 dark:text-neutral-300 transition-colors cursor-default"
                           >
                             {skill}
                           </span>
