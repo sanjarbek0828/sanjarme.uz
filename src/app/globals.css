@@ -201,7 +201,6 @@ html, body, button, a, input, select, textarea {
 
 /* VisionOS Next-Gen Ambient Card with Shimmer Reflection */
 .vision-glass-card {
-  position: relative;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.65) 100%);
   backdrop-filter: blur(28px) saturate(200%);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
@@ -211,7 +210,6 @@ html, body, button, a, input, select, textarea {
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translate3d(0, 0, 0);
-  contain: paint layout;
 }
 
 .dark .vision-glass-card {
@@ -223,7 +221,6 @@ html, body, button, a, input, select, textarea {
     0 16px 44px -6px rgba(0, 0, 0, 0.75),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.22);
   transform: translate3d(0, 0, 0);
-  contain: paint layout;
 }
 
 .vision-glass-card:hover {
@@ -241,6 +238,29 @@ html, body, button, a, input, select, textarea {
     0 28px 70px -8px rgba(0, 0, 0, 0.85),
     0 0 24px -2px rgba(56, 189, 248, 0.2),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Floating overlay badges for Hero portrait & previews */
+.floating-badge-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.75) 100%);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 16px 36px -4px rgba(0, 0, 0, 0.12),
+    0 4px 12px -2px rgba(0, 0, 0, 0.05),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
+}
+
+.dark .floating-badge-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(14, 14, 20, 0.85);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 48px -6px rgba(0, 0, 0, 0.85),
+    0 4px 16px -2px rgba(56, 189, 248, 0.15),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* Luxury Multi-Layer Ultra-Glass for Showcase Hero Cards */

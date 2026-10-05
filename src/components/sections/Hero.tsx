@@ -288,36 +288,6 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
               <div className="absolute inset-0 -m-8 rounded-full bg-gradient-to-tr from-sky-400/20 via-indigo-500/15 to-transparent dark:from-sky-500/25 dark:via-indigo-500/20 dark:to-transparent blur-3xl pointer-events-none -z-10" />
 
               <div className="relative w-full max-w-[220px] xs:max-w-[260px] sm:max-w-[320px] lg:max-w-[370px] mx-auto">
-                {/* Floating Badge 1: Next.js 15 & React 19 (Top Right) */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -top-3 -right-2 sm:-right-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl vision-glass-card border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
-                >
-                  <div className="p-1 rounded-lg bg-sky-500/10 text-sky-500">
-                    <Zap className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Framework</span>
-                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Next.js 15 & React 19</span>
-                  </div>
-                </motion.div>
-
-                {/* Floating Badge 2: Telegram Bot & APIs (Bottom Left) */}
-                <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-3 -left-2 sm:-left-4 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl vision-glass-card border border-black/[0.08] dark:border-white/[0.12] shadow-xl backdrop-blur-xl"
-                >
-                  <div className="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">
-                    <Bot className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Automations</span>
-                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Telegram Bots & APIs</span>
-                  </div>
-                </motion.div>
-
                 {/* Apple-grade Ultra Glass Portrait Showcase with Ambient Glow Rim */}
                 <div className="relative p-1.5 sm:p-2.5 rounded-[22px] sm:rounded-[34px] ultra-glass shadow-2xl transition-all duration-500 hover:shadow-sky-500/20 group">
                   <div className="absolute -inset-0.5 rounded-[24px] sm:rounded-[36px] bg-gradient-to-tr from-sky-500/30 via-indigo-500/20 to-purple-500/30 opacity-40 group-hover:opacity-80 blur-xs transition-opacity -z-10" />
@@ -336,6 +306,36 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
                   </div>
                 </div>
+
+                {/* Floating Badge 1: Next.js 15 & React 19 (Top Right of Photo) */}
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="!absolute -top-3 sm:-top-4 -right-2 sm:-right-5 z-30 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl floating-badge-glass border border-black/[0.08] dark:border-white/[0.14] shadow-xl backdrop-blur-xl pointer-events-none"
+                >
+                  <div className="p-1 rounded-lg bg-sky-500/10 text-sky-500">
+                    <Zap className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Framework</span>
+                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Next.js 15 & React 19</span>
+                  </div>
+                </motion.div>
+
+                {/* Floating Badge 2: Telegram Bot & APIs (Bottom Left of Photo) */}
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="!absolute -bottom-3 sm:-bottom-4 -left-2 sm:-left-5 z-30 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl floating-badge-glass border border-black/[0.08] dark:border-white/[0.14] shadow-xl backdrop-blur-xl pointer-events-none"
+                >
+                  <div className="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">
+                    <Bot className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block leading-none">Automations</span>
+                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">Telegram Bots & APIs</span>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
