@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -12,7 +13,8 @@ import {
   Bot, 
   Clock,
   Sparkles,
-  Send 
+  Send,
+  FileText 
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, InstagramIcon, TelegramIcon, XIcon } from '@/components/ui/Icons';
 import { SiteContent } from '@/lib/types';
@@ -159,6 +161,18 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
                 <Send className="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-300 group-hover:translate-x-0.5 transition-transform" />
                 <span>{t.nav.connect}</span>
               </motion.a>
+
+              {/* Professional Resume / CV Page Button */}
+              <Link href="/resume" className="inline-block">
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-[13px] sm:text-sm font-semibold text-neutral-900 dark:text-white bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.1] dark:border-white/[0.14] transition-all cursor-pointer inline-flex items-center gap-2 group shadow-xs"
+                >
+                  <FileText className="w-3.5 h-3.5 text-sky-500 group-hover:scale-110 transition-transform" />
+                  <span>{t.hero.downloadCv}</span>
+                </motion.div>
+              </Link>
 
               {/* Instant Copy Email Pill */}
               <motion.button

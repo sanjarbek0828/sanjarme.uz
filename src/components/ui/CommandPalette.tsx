@@ -165,15 +165,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
       {
         id: 'act-resume',
-        title: language === 'uz' ? 'GitHub Repozitoriyalarni ko\'rish' : language === 'ru' ? 'Открыть репозитории GitHub' : 'View GitHub Repositories',
+        title: language === 'uz' ? 'Professional Rezyumeni ko\'rish (CV)' : language === 'ru' ? 'Открыть резюме (CV)' : 'View Professional Resume / CV',
         category: t.commandPalette.actionsCategory,
-        icon: <FileText className="w-4 h-4 text-blue-500" />,
+        icon: <FileText className="w-4 h-4 text-sky-500" />,
         perform: () => {
-          window.open('https://github.com/sanjarbek0828', '_blank');
+          window.location.href = '/resume';
           onClose();
         },
         shortcut: 'R',
-        subtext: 'github.com/sanjarbek0828',
+        subtext: 'sanjarme.uz/resume (A4 PDF)',
       },
 
       // Social

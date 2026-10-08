@@ -16,7 +16,8 @@ import {
   Award,
   Mail,
   Send,
-  Briefcase
+  Briefcase,
+  FileText
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageToggle } from './LanguageToggle';
@@ -37,6 +38,7 @@ export const Navbar: React.FC = () => {
     { name: t.nav.services, href: '#services', icon: Layers },
     { name: t.nav.projects, href: '#projects', icon: FolderGit2 },
     { name: t.nav.certificates, href: '#certificates', icon: Award },
+    { name: t.nav.resume, href: '/resume', icon: FileText },
     { name: t.nav.contact, href: '#contact', icon: Mail },
   ];
 
@@ -109,15 +111,26 @@ export const Navbar: React.FC = () => {
 
             {/* Desktop Navigation - Apple Segmented Clean Links */}
             <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full apple-glass-pill specular-rim shadow-2xs">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-full transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.08]"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isInternal = link.href.startsWith('/');
+                return isInternal ? (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-full transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.08]"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white rounded-full transition-all duration-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.08]"
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Right Action buttons - Desktop */}
@@ -194,14 +207,27 @@ export const Navbar: React.FC = () => {
                   {navLinks.map((link, idx) => {
                     const Icon = link.icon;
                     const isLast = idx === navLinks.length - 1;
-                    return (
+                    const isInternal = link.href.startsWith('/');
+                    const itemClass = `flex items-center gap-2.5 p-3 rounded-2xl vision-glass-card border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all ${
+                      isLast ? 'col-span-2 justify-center' : ''
+                    }`;
+
+                    return isInternal ? (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={itemClass}
+                      >
+                        <Icon className="w-4 h-4 text-sky-500 shrink-0" />
+                        <span className="truncate">{link.name}</span>
+                      </Link>
+                    ) : (
                       <a
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`flex items-center gap-2.5 p-3 rounded-2xl vision-glass-card border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium text-neutral-800 dark:text-neutral-200 active:scale-[0.98] transition-all ${
-                          isLast ? 'col-span-2 justify-center' : ''
-                        }`}
+                        className={itemClass}
                       >
                         <Icon className="w-4 h-4 text-sky-500 shrink-0" />
                         <span className="truncate">{link.name}</span>

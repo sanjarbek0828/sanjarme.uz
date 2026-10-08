@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { MapPin, Globe2, Clock, Zap, Layers, Music, Award, GitBranch, Terminal } from 'lucide-react';
+import { MapPin, Globe2, Clock, Zap, Layers, Music, Award, GitBranch, Terminal, FileText, ArrowRight } from 'lucide-react';
 import { SiteContent } from '@/lib/types';
 import { DevTerminal } from '@/components/ui/DevTerminal';
 import { useLanguage } from '@/lib/language-context';
@@ -190,6 +191,24 @@ export const About: React.FC<AboutProps> = ({ content }) => {
                 </div>
               </div>
             </motion.div>
+
+            {/* Direct Resume Link Pill */}
+            <div className="pt-2 flex items-center">
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 text-white hover:bg-black dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 transition-all shadow-xs hover:shadow-md cursor-pointer group"
+              >
+                <FileText className="w-3.5 h-3.5 text-sky-500 group-hover:scale-110 transition-transform" />
+                <span>
+                  {language === 'ru'
+                    ? 'Посмотреть полное резюме (CV)'
+                    : language === 'en'
+                    ? 'View Complete Resume (CV)'
+                    : "To'liq rezyumeni ko'rish (CV)"}
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
           </motion.div>
 
           {/* Right Column: Stats & Spotify Vibe */}

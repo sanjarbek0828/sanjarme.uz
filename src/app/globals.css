@@ -704,3 +704,79 @@ img {
   }
 }
 
+/* ==========================================================================
+   RESUME PRINT & PDF EXPORT STYLES (A4 ATS-Optimized)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+    line-height: 1.45 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide screen-only interactive elements */
+  .no-print,
+  header,
+  footer,
+  nav,
+  .print-hidden,
+  button:not(.print-visible) {
+    display: none !important;
+  }
+
+  /* Ensure resume container takes full width cleanly */
+  .resume-print-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* Prevent awkward page breaks inside items */
+  .resume-section {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  .resume-item,
+  .resume-card,
+  .resume-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Clean contrast for badges and borders */
+  .resume-badge {
+    border: 1px solid #d1d5db !important;
+    background: #f9fafb !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure text colors stay dark and readable */
+  .dark body,
+  .dark .resume-print-container {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}
+
+

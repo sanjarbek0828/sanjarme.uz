@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Briefcase, 
@@ -8,7 +9,9 @@ import {
   Award, 
   Calendar, 
   CheckCircle2, 
-  Sparkles 
+  Sparkles,
+  FileText,
+  ArrowRight
 } from 'lucide-react';
 import { MilestoneItem } from '@/lib/types';
 import { initialMilestones } from '@/lib/initial-data';
@@ -19,7 +22,7 @@ interface ExperienceProps {
 }
 
 export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMilestones }) => {
-  const { t, getTranslatedMilestone } = useLanguage();
+  const { t, getTranslatedMilestone, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'work' | 'education'>('all');
 
   const translatedMilestones = useMemo(() => {
@@ -193,8 +196,49 @@ export const Experience: React.FC<ExperienceProps> = ({ milestones = initialMile
           </div>
         </div>
 
+        {/* Full Resume CTA Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 sm:mt-14 p-5 sm:p-7 rounded-3xl vision-glass-card specular-rim border border-sky-500/20 bg-sky-500/[0.03] dark:bg-sky-500/[0.05] flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left"
+        >
+          <div className="flex flex-col sm:flex-row items-center gap-3.5">
+            <div className="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-500 flex items-center justify-center shrink-0">
+              <FileText className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white">
+                {language === 'ru'
+                  ? 'Полное резюме со всеми проектами и сертификатами'
+                  : language === 'en'
+                  ? 'Complete Resume with all projects and certifications'
+                  : "To'liq rezyume, loyihalar va xalqaro sertifikatlar to'plami"}
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
+                {language === 'ru'
+                  ? 'Доступно в формате ATS-совместимого веб-документа и для скачивания в PDF'
+                  : language === 'en'
+                  ? 'Available as an ATS-compatible web document and downloadable PDF'
+                  : "ATS-moslashtirilgan interaktiv formatda va PDF yuklab olish imkoniyati bilan"}
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/resume"
+            className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-neutral-900 text-white hover:bg-black dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 transition-all inline-flex items-center gap-2 shadow-md hover:shadow-lg active:scale-95 shrink-0"
+          >
+            <span>
+              {language === 'ru' ? 'Открыть резюме' : language === 'en' ? 'Open Resume' : "Rezyumeni ochish"}
+            </span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
       </div>
     </section>
   );
 };
+
 

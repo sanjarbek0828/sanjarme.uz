@@ -1,62 +1,63 @@
-export type Language = 'uz' | 'ru' | 'en';
+  export type Language = 'uz' | 'ru' | 'en';
 
-export interface TranslationDictionary {
-  nav: {
-    about: string;
-    skills: string;
-    experience: string;
-    services: string;
-    projects: string;
-    certificates: string;
-    contact: string;
-    search: string;
-    searchShortcut: string;
-    connect: string;
-    adminPanel: string;
-    fullStack: string;
-  };
-  hero: {
-    statusBadge: string;
-    greeting: string;
-    name: string;
-    titlePart1: string;
-    titlePart2: string;
-    titlePart3: string;
-    description: string;
-    viewProjects: string;
-    calcPrice: string;
-    downloadCv: string;
-    stats: {
-      exp: string;
+  export interface TranslationDictionary {
+    nav: {
+      about: string;
+      skills: string;
+      experience: string;
+      services: string;
       projects: string;
-      satisfaction: string;
-      support: string;
+      certificates: string;
+      contact: string;
+      resume: string;
+      search: string;
+      searchShortcut: string;
+      connect: string;
+      adminPanel: string;
+      fullStack: string;
     };
-    terminalBadge: string;
-    personajBadge: string;
-  };
-  about: {
-    badge: string;
-    heading: string;
-    quote: string;
-    p1: string;
-    p2: string;
-    p3: string;
-    cards: {
-      education: string;
-      educationDesc: string;
-      philosophy: string;
-      philosophyDesc: string;
-      vibe: string;
-      vibeDesc: string;
-      location: string;
-      locationVal: string;
+    hero: {
+      statusBadge: string;
+      greeting: string;
+      name: string;
+      titlePart1: string;
+      titlePart2: string;
+      titlePart3: string;
+      description: string;
+      viewProjects: string;
+      calcPrice: string;
+      downloadCv: string;
+      stats: {
+        exp: string;
+        projects: string;
+        satisfaction: string;
+        support: string;
+      };
+      terminalBadge: string;
+      personajBadge: string;
     };
-  };
-  skills: {
-    badge: string;
-    headingPart1: string;
-    headingPart2: string;
+    about: {
+      badge: string;
+      heading: string;
+      quote: string;
+      p1: string;
+      p2: string;
+      p3: string;
+      cards: {
+        education: string;
+        educationDesc: string;
+        philosophy: string;
+        philosophyDesc: string;
+        vibe: string;
+        vibeDesc: string;
+        location: string;
+        locationVal: string;
+      };
+    };
+    skills: {
+      badge: string;
+      headingPart1: string;
+      headingPart2: string;
     sub: string;
     categories: {
       all: string;
@@ -238,6 +239,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       projects: 'Loyihalar',
       certificates: 'Sertifikatlar',
       contact: 'Aloqa',
+      resume: 'Rezyume',
       search: 'Qidiruv',
       searchShortcut: 'Tezkor Qidiruv (⌘K)',
       connect: "Bog'lanish",
@@ -472,6 +474,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       projects: 'Проекты',
       certificates: 'Сертификаты',
       contact: 'Контакты',
+      resume: 'Резюме',
       search: 'Поиск',
       searchShortcut: 'Быстрый Поиск (⌘K)',
       connect: 'Связаться',
@@ -706,6 +709,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       projects: 'Projects',
       certificates: 'Certifications',
       contact: 'Contact',
+      resume: 'Resume',
       search: 'Search',
       searchShortcut: 'Quick Search (⌘K)',
       connect: 'Get in Touch',

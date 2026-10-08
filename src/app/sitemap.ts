@@ -18,6 +18,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: `${baseUrl}/resume`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+      alternates: {
+        languages: {
+          uz: `${baseUrl}/resume`,
+          en: `${baseUrl}/resume`,
+          ru: `${baseUrl}/resume`,
+        },
+      },
+    },
+    {
       url: `${baseUrl}#about`,
       lastModified: now,
       changeFrequency: 'weekly',

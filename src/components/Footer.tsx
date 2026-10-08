@@ -107,6 +107,11 @@ export const Footer: React.FC = () => {
               <li>
                 <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">{t.nav.contact}</a>
               </li>
+              <li>
+                <Link href="/resume" className="hover:text-black dark:hover:text-white transition-colors font-semibold text-sky-600 dark:text-sky-400">
+                  {t.nav.resume} (CV)
+                </Link>
+              </li>
             </ul>
           </div>
 
